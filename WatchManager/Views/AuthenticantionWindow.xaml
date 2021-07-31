@@ -4,8 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WatchManager"
+        xmlns:vm="clr-namespace:WatchManager.ViewModels"
         mc:Ignorable="d"
-        Title="WatchManager" Height="340" Width="640" WindowStyle="SingleBorderWindow">
+        Title="WatchManager" Height="380" Width="640" WindowStyle="SingleBorderWindow">
+    <!-- Если подключать DataContext здесь, вместо CodeBegind'а, то
+         все Binding'и будут отображаться сразу в конструкторе -->
+    <Window.DataContext>
+        <vm:AuthenticationViewModel></vm:AuthenticationViewModel>
+    </Window.DataContext>
+
     <Window.Resources>
         <Style x:Key="Logo">
             <Setter Property="Control.Foreground" Value="White"/>
@@ -26,20 +33,35 @@
             <Setter Property="Control.HorizontalContentAlignment" Value="Center"/>
             <Setter Property="Control.VerticalContentAlignment" Value="Center"/>
         </Style>
+
+        <Style x:Key="AuthButton">
+            <Setter Property="Control.Visibility" Value="Visible"/>
+            <Setter Property="Button.IsDefault" Value="True"/>
+            <Setter Property="Control.Height" Value="50"/>
+            <Setter Property="Control.Width" Value="500"/>
+            <Setter Property="Control.Background" Value="#7c67ab"/>
+            <Setter Property="Control.Foreground" Value="White"/>
+            <Setter Property="Control.FontSize" Value="36"/>
+            <Setter Property="Control.VerticalContentAlignment" Value="Center"/>
+
+
+        </Style>
         
     </Window.Resources>
 
 
+    
     <Grid Background="#FF4C4C53">
         <Grid.RowDefinitions>
             <RowDefinition Height="180"></RowDefinition>
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="60"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="WatchManager" Style="{StaticResource Logo}"></TextBlock>
-        <TextBox Grid.Row="1" Style="{StaticResource InputField}"></TextBox>
-        <PasswordBox Grid.Row="2" Style="{StaticResource InputField}"></PasswordBox>
+        <TextBlock Grid.Row="0" Text="{Binding Title}" Style="{StaticResource Logo}"></TextBlock>
+        <TextBox Grid.Row="1" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputField}"></TextBox>
+        <PasswordBox Grid.Row="2" x:Name="passwordBox" Style="{StaticResource InputField}"/>
+        <Button Grid.Row="3" Content="Auth"  Command="{Binding AuthenticationCommand}" CommandParameter="{Binding ElementName=passwordBox, Path=Password}" Style="{StaticResource AuthButton}"></Button>
     </Grid>
 </Window>
