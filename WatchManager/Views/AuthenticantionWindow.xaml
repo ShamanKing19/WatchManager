@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WatchManager"
         xmlns:vm="clr-namespace:WatchManager.ViewModels"
+        xmlns:components="clr-namespace:WatchManager.Components"
         mc:Ignorable="d"
         Title="WatchManager" Height="380" Width="640" WindowStyle="SingleBorderWindow">
     <!-- Если подключать DataContext здесь, вместо CodeBegind'а, то
@@ -61,7 +62,8 @@
 
         <TextBlock Grid.Row="0" Text="{Binding Title}" Style="{StaticResource Logo}"></TextBlock>
         <TextBox Grid.Row="1" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputField}"></TextBox>
-        <PasswordBox Grid.Row="2" x:Name="passwordBox" Style="{StaticResource InputField}"/>
-        <Button Grid.Row="3" Content="Auth"  Command="{Binding AuthenticationCommand}" CommandParameter="{Binding ElementName=passwordBox, Path=Password}" Style="{StaticResource AuthButton}"></Button>
+        <components:BindablePasswordBox Grid.Row="2" Password="{Binding Password}"/>
+        <!-- Пароль передаётся, только если через Hot Reload поменять значение на другое и обратно -->
+        <Button Grid.Row="3" Content="Auth"  Command="{Binding AuthenticationCommand}" Style="{StaticResource AuthButton}"></Button>
     </Grid>
 </Window>

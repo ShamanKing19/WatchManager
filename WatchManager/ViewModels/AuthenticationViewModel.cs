@@ -47,12 +47,10 @@ namespace WatchManager.ViewModels
                 OnPropertyChanged(nameof(Password));
             }
         }
-        public string Title { get; } = "WatchControl";
+        public string Title { get; } = "WatchManager";
 
 
-        #region Commands
-        public RelayCommand AuthenticationCommand { get; private set; }
-        #endregion
+        public RelayCommand AuthenticationCommand { get; set; }
 
         public AuthenticationViewModel()
         {
@@ -66,13 +64,16 @@ namespace WatchManager.ViewModels
 
         public void ExecuteUserAuthentication(object parameter)
         {
-            MessageBox.Show($"Login:{Login}, Password: {Password}, parameter: {parameter}");
+            MessageBox.Show($"Login: {Login}, Password: {Password}");
         }
 
 
         public bool CanExecuteAuthenticateUser(object parameter)
         {
+            // if (Login != null) return Login.Length
+            // else return 0
             int inputLength = Login?.Length ?? 0;
+            
             return inputLength > 0;
         }
 
