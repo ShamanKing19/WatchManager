@@ -12,20 +12,22 @@ using WatchManager.Commands;
 
 namespace WatchManager.ViewModels
 {
-    public class AuthenticationViewModel : INotifyPropertyChanged
+    public class AuthenticationViewModel : BaseViewModel
     {
-        #region Реализация интерфейса INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
-        #endregion
-
-
+        private BaseViewModel _selectedViewModel;
         private string _login;
         private string _password;
         
+
+        public BaseViewModel SelectedViewModel
+        {
+            get => _selectedViewModel;
+            set
+            {
+                _selectedViewModel = value;
+                OnPropertyChanged(nameof(SelectedViewModel));
+            }
+        }
         public string Login
         {
             get
@@ -64,7 +66,17 @@ namespace WatchManager.ViewModels
 
         public void ExecuteUserAuthentication(object parameter)
         {
-            MessageBox.Show($"Login: {Login}, Password: {Password}");
+            // Затычка для авторизации
+            if (Login == Password)
+            {
+                ChangeViewModel(new WatchViewModel());
+                MessageBox.Show($"Hello {Login}!");
+            }
+            else
+            {
+                Password = "";
+                MessageBox.Show($"Wrong password");
+            }
         }
 
 
@@ -73,9 +85,14 @@ namespace WatchManager.ViewModels
             // if (Login != null) return Login.Length
             // else return 0
             int inputLength = Login?.Length ?? 0;
-            
-            return inputLength > 0;
+            int passwordLength = Password?.Length ?? 0;
+
+            return (inputLength > 0) && (passwordLength > 0);
         }
 
+        private void ChangeViewModel(BaseViewModel viewmodel)
+        {
+            SelectedViewModel = viewmodel;
+        }
     }
 }
