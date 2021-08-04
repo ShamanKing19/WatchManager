@@ -48,7 +48,6 @@ namespace WatchManager.ViewModels
                 ExecuteUserAuthentication,
                 CanExecuteAuthenticateUser
             );
-            CurrentViewModel = this;
         }
 
 
@@ -57,7 +56,6 @@ namespace WatchManager.ViewModels
             // Затычка для авторизации
             if (Login == Password)
             {
-                CurrentViewModel = new WatchViewModel();
                 //MessageBox.Show($"Hello {Login}!");
             }
             else

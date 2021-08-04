@@ -17,18 +17,6 @@ namespace WatchManager.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
         #endregion
-
-        private BaseViewModel _currentViewModel;
-        public BaseViewModel CurrentViewModel
-        {
-            get => _currentViewModel;
-            set
-            {
-                _currentViewModel = value;
-                OnPropertyChanged(nameof(CurrentViewModel));
-            }
-        }
-   
     }
 
 }
