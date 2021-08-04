@@ -12,6 +12,7 @@
         <vm:AuthenticationViewModel></vm:AuthenticationViewModel>
     </UserControl.DataContext>
 
+
     <UserControl.Resources>
         <Style x:Key="Logo">
             <Setter Property="Control.Foreground" Value="White"/>

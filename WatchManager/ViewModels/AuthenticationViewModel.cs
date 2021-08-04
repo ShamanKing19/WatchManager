@@ -14,20 +14,9 @@ namespace WatchManager.ViewModels
 {
     public class AuthenticationViewModel : BaseViewModel
     {
-        private BaseViewModel _selectedViewModel;
         private string _login;
         private string _password;
-        
-
-        public BaseViewModel SelectedViewModel
-        {
-            get => _selectedViewModel;
-            set
-            {
-                _selectedViewModel = value;
-                OnPropertyChanged(nameof(SelectedViewModel));
-            }
-        }
+        public string Title { get; } = "WatchManager";
         public string Login
         {
             get
@@ -49,8 +38,6 @@ namespace WatchManager.ViewModels
                 OnPropertyChanged(nameof(Password));
             }
         }
-        public string Title { get; } = "WatchManager";
-
 
         public RelayCommand AuthenticationCommand { get; set; }
 
@@ -61,6 +48,7 @@ namespace WatchManager.ViewModels
                 ExecuteUserAuthentication,
                 CanExecuteAuthenticateUser
             );
+            CurrentViewModel = this;
         }
 
 
@@ -69,8 +57,8 @@ namespace WatchManager.ViewModels
             // Затычка для авторизации
             if (Login == Password)
             {
-                ChangeViewModel(new WatchViewModel());
-                MessageBox.Show($"Hello {Login}!");
+                CurrentViewModel = new WatchViewModel();
+                //MessageBox.Show($"Hello {Login}!");
             }
             else
             {
@@ -88,11 +76,6 @@ namespace WatchManager.ViewModels
             int passwordLength = Password?.Length ?? 0;
 
             return (inputLength > 0) && (passwordLength > 0);
-        }
-
-        private void ChangeViewModel(BaseViewModel viewmodel)
-        {
-            SelectedViewModel = viewmodel;
         }
     }
 }

@@ -9,11 +9,11 @@
         Title="WatchManager" Height="380" Width="640" WindowStyle="SingleBorderWindow">
 
     <Window.DataContext>
-        <vm:MainWindowViewModel></vm:MainWindowViewModel>
+        <vm:AuthenticationViewModel></vm:AuthenticationViewModel>
     </Window.DataContext>
 
 
-    <ContentControl Content="{Binding StartupViewModel}"/>
+    <ContentControl Content="{Binding CurrentViewModel}"/>
 
 
 </Window>
