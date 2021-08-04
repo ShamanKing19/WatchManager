@@ -12,7 +12,7 @@ using WatchManager.Commands;
 
 namespace WatchManager.ViewModels
 {
-    public class AuthenticationViewModel : BaseViewModel
+    public class AuthenticationViewModel : MainViewModel
     {
         private string _login;
         private string _password;
@@ -39,7 +39,9 @@ namespace WatchManager.ViewModels
             }
         }
 
+
         public RelayCommand AuthenticationCommand { get; set; }
+
 
         public AuthenticationViewModel()
         {
@@ -56,6 +58,7 @@ namespace WatchManager.ViewModels
             // Затычка для авторизации
             if (Login == Password)
             {
+                ChangeViewModel(new WatchViewModel());
                 //MessageBox.Show($"Hello {Login}!");
             }
             else

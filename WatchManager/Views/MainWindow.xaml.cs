@@ -24,6 +24,7 @@ namespace WatchManager
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel(new AuthenticationViewModel());
         }
     }
 }
