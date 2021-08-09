@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using WatchManager.Stores;
 
 namespace WatchManager.ViewModels
 {
@@ -11,9 +12,9 @@ namespace WatchManager.ViewModels
     {
         public string Title { get; set; } = "WATCHWINDOW";
 
-        public WatchViewModel()
+        public WatchViewModel(NavigationStore navigationStore)
         {
-            //MessageBox.Show("This is the constructor of WatchViewModel!");
+            
         }
     }
 }

@@ -8,9 +8,7 @@
              xmlns:vm="clr-namespace:WatchManager.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="380" d:DesignWidth="640">
-    <UserControl.DataContext>
-        <vm:AuthenticationViewModel></vm:AuthenticationViewModel>
-    </UserControl.DataContext>
+
 
 
     <UserControl.Resources>
@@ -75,7 +73,7 @@
         
         <TextBlock Grid.Row="0" Text="{Binding Title}" Style="{StaticResource Logo}"></TextBlock>
         <TextBox  Grid.Row="1" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputField}"></TextBox>
-        <components:BindablePasswordBox Grid.Row="2" Password="{Binding Password}" />
-        <Button Grid.Row="3" Content="Auth"  Command="{Binding AuthenticationCommand}" Style="{StaticResource AuthButton}"></Button>
+        <components:BindablePasswordBox Grid.Row="2" Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
+        <Button Grid.Row="3" Content="Auth"  Command="{Binding SwitchViewModelCommand}" Style="{StaticResource AuthButton}"></Button>
     </Grid>
 </UserControl>

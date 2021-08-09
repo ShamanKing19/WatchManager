@@ -4,38 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using WatchManager.Stores;
 
 namespace WatchManager.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        //private BaseViewModel startupViewModel;
-        private BaseViewModel _currentViewModel;
+        private readonly NavigationStore _navigationStore;
 
         public BaseViewModel CurrentViewModel
         {
-            get => _currentViewModel;
-            set
-            {
-                _currentViewModel = value;
-                OnPropertyChanged(nameof(CurrentViewModel));
-            }
+            get => _navigationStore.CurrentViewModel;
         }
 
-        public MainViewModel(BaseViewModel vm)
+        public MainViewModel(NavigationStore navigationStore)
         {
-            CurrentViewModel = vm;
+            _navigationStore = navigationStore;
+            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
         }
 
-        public MainViewModel() : base()
-        {
 
-        }
-
-        protected void ChangeViewModel(BaseViewModel vm)
+        private void OnCurrentViewModelChanged()
         {
-            CurrentViewModel = vm;
-            MessageBox.Show($"View should be changed!\nCurrent VM: {CurrentViewModel}");
+            OnPropertyChanged(nameof(CurrentViewModel));
         }
     }
 }

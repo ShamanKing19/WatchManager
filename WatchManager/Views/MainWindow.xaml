@@ -4,16 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WatchManager" 
-        xmlns:vm="clr-namespace:WatchManager.ViewModels"
+        xmlns:vm="clr-namespace:WatchManager.ViewModels" 
+        xmlns:views="clr-namespace:WatchManager.Views"
         mc:Ignorable="d"
         Title="WatchManager" Height="380" Width="640" WindowStyle="SingleBorderWindow">
 
-    <!--
-    <Window.DataContext>
-        <vm:MainViewModel()/>
-    </Window.DataContext>
-    -->
-    <ContentControl Content="{Binding CurrentViewModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+
+
+
+     <ContentControl Content="{Binding CurrentViewModel}"/>
 
 
 </Window>

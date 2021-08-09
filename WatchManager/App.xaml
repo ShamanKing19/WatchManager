@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:WatchManager"
              xmlns:views="clr-namespace:WatchManager.Views"
              xmlns:viewmodels="clr-namespace:WatchManager.ViewModels"
-             StartupUri="Views/MainWindow.xaml">
+             >
     <Application.Resources>
         <DataTemplate DataType="{x:Type viewmodels:AuthenticationViewModel}">
             <views:AuthenticationPage/>
