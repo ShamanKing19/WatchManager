@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using WatchManager.Stores;
+using WatchManager.ViewModels;
 
 namespace WatchManager
 {
@@ -13,5 +15,17 @@ namespace WatchManager
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            NavigationStore navigationStore = new();
+            navigationStore.CurrentViewModel = new AuthenticationViewModel(navigationStore);
+            MainWindow = new MainWindow()
+            {
+                DataContext = new MainViewModel(navigationStore)
+            };
+            MainWindow.Show();
+
+            base.OnStartup(e);
+        }
     }
 }

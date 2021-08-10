@@ -9,73 +9,23 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using WatchManager.Commands;
+using WatchManager.Stores;
 
 namespace WatchManager.ViewModels
 {
-    public class AuthenticationViewModel : INotifyPropertyChanged
+    public class AuthenticationViewModel : BaseViewModel
     {
-        #region Реализация интерфейса INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
-        #endregion
-
-
-        private string _login;
-        private string _password;
-        
-        public string Login
-        {
-            get
-            {
-                return _login;
-            }
-            set
-            {
-                _login = value;
-                OnPropertyChanged(nameof(Login));
-            }
-        }
-        public string Password
-        {
-            get => _password;
-            set
-            {
-                _password = value;
-                OnPropertyChanged(nameof(Password));
-            }
-        }
         public string Title { get; } = "WatchManager";
+        public string Login { get; set; }
+        public string Password { get; set; }
+
+        public ICommand SwitchViewModelCommand { get; }
+        public ICommand AuthenticationCommand{ get; }
 
 
-        public RelayCommand AuthenticationCommand { get; set; }
-
-        public AuthenticationViewModel()
+        public AuthenticationViewModel(NavigationStore navigationStore)
         {
-            AuthenticationCommand = new RelayCommand
-            (
-                ExecuteUserAuthentication,
-                CanExecuteAuthenticateUser
-            );
+            SwitchViewModelCommand = new SwitchToWatchViewModelCommand(navigationStore, () => new WatchViewModel(navigationStore));
         }
-
-
-        public void ExecuteUserAuthentication(object parameter)
-        {
-            MessageBox.Show($"Login: {Login}, Password: {Password}");
-        }
-
-
-        public bool CanExecuteAuthenticateUser(object parameter)
-        {
-            // if (Login != null) return Login.Length
-            // else return 0
-            int inputLength = Login?.Length ?? 0;
-            
-            return inputLength > 0;
-        }
-
     }
 }

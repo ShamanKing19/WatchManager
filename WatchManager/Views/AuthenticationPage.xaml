@@ -1,20 +1,17 @@
-﻿<Window x:Class="WatchManager.AuthenticationWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WatchManager"
-        xmlns:vm="clr-namespace:WatchManager.ViewModels"
-        xmlns:components="clr-namespace:WatchManager.Components"
-        mc:Ignorable="d"
-        Title="WatchManager" Height="380" Width="640" WindowStyle="SingleBorderWindow">
-    <!-- Если подключать DataContext здесь, вместо CodeBegind'а, то
-         все Binding'и будут отображаться сразу в конструкторе -->
-    <Window.DataContext>
-        <vm:AuthenticationViewModel></vm:AuthenticationViewModel>
-    </Window.DataContext>
+﻿<UserControl x:Class="WatchManager.Views.AuthenticationPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WatchManager.Views" 
+             xmlns:components="clr-namespace:WatchManager.Components" 
+             xmlns:vm="clr-namespace:WatchManager.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="380" d:DesignWidth="640">
 
-    <Window.Resources>
+
+
+    <UserControl.Resources>
         <Style x:Key="Logo">
             <Setter Property="Control.Foreground" Value="White"/>
             <Setter Property="Control.FontSize" Value="44"/>
@@ -47,11 +44,24 @@
 
 
         </Style>
-        
-    </Window.Resources>
 
+        <ControlTemplate x:Key="ButtonTemplate" TargetType="Button">
+            <Border BorderBrush="Orange" BorderThickness="3" CornerRadius="20"
+                    TextBlock.Foreground="White">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStopCollection>
+                            <GradientStop Offset="0" Color="LimeGreen"></GradientStop>
+                            <GradientStop Offset="1" Color="LightBlue"></GradientStop>
+                        </GradientStopCollection>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <ContentPresenter RecognizesAccessKey="True"></ContentPresenter>
+            </Border>
+        </ControlTemplate>
 
-    
+    </UserControl.Resources>
+
     <Grid Background="#FF4C4C53">
         <Grid.RowDefinitions>
             <RowDefinition Height="180"></RowDefinition>
@@ -60,10 +70,10 @@
             <RowDefinition Height="60"></RowDefinition>
         </Grid.RowDefinitions>
 
+        
         <TextBlock Grid.Row="0" Text="{Binding Title}" Style="{StaticResource Logo}"></TextBlock>
-        <TextBox Grid.Row="1" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputField}"></TextBox>
-        <components:BindablePasswordBox Grid.Row="2" Password="{Binding Password}"/>
-        <!-- Пароль передаётся, только если через Hot Reload поменять значение на другое и обратно -->
-        <Button Grid.Row="3" Content="Auth"  Command="{Binding AuthenticationCommand}" Style="{StaticResource AuthButton}"></Button>
+        <TextBox  Grid.Row="1" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputField}"></TextBox>
+        <components:BindablePasswordBox Grid.Row="2" Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
+        <Button Grid.Row="3" Content="Auth"  Command="{Binding SwitchViewModelCommand}" Style="{StaticResource AuthButton}"></Button>
     </Grid>
-</Window>
+</UserControl>

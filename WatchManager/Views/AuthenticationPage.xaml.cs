@@ -12,16 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WatchManager.ViewModels;
 
-namespace WatchManager
+namespace WatchManager.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для AuthenticationPage.xaml
     /// </summary>
-    public partial class AuthenticationWindow : Window
+    public partial class AuthenticationPage : UserControl
     {
-        public AuthenticationWindow()
+        public AuthenticationPage()
         {
             InitializeComponent();
         }
