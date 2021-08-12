@@ -7,13 +7,8 @@
         xmlns:vm="clr-namespace:WatchManager.ViewModels" 
         xmlns:views="clr-namespace:WatchManager.Views"
         mc:Ignorable="d"
-        Title="WatchManager" Height="380" Width="640" WindowStyle="SingleBorderWindow">
-
-
-
-
+        Title="WatchManager" MinHeight="380" MinWidth="660" Height="380" Width="660" WindowStyle="SingleBorderWindow">
 
      <ContentControl Content="{Binding CurrentViewModel}"/>
-
 
 </Window>

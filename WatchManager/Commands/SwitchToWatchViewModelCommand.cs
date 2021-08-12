@@ -22,13 +22,7 @@ namespace WatchManager.Commands
 
         public override bool CanExecute(object parameter)
         {
-            /*AuthenticationViewModel authVM = (AuthenticationViewModel)_navigtationStore.CurrentViewModel;
-            int loginLength = authVM.Login?.Length ?? 0;
-            int passwordLength = authVM.Password?.Length ?? 0;
-
-            return loginLength > 0 && passwordLength > 0;*/
             return true;
-
         }
 
         public override void Execute(object parameter)

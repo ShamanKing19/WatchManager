@@ -64,7 +64,7 @@
 
     <Grid Background="#FF4C4C53">
         <Grid.RowDefinitions>
-            <RowDefinition Height="180"></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="60"></RowDefinition>
@@ -74,6 +74,6 @@
         <TextBlock Grid.Row="0" Text="{Binding Title}" Style="{StaticResource Logo}"></TextBlock>
         <TextBox  Grid.Row="1" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputField}"></TextBox>
         <components:BindablePasswordBox Grid.Row="2" Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
-        <Button Grid.Row="3" Content="Auth"  Command="{Binding SwitchViewModelCommand}" Style="{StaticResource AuthButton}"></Button>
+        <Button Grid.Row="3" Content="Auth"  Command="{Binding SwitchViewModelCommand}" CommandParameter="{Binding Login}" Style="{StaticResource AuthButton}"></Button>
     </Grid>
 </UserControl>
