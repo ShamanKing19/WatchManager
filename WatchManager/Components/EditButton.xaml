@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:WatchManager.Components"
              mc:Ignorable="d" 
              d:DesignHeight="45" d:DesignWidth="82.5">
-    
+
     <UserControl.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -66,8 +66,6 @@
         </Style>
     </UserControl.Resources>
 
+    <Button Style="{DynamicResource EditButton}" Content="Edit" Width="82.5" Height="45"/>
 
-    
-    
-    <Button Style="{DynamicResource EditButton}" Content="Edit" Width="82.5" Height="45" ></Button>
 </UserControl>
