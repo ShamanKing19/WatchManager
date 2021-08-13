@@ -47,6 +47,11 @@ namespace WatchManager.ViewModels
 
         public ObservableCollection<string> RowCollection { get; set; }
 
+        public ICommand SwitchToSettingsViewModelCommand{ get; }
+        public ICommand SwitchToAddViewModelCommand { get; }
+        public ICommand SwitchToEditViewModelCommand { get; }
+        public ICommand DeleteRowCommand { get; }
+
 
         public WatchViewModel(NavigationStore navigationStore)
         {
@@ -61,6 +66,8 @@ namespace WatchManager.ViewModels
                 "Доктор Хаус",
                 "Локи"
             };
+            SwitchToAddViewModelCommand = new SwitchToAddPageCommand(navigationStore, () => new AddRowViewModel(navigationStore));
+
         }
 
 
