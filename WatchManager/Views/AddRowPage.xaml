@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WatchManager.Views"
-             xmlns:components="clr-namespace:WatchManager.Components"
+             xmlns:components="clr-namespace:WatchManager.Components" 
+             xmlns:viewmodels="clr-namespace:WatchManager.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:AddRowViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="380" d:DesignWidth="640">
     
@@ -15,23 +17,27 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0">
-            <Border Background="#7c67ab" Width="345" Height="95" CornerRadius="10" Margin="0 24 0 10">
+            <Border  Background="#7c67ab" Width="400" Height="125" CornerRadius="10" Margin="0 24 0 10" Padding="6 0">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <components:TitleInputField Grid.Row="0"/>
-                    <DockPanel Grid.Row="1" Width="325">
-                        <components:TypeInputField/>
-                        <components:SeasonCountInputField Width="190"/>
+                    <DockPanel Grid.Row="1">
+                        <components:TypeInputField Width="170"/>
+                        <components:SeasonCountInputField Width="170"/>
+                    </DockPanel>
+                    <DockPanel Grid.Row="2">
+                        <components:CurrentSeasonInputField Width="180"/>
+                        <components:CurrentEpisodeInputField Width="200"/>
                     </DockPanel>
                 </Grid>
             </Border>
 
-            <Border Background="#7c67ab" Width="345" Height="215" CornerRadius="10">
-
-            </Border>
+            <components:SeasonsInputField/>
+            
         </StackPanel>
         
 

@@ -67,5 +67,5 @@
     </UserControl.Resources>
 
 
-    <Button Style="{DynamicResource SaveButton}" Content="Save" Width="80" Height="40"></Button>
+    <Button Command="{Binding AddDocumentCommand}" Style="{DynamicResource SaveButton}" Content="Save" Width="80" Height="40"></Button>
 </UserControl>

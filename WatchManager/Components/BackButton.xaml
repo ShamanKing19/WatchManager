@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WatchManager.Components"
+             xmlns:local="clr-namespace:WatchManager.Components" 
+             xmlns:viewmodels="clr-namespace:WatchManager.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:AddRowViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="40" d:DesignWidth="82.5">
 
@@ -67,6 +69,6 @@
     </UserControl.Resources>
 
 
-    <Button Command="{Binding BackToWatchPage}" Style="{DynamicResource BackButton}" Content="Back" Width="80" Height="40"></Button>
+    <Button Command="{Binding BackToWatchPageCommand}" Style="{DynamicResource BackButton}" Content="Back" Width="80" Height="40"></Button>
     
 </UserControl>

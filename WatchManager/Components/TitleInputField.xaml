@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WatchManager.Components"
+             xmlns:local="clr-namespace:WatchManager.Components" 
+             xmlns:viewmodels="clr-namespace:WatchManager.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:AddRowViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="325">
 
@@ -14,7 +16,7 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="16.67"/>
         </Style>
-        
+
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
         <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
         <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
@@ -61,18 +63,18 @@
                 </MultiTrigger>
             </Style.Triggers>
         </Style>
-   
+
     </UserControl.Resources>
 
 
-    <Border Background="#4c4c53" CornerRadius="15" Width="325" Height="30">
+    <Border Background="#4c4c53" CornerRadius="15" Height="30">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="12*"/>
+                <ColumnDefinition Width="53*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Title" Grid.Column="0"/>
-            <TextBox Style="{DynamicResource TitleInputField}" Grid.Column="1"/>
+            <TextBlock Text="Title" Height="22" Width="30"/>
+            <TextBox Text="{Binding TitleName}" Style="{DynamicResource TitleInputField}" Grid.Column="1"/>
         </Grid>
     </Border>
 

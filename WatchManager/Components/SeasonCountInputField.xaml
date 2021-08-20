@@ -13,6 +13,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="16.67"/>
+            <Setter Property="Margin" Value="4 0 0 3"/>
         </Style>
 
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
@@ -65,14 +66,14 @@
     </UserControl.Resources>
 
 
-    <Border Background="#4c4c53" CornerRadius="15" Width="160" Height="30">
+    <Border Background="#4c4c53" CornerRadius="15" Height="30">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="17*"/>
                 <ColumnDefinition Width="15*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Seasons" Height="22" Width="60"/>
-            <TextBox Style="{DynamicResource TitleInputField}" Grid.Column="1"/>
+            <TextBlock Text="Seasons"/>
+            <TextBox Text="{Binding SeasonsCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TitleInputField}" Grid.Column="1"/>
         </Grid>
     </Border>
 

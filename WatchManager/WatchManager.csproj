@@ -13,6 +13,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.13.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Components\EditButton.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
