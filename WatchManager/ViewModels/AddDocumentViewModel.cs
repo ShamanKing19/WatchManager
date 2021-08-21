@@ -12,7 +12,7 @@ using WatchManager.Stores;
 
 namespace WatchManager.ViewModels
 {
-    public class AddRowViewModel : BaseViewModel
+    public class AddDocumentViewModel : BaseViewModel
     {
         private string _titleName;
         private string _titleType;
@@ -60,12 +60,20 @@ namespace WatchManager.ViewModels
         public int CurrentSeason
         {
             get => _currentSeason;
-            set => _currentSeason = value;
+            set
+            {
+                _currentSeason = value;
+                OnPropertyChanged(nameof(CurrentSeason));
+            }
         }
         public int CurrentEpisode
         {
             get => _currentEpisode;
-            set => _currentEpisode = value;
+            set
+            {
+                _currentEpisode = value;
+                OnPropertyChanged(nameof(CurrentEpisode));
+            }
         }
 
 
@@ -73,9 +81,11 @@ namespace WatchManager.ViewModels
         public ICommand BackToWatchPageCommand { get; }
         public ICommand AddDocumentCommand { get; }
 
-        public AddRowViewModel(NavigationStore navigationStore)
+        public AddDocumentViewModel(NavigationStore navigationStore)
         {
             SeasonsCount = 1;
+            CurrentSeason = 1;
+            CurrentEpisode = 1;
             BackToWatchPageCommand = new BackToWatchPageCommand(navigationStore, () => new WatchViewModel(navigationStore));
             // Сюда надо передать объект DocumentModel со всеми данными тайтла
             AddDocumentCommand = new AddDocumentCommand

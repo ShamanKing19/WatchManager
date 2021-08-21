@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="WatchManager.Views.AddRowPage"
+﻿<UserControl x:Class="WatchManager.Views.AddDocumentPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:WatchManager.Views"
              xmlns:components="clr-namespace:WatchManager.Components" 
              xmlns:viewmodels="clr-namespace:WatchManager.ViewModels" 
-             d:DataContext="{d:DesignInstance Type=viewmodels:AddRowViewModel}"
+             d:DataContext="{d:DesignInstance Type=viewmodels:AddDocumentViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="380" d:DesignWidth="640">
     
@@ -24,19 +24,21 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <components:TitleInputField Grid.Row="0"/>
-                    <DockPanel Grid.Row="1">
-                        <components:TypeInputField Width="170"/>
-                        <components:SeasonCountInputField Width="170"/>
-                    </DockPanel>
-                    <DockPanel Grid.Row="2">
-                        <components:CurrentSeasonInputField Width="180"/>
-                        <components:CurrentEpisodeInputField Width="200"/>
-                    </DockPanel>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <components:TitleInputField Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+                    <components:TypeInputField Margin="0 0 5 0" Grid.Row="1" Grid.Column="0"/>
+                    <components:SeasonsInputField Margin="5 0 0 0" Grid.Row="1" Grid.Column="1"/>
+                    <components:CurrentSeasonInputField Margin="0 0 5 0" Grid.Row="2" Grid.Column="0"/>
+                    <components:CurrentEpisodeInputField Margin="5 0 0 0" Grid.Row="2" Grid.Column="1"/>
+
                 </Grid>
             </Border>
 
-            <components:SeasonsInputField/>
+            <components:SeasonsTable/>
             
         </StackPanel>
         

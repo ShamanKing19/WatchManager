@@ -18,9 +18,9 @@ namespace WatchManager.Views
     /// <summary>
     /// Логика взаимодействия для AddRowPage.xaml
     /// </summary>
-    public partial class AddRowPage : UserControl
+    public partial class AddDocumentPage : UserControl
     {
-        public AddRowPage()
+        public AddDocumentPage()
         {
             InitializeComponent();
         }

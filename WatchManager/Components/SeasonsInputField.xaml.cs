@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace WatchManager.Components
 {
     /// <summary>
-    /// Логика взаимодействия для SeasonsInputField.xaml
+    /// Логика взаимодействия для SeasonCountInputField.xaml
     /// </summary>
     public partial class SeasonsInputField : UserControl
     {

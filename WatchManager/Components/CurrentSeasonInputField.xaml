@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WatchManager.Components" xmlns:viewmodels="clr-namespace:WatchManager.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AddRowViewModel}"
+             xmlns:local="clr-namespace:WatchManager.Components" 
+             xmlns:viewmodels="clr-namespace:WatchManager.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:AddDocumentViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="200">
     <UserControl.Resources>
@@ -66,8 +68,8 @@
     <Border Background="#4c4c53" CornerRadius="15" Height="30">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="63*"/>
-                <ColumnDefinition Width="37*"/>
+                <ColumnDefinition Width="27*"/>
+                <ColumnDefinition Width="13*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Current season" Height="22" Width="110"/>
             <TextBox Text="{Binding CurrentSeason}" Style="{DynamicResource CurrentSeasonInputField}" Grid.Column="1"/>

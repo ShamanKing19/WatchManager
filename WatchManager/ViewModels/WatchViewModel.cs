@@ -66,7 +66,7 @@ namespace WatchManager.ViewModels
                 "Доктор Хаус",
                 "Локи"
             };
-            SwitchToAddViewModelCommand = new SwitchToAddPageCommand(navigationStore, () => new AddRowViewModel(navigationStore));
+            SwitchToAddViewModelCommand = new SwitchToAddPageCommand(navigationStore, () => new AddDocumentViewModel(navigationStore));
 
         }
 

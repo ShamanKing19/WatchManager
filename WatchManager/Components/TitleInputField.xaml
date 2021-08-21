@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WatchManager.Components" 
              xmlns:viewmodels="clr-namespace:WatchManager.ViewModels" 
-             d:DataContext="{d:DesignInstance Type=viewmodels:AddRowViewModel}"
+             d:DataContext="{d:DesignInstance Type=viewmodels:AddDocumentViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="325">
 
@@ -73,7 +73,7 @@
                 <ColumnDefinition Width="12*"/>
                 <ColumnDefinition Width="53*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Title" Height="22" Width="30"/>
+            <TextBlock Text="Title"/>
             <TextBox Text="{Binding TitleName}" Style="{DynamicResource TitleInputField}" Grid.Column="1"/>
         </Grid>
     </Border>
