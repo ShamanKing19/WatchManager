@@ -18,9 +18,9 @@ namespace WatchManager.Components
     /// <summary>
     /// Логика взаимодействия для TypeInputField.xaml
     /// </summary>
-    public partial class TypeInputField : UserControl
+    public partial class TypeInputCombobox : UserControl
     {
-        public TypeInputField()
+        public TypeInputCombobox()
         {
             InitializeComponent();
         }

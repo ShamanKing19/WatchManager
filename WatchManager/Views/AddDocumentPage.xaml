@@ -30,7 +30,7 @@
                     </Grid.ColumnDefinitions>
                     
                     <components:TitleInputField Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
-                    <components:TypeInputField Margin="0 0 5 0" Grid.Row="1" Grid.Column="0"/>
+                    <components:TypeInputCombobox Margin="0 0 5 0" Grid.Row="1" Grid.Column="0"/>
                     <components:SeasonsInputField Margin="5 0 0 0" Grid.Row="1" Grid.Column="1"/>
                     <components:CurrentSeasonInputField Margin="0 0 5 0" Grid.Row="2" Grid.Column="0"/>
                     <components:CurrentEpisodeInputField Margin="5 0 0 0" Grid.Row="2" Grid.Column="1"/>
@@ -38,7 +38,7 @@
                 </Grid>
             </Border>
 
-            <components:SeasonsTable/>
+            <components:SeasonsTable HorizontalAlignment="Center"/>
             
         </StackPanel>
         
