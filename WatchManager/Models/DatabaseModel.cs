@@ -27,53 +27,7 @@ namespace WatchManager.Models
         }
 
 
-        // Test
-        private void CreateAnimeDocument()
-        {
-            Dictionary<BsonString, BsonInt32> seasons = new Dictionary<BsonString, BsonInt32>()
-            {
-                {"1", 220},
-                {"2", 500}
-            };
-
-            Dictionary<BsonString, BsonInt32> currentEpisode = new Dictionary<BsonString, BsonInt32>()
-            {
-                {"Season", 2},
-                {"Episode", 358 }
-
-            };
-
-            DocumentModel user = new("Naruto", "Anime", seasons, currentEpisode);
-            BsonDocument doc = user.ToBsonDocument();
-            InsertDocumentIntoCollectionAsync(doc, userdataCollectionName).Wait();
-
-        }
-
-        // Test
-        private void CreateSerialDocument()
-        {
-            Dictionary<BsonString, BsonInt32> seasons = new Dictionary<BsonString, BsonInt32>()
-            {
-                {"1", 24},
-                {"2",24},
-                {"3", 24},
-                {"4", 24},
-                {"5", 24},
-                {"6", 24},
-            };
-
-            Dictionary<BsonString, BsonInt32> currentEpisode = new Dictionary<BsonString, BsonInt32>()
-            {
-                {"Season", 5},
-                {"Episode", 1 }
-
-            };
-
-            DocumentModel user = new("Flash", "Serial", seasons, currentEpisode);
-            BsonDocument doc = user.ToBsonDocument();
-            InsertDocumentIntoCollectionAsync(doc, userdataCollectionName).Wait();
-
-        }
+       
 
 
         public async void CreateAccountAsync(string username, string password)
@@ -92,7 +46,7 @@ namespace WatchManager.Models
 
 
         // TODO: сделать универсальным для изменения любого значения, не добавляя параметр
-        private async Task ChangeDocumentCurrentEpisodeAsync(string collectionName, string documentName, Dictionary<BsonString, BsonInt32> newValue)
+        private async Task ChangeDocumentCurrentEpisodeAsync(string collectionName, string documentName, SeasonModel newValue)
         {
             BsonDocument oldDocument = await GetDocumentByNameAsync(collectionName, documentName);
             DocumentModel user = BsonSerializer.Deserialize<DocumentModel>(oldDocument);

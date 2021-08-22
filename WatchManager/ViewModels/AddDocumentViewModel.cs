@@ -15,7 +15,7 @@ namespace WatchManager.ViewModels
     public class AddDocumentViewModel : BaseViewModel
     {
         #region Constants
-        private const int DEFAULT_VALUE = 1;
+        private const string DEFAULT_VALUE = "1";
         private const int SEASONS_LIMIT = 50;
         #endregion
 
@@ -154,17 +154,31 @@ namespace WatchManager.ViewModels
 
         public AddDocumentViewModel(NavigationStore navigationStore)
         {
-            SeasonsCount = DEFAULT_VALUE.ToString();
-            CurrentSeason = DEFAULT_VALUE.ToString();
-            CurrentEpisode = DEFAULT_VALUE.ToString();
+            SeasonsCount = DEFAULT_VALUE;
+            CurrentSeason = DEFAULT_VALUE;
+            CurrentEpisode = DEFAULT_VALUE;
             TitleType = TitleTypeList[0]; // default type
             BackToWatchPageCommand = new BackToWatchPageCommand(navigationStore, () => new WatchViewModel(navigationStore));
             // Сюда надо передать объект DocumentModel со всеми данными тайтла
+
             AddDocumentCommand = new AddDocumentCommand
                 (
                     navigationStore,
                     () => new WatchViewModel(navigationStore)
                 );
+        }
+
+
+        private DocumentModel CreateNewDocument()
+        {
+            if (TitleType == "Film")
+            {
+                return new DocumentModel(TitleName, TitleType, false);
+            }
+            else
+            {
+                return new DocumentModel(TitleName, TitleType, SeasonsCollection, new SeasonModel(CurrentSeason, CurrentEpisode ));
+            }
         }
 
 

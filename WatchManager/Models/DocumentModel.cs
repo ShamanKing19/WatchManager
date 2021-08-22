@@ -2,6 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,10 +17,10 @@ namespace WatchManager.Models
         public BsonString TitleType { get; set; }
 
         [BsonIgnoreIfNull]
-        public Dictionary<BsonString, BsonInt32> Seasons { get; set; }
+        public ObservableCollection<SeasonModel> Seasons { get; set; }
 
         [BsonIgnoreIfNull]
-        public Dictionary<BsonString, BsonInt32> CurrentEpisode { get; set; }
+        public SeasonModel CurrentEpisode { get; set; }
 
         [BsonDefaultValue(false)]
         public bool Watched { get; set; }
@@ -35,7 +36,7 @@ namespace WatchManager.Models
 
 
         // Сериал/аниме
-        public DocumentModel(BsonString titleName, BsonString titleType, Dictionary<BsonString, BsonInt32> seasons, Dictionary<BsonString, BsonInt32> currentEpisode)
+        public DocumentModel(BsonString titleName, BsonString titleType, ObservableCollection<SeasonModel> seasons, SeasonModel currentEpisode)
         {
             TitleName = titleName;
             TitleType = titleType;
