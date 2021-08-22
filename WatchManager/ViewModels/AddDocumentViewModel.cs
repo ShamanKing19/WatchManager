@@ -25,7 +25,8 @@ namespace WatchManager.ViewModels
 
         #region View Parameters Fields
         private List<string> _titleTypeList = new List<string> { "Film", "Serial", "Anime" };
-        private Visibility _seasonsTableVisibility;
+        private Visibility _filmTypeVisibility;
+
         #endregion
 
         #region Document Model Properties
@@ -43,7 +44,7 @@ namespace WatchManager.ViewModels
             set
             {
                 _titleType = value;
-                ChangeSeasonsTableVisibitity(value);
+                ChangeFieldsVisibitity(value);
             }
         }
         public int SeasonsCount
@@ -102,15 +103,16 @@ namespace WatchManager.ViewModels
                 OnPropertyChanged(nameof(TitleType));
             }
         }
-        public Visibility SeasonsTableVisibility
+        public Visibility FilmTypeVisibility
         {
-            get => _seasonsTableVisibility;
+            get => _filmTypeVisibility;
             set
             {
-                _seasonsTableVisibility = value;
-                OnPropertyChanged(nameof(SeasonsTableVisibility));
+                _filmTypeVisibility = value;
+                OnPropertyChanged(nameof(FilmTypeVisibility));
             }
         }
+        
         #endregion
 
         #region Commands
@@ -143,15 +145,15 @@ namespace WatchManager.ViewModels
             }
         }
 
-        private void ChangeSeasonsTableVisibitity(string value)
+        private void ChangeFieldsVisibitity(string value)
         {
             if (value == "Film")
             {
-                SeasonsTableVisibility = Visibility.Hidden;
+                FilmTypeVisibility = Visibility.Hidden; 
             }
             else
             {
-                SeasonsTableVisibility = Visibility.Visible;
+                FilmTypeVisibility = Visibility.Visible;
             }
         }
 

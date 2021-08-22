@@ -114,11 +114,11 @@
 
     </UserControl.Resources>
 
-    <Border Visibility="{Binding SeasonsTableVisibility}" Background="#7c67ab" Height="215" Width="205" CornerRadius="15">
+    <Border Background="#7c67ab" Height="215" Width="205" CornerRadius="15">
         <DataGrid 
-                ItemsSource="{Binding SeasonsCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                 Height="200" 
                 Width="200" 
+                ItemsSource="{Binding SeasonsCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                 Style="{DynamicResource SeasonsInputTable}"
                 ColumnHeaderStyle="{DynamicResource ColumnHeaderStyle}"
                 CellStyle="{DynamicResource CellStyle}"
