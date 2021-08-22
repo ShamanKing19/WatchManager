@@ -72,7 +72,7 @@
                 <ColumnDefinition Width="13*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Current season" Height="22" Width="110"/>
-            <TextBox Text="{Binding CurrentSeason}" Style="{DynamicResource CurrentSeasonInputField}" Grid.Column="1"/>
+            <TextBox Text="{Binding CurrentSeason, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource CurrentSeasonInputField}" Grid.Column="1"/>
         </Grid>
     </Border>
 </UserControl>

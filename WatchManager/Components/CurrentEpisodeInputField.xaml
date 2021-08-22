@@ -73,7 +73,7 @@
                 <ColumnDefinition Width="13*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Current episode" Height="22" Width="118"/>
-            <TextBox Text="{Binding CurrentEpisode}" Style="{DynamicResource CurrentEpisodeInputField}" Grid.Column="1"/>
+            <TextBox Text="{Binding CurrentEpisode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource CurrentEpisodeInputField}" Grid.Column="1"/>
         </Grid>
     </Border>
 </UserControl>

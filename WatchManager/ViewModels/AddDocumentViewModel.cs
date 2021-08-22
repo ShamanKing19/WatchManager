@@ -14,13 +14,18 @@ namespace WatchManager.ViewModels
 {
     public class AddDocumentViewModel : BaseViewModel
     {
+        #region Constants
+        private const int DEFAULT_VALUE = 1;
+        private const int SEASONS_LIMIT = 50;
+        #endregion
+
         #region Document Model Fields
         private string _titleName;
         private string _titleType;
-        private int _seasonsCount;
+        private string _seasonsCount;
         private ObservableCollection<SeasonModel> _seasonsCollection;
-        private int _currentSeason;
-        private int _currentEpisode;
+        private string _currentSeason;
+        private string _currentEpisode;
         #endregion
 
         #region View Parameters Fields
@@ -47,14 +52,19 @@ namespace WatchManager.ViewModels
                 ChangeFieldsVisibitity(value);
             }
         }
-        public int SeasonsCount
+        public string SeasonsCount
         {
             get => _seasonsCount;
             set
             {
-                if (value <= 100) 
-                { 
+                if (IsEmpty(value))
+                {
+                    _seasonsCount = "";
+                }
+                else if (IsNumber(value) && Int32.Parse(value) <= SEASONS_LIMIT)
+                {
                     _seasonsCount = value;
+                    CorrectCurrentSeason(value);
                     GenerateSeasonsAndEpisodesContainer();
                     OnPropertyChanged(nameof(SeasonsCount));
                 }
@@ -73,22 +83,44 @@ namespace WatchManager.ViewModels
                 OnPropertyChanged(nameof(SeasonsCollection));
             }
         }
-        public int CurrentSeason
+        public string CurrentSeason
         {
             get => _currentSeason;
             set
             {
-                _currentSeason = value;
-                OnPropertyChanged(nameof(CurrentSeason));
+                if (IsEmpty(value))
+                {
+                    _currentSeason = "";
+                }
+                else if (IsNumber(value) && Int32.Parse(value) <= Int32.Parse(SeasonsCount))
+                {
+                    _currentSeason = value;
+                    OnPropertyChanged(nameof(CurrentSeason));
+                }
+                else
+                {
+                    return;
+                }
             }
         }
-        public int CurrentEpisode
+        public string CurrentEpisode
         {
             get => _currentEpisode;
             set
             {
-                _currentEpisode = value;
-                OnPropertyChanged(nameof(CurrentEpisode));
+                if (IsEmpty(value))
+                {
+                    _currentEpisode = "";
+                }
+                else if (IsNumber(value))
+                {
+                    _currentEpisode = value;
+                    OnPropertyChanged(nameof(CurrentEpisode));
+                }
+                else
+                {
+                    return;
+                }
             }
         }
         #endregion
@@ -122,9 +154,9 @@ namespace WatchManager.ViewModels
 
         public AddDocumentViewModel(NavigationStore navigationStore)
         {
-            SeasonsCount = 1;
-            CurrentSeason = 1;
-            CurrentEpisode = 1;
+            SeasonsCount = DEFAULT_VALUE.ToString();
+            CurrentSeason = DEFAULT_VALUE.ToString();
+            CurrentEpisode = DEFAULT_VALUE.ToString();
             TitleType = TitleTypeList[0]; // default type
             BackToWatchPageCommand = new BackToWatchPageCommand(navigationStore, () => new WatchViewModel(navigationStore));
             // Сюда надо передать объект DocumentModel со всеми данными тайтла
@@ -139,11 +171,26 @@ namespace WatchManager.ViewModels
         private void GenerateSeasonsAndEpisodesContainer()
         {
             SeasonsCollection = new ObservableCollection<SeasonModel>();
-            for (int i = 1; i <= SeasonsCount; i++)
+            int value = Int32.Parse(SeasonsCount);
+            for (int i = 1; i <= value; i++)
             {
                 SeasonsCollection.Add(new SeasonModel(i.ToString(), "0"));
             }
         }
+
+
+        // TODO: Implement
+        private void CorrectCurrentSeason(string value)
+        {
+            
+        }
+
+
+        private bool IsNumber(string value)
+        {
+            return Int32.TryParse(value, out int input);
+        }
+
 
         private void ChangeFieldsVisibitity(string value)
         {
@@ -158,9 +205,9 @@ namespace WatchManager.ViewModels
         }
 
 
-        private bool IsNumber(string value)
+        private bool IsEmpty(string value)
         {
-            return true;
+            return value.Length == 0;
         }
     }
 }
