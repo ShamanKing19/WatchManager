@@ -14,41 +14,45 @@ namespace WatchManager.ViewModels
 {
     public class AddDocumentViewModel : BaseViewModel
     {
+        #region View Parameters Fields
+        private List<string> _titleTypeList;
+        private Visibility _filmTypeVisibility;
+        #endregion
+
         #region Constants
         private const string DEFAULT_VALUE = "1";
         private const int SEASONS_LIMIT = 50;
+        private readonly string DEFAULT_TYPE_VALUE;
         #endregion
 
-        #region Document Model Fields
+        #region Document Model Private Fields
         private string _titleName;
         private string _titleType;
         private string _seasonsCount;
         private ObservableCollection<SeasonModel> _seasonsCollection;
         private string _currentSeason;
         private string _currentEpisode;
-        #endregion
-
-        #region View Parameters Fields
-        private List<string> _titleTypeList = new List<string> { "Film", "Serial", "Anime" };
-        private Visibility _filmTypeVisibility;
-
+        private bool _watched;
+        private DocumentModel _document = new DocumentModel();
         #endregion
 
         #region Document Model Properties
         public string TitleName
         {
-            get => _titleName;
+            get => _titleName == null ? "" : _titleName;
             set
             {
                 _titleName = value;
+                _document.TitleName = value;
             }
         }
         public string TitleType
         {
-            get => _titleType;
+            get => _titleType == null ? DEFAULT_TYPE_VALUE : _titleType;
             set
             {
                 _titleType = value;
+                _document.TitleType = value;
                 ChangeFieldsVisibitity(value);
             }
         }
@@ -80,6 +84,7 @@ namespace WatchManager.ViewModels
             set
             {
                 _seasonsCollection = value;
+                _document.Seasons = value;
                 OnPropertyChanged(nameof(SeasonsCollection));
             }
         }
@@ -95,6 +100,7 @@ namespace WatchManager.ViewModels
                 else if (IsNumber(value) && Int32.Parse(value) <= Int32.Parse(SeasonsCount))
                 {
                     _currentSeason = value;
+                    _document.CurrentEpisode.SeasonNumber = value;
                     OnPropertyChanged(nameof(CurrentSeason));
                 }
                 else
@@ -115,12 +121,22 @@ namespace WatchManager.ViewModels
                 else if (IsNumber(value))
                 {
                     _currentEpisode = value;
+                    _document.CurrentEpisode.SeasonEpisodes =  value;
                     OnPropertyChanged(nameof(CurrentEpisode));
                 }
                 else
                 {
                     return;
                 }
+            }
+        }
+        public bool Watched 
+        {
+            get => _watched;
+            set
+            {
+                _watched = value;
+                _document.Watched = value;
             }
         }
         #endregion
@@ -154,17 +170,19 @@ namespace WatchManager.ViewModels
 
         public AddDocumentViewModel(NavigationStore navigationStore)
         {
+            TitleTypeList = new List<string> { "Film", "Serial", "Anime" };
+            DEFAULT_TYPE_VALUE = TitleTypeList[0];
+            TitleType = DEFAULT_TYPE_VALUE;
             SeasonsCount = DEFAULT_VALUE;
             CurrentSeason = DEFAULT_VALUE;
             CurrentEpisode = DEFAULT_VALUE;
-            TitleType = TitleTypeList[0]; // default type
             BackToWatchPageCommand = new BackToWatchPageCommand(navigationStore, () => new WatchViewModel(navigationStore));
-            // Сюда надо передать объект DocumentModel со всеми данными тайтла
-
+            // Сюда надо передать объект DocumentModel со всеми данными тайтла, либо передать метод, собирающий данные с формы
             AddDocumentCommand = new AddDocumentCommand
                 (
                     navigationStore,
-                    () => new WatchViewModel(navigationStore)
+                    () => new WatchViewModel(navigationStore),
+                    _document
                 );
         }
 
@@ -193,16 +211,10 @@ namespace WatchManager.ViewModels
         }
 
 
-        // TODO: Implement
+        // Изменяет текущий сезон, если было изменено количество сезонов
         private void CorrectCurrentSeason(string value)
         {
             
-        }
-
-
-        private bool IsNumber(string value)
-        {
-            return Int32.TryParse(value, out int input);
         }
 
 
@@ -210,12 +222,18 @@ namespace WatchManager.ViewModels
         {
             if (value == "Film")
             {
-                FilmTypeVisibility = Visibility.Hidden; 
+                FilmTypeVisibility = Visibility.Collapsed; 
             }
             else
             {
                 FilmTypeVisibility = Visibility.Visible;
             }
+        }
+
+
+        private bool IsNumber(string value)
+        {
+            return Int32.TryParse(value, out int input);
         }
 
 

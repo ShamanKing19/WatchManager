@@ -15,18 +15,19 @@ namespace WatchManager.Commands
     {
         private NavigationStore _navigtationStore;
         private Func<BaseViewModel> _createViewModel;
-        //private DocumentModel _document;
+        private DocumentModel _document;
 
-        public AddDocumentCommand(NavigationStore navigtationStore, Func<BaseViewModel> createViewModel)
+
+        public AddDocumentCommand(NavigationStore navigtationStore, Func<BaseViewModel> createViewModel, DocumentModel document)
         {
             _navigtationStore = navigtationStore;
             _createViewModel = createViewModel;
-            //_document = document;
+            _document = document;
         }
         public override void Execute(object parameter)
         {
             // Вот здесь запись будет сохраняться в базу данных
-
+            MessageBox.Show(_document.ToString());
             _navigtationStore.CurrentViewModel = _createViewModel();
         }
     }

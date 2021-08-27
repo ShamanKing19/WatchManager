@@ -20,7 +20,7 @@ namespace WatchManager.Models
         public ObservableCollection<SeasonModel> Seasons { get; set; }
 
         [BsonIgnoreIfNull]
-        public SeasonModel CurrentEpisode { get; set; }
+        public SeasonModel CurrentEpisode { get; set; } = new SeasonModel("0", "0");
 
         [BsonDefaultValue(false)]
         public bool Watched { get; set; }
@@ -42,6 +42,25 @@ namespace WatchManager.Models
             TitleType = titleType;
             Seasons = seasons;
             CurrentEpisode = currentEpisode;
+        }
+
+
+        public DocumentModel()
+        {
+
+        }
+
+
+        public override string ToString()
+        {
+            if (TitleType == "Film")
+            {
+                return $"{TitleName}, {TitleType}, {Watched}";
+            }
+            else
+            {
+                return $"{TitleName}, {TitleType}, {Seasons}, {CurrentEpisode}, {Watched}";
+            }
         }
     }
 }
