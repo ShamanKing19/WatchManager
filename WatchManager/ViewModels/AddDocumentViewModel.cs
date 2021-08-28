@@ -54,6 +54,7 @@ namespace WatchManager.ViewModels
                 _titleType = value;
                 _document.TitleType = value;
                 ChangeFieldsVisibitity(value);
+                SetCurrentSeason(value);
             }
         }
         public string SeasonsCount
@@ -86,6 +87,7 @@ namespace WatchManager.ViewModels
             set
             {
                 _currentSeason = value;
+                // TODO: Сделать это красивее
                 if (TitleType != "Film")
                 {
                     _document.CurrentEpisode.SeasonNumber = value;
@@ -100,9 +102,10 @@ namespace WatchManager.ViewModels
             set
             {
                 _currentEpisode = value;
+                // TODO: Сделать это красивее
                 if (TitleType != "Film")
                 {
-                    _document.CurrentEpisode.SeasonEpisodes = value;
+                    _document.CurrentEpisode.SeasonEpisodesCount = value;
                 }
                 OnPropertyChanged(nameof(CurrentEpisode));
             }
@@ -171,6 +174,19 @@ namespace WatchManager.ViewModels
             for (int i = 1; i <= value; i++)
             {
                 SeasonsCollection.Add(new SeasonModel(i.ToString(), "0"));
+            }
+        }
+
+
+        private void SetCurrentSeason(string titleType)
+        {
+            if (TitleType == "Film")
+            {
+                _document.CurrentEpisode = null;
+            }
+            else
+            {
+                _document.CurrentEpisode = new SeasonModel("1", "1");
             }
         }
 

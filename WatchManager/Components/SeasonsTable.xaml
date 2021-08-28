@@ -126,7 +126,7 @@
         
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Season" Binding="{Binding SeasonNumber}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Episodes" Binding="{Binding SeasonEpisodes}"/>
+                <DataGridTextColumn Header="Episodes" Binding="{Binding SeasonEpisodesCount}"/>
             </DataGrid.Columns>
 
         </DataGrid>
