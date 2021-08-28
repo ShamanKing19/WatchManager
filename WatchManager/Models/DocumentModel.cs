@@ -11,17 +11,19 @@ namespace WatchManager.Models
 {
     public class DocumentModel
     {
+        // По идее этим записям ID не нужен, вместо них используется логин пользователя
+        // Для разрешения одинаковых логинов можно будет попробовать сделать
+        // id названием коллекции, хотя не факт что сработает, потому что набор символов одинаковый
         [BsonId]
         public ObjectId Id { get; set; }
         public BsonString TitleName { get; set; }
         public BsonString TitleType { get; set; }
 
-        // Это должен быть словарь <string, string>
         [BsonIgnoreIfNull]
         public ObservableCollection<SeasonModel> Seasons { get; set; }
 
         [BsonIgnoreIfNull]
-        public SeasonModel CurrentEpisode { get; set; } = new SeasonModel("0", "0");
+        public SeasonModel CurrentEpisode { get; set; }
 
         [BsonDefaultValue(false)]
         public bool Watched { get; set; }

@@ -39,7 +39,7 @@ namespace WatchManager.ViewModels
         #region Document Model Properties
         public string TitleName
         {
-            get => _titleName == null ? "" : _titleName;
+            get => _titleName;
             set
             {
                 _titleName = value;
@@ -48,7 +48,7 @@ namespace WatchManager.ViewModels
         }
         public string TitleType
         {
-            get => _titleType == null ? DEFAULT_TYPE_VALUE : _titleType;
+            get => _titleType;
             set
             {
                 _titleType = value;
@@ -61,21 +61,13 @@ namespace WatchManager.ViewModels
             get => _seasonsCount;
             set
             {
-                if (IsEmpty(value))
+                _seasonsCount = value;
+                if (TitleType != "Film")
                 {
-                    _seasonsCount = "";
-                }
-                else if (IsNumber(value) && Int32.Parse(value) <= SEASONS_LIMIT)
-                {
-                    _seasonsCount = value;
                     CorrectCurrentSeason(value);
                     GenerateSeasonsAndEpisodesContainer();
-                    OnPropertyChanged(nameof(SeasonsCount));
                 }
-                else
-                {
-                    return;
-                }
+                OnPropertyChanged(nameof(SeasonsCount));
             }
         }
         public ObservableCollection<SeasonModel> SeasonsCollection
@@ -93,20 +85,13 @@ namespace WatchManager.ViewModels
             get => _currentSeason;
             set
             {
-                if (IsEmpty(value))
+                _currentSeason = value;
+                if (TitleType != "Film")
                 {
-                    _currentSeason = "";
-                }
-                else if (IsNumber(value) && Int32.Parse(value) <= Int32.Parse(SeasonsCount))
-                {
-                    _currentSeason = value;
                     _document.CurrentEpisode.SeasonNumber = value;
-                    OnPropertyChanged(nameof(CurrentSeason));
                 }
-                else
-                {
-                    return;
-                }
+                OnPropertyChanged(nameof(CurrentSeason));
+                
             }
         }
         public string CurrentEpisode
@@ -114,20 +99,12 @@ namespace WatchManager.ViewModels
             get => _currentEpisode;
             set
             {
-                if (IsEmpty(value))
+                _currentEpisode = value;
+                if (TitleType != "Film")
                 {
-                    _currentEpisode = "";
+                    _document.CurrentEpisode.SeasonEpisodes = value;
                 }
-                else if (IsNumber(value))
-                {
-                    _currentEpisode = value;
-                    _document.CurrentEpisode.SeasonEpisodes =  value;
-                    OnPropertyChanged(nameof(CurrentEpisode));
-                }
-                else
-                {
-                    return;
-                }
+                OnPropertyChanged(nameof(CurrentEpisode));
             }
         }
         public bool Watched 
