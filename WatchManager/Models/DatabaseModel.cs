@@ -9,35 +9,25 @@ using System.Threading.Tasks;
 
 namespace WatchManager.Models
 {
-    class DatabaseModel
+    static class DatabaseModel
     {
-        readonly string connectionString = "mongodb://localhost";
-        readonly string databaseName = "EpisodeManager";
-        readonly string accountsCollectionName = "Accounts";
-        readonly string userdataCollectionName = "testuserData";
-
-
-
-        // Test
-        private void CreateFilmDocument()
-        {
-            DocumentModel user = new("Pulp Fiction", "Film", false);
-            BsonDocument doc = user.ToBsonDocument();
-            InsertDocumentIntoCollectionAsync(doc, userdataCollectionName).Wait();
-        }
+        static readonly string connectionString = "mongodb://localhost";
+        static readonly string databaseName = "EpisodeManager";
+        static readonly string accountsCollectionName = "Accounts";
+        static readonly string userdataCollectionName = "testuserData";
 
 
        
 
 
-        public async void CreateAccountAsync(string username, string password)
+        public static async void CreateAccountAsync(string username, string password)
         {
             BsonDocument doc = new AccountModel(username, password).ToBsonDocument();
             await InsertDocumentIntoCollectionAsync(doc, accountsCollectionName);
         }
 
 
-        public async Task DeleteDocumentAsync(string collectionName, string documentName)
+        public static async Task DeleteDocumentAsync(string collectionName, string documentName)
         {
             var collection = GetCollection(collectionName);
             var filter = Builders<BsonDocument>.Filter.Eq("TitleName", documentName);
@@ -46,7 +36,7 @@ namespace WatchManager.Models
 
 
         // TODO: сделать универсальным для изменения любого значения, не добавляя параметр
-        private async Task ChangeDocumentCurrentEpisodeAsync(string collectionName, string documentName, SeasonModel newValue)
+        private static async Task ChangeDocumentCurrentEpisodeAsync(string collectionName, string documentName, SeasonModel newValue)
         {
             BsonDocument oldDocument = await GetDocumentByNameAsync(collectionName, documentName);
             DocumentModel user = BsonSerializer.Deserialize<DocumentModel>(oldDocument);
@@ -56,14 +46,14 @@ namespace WatchManager.Models
         }
 
 
-        public async Task UpdateDocumentAsync(string collectionName, BsonDocument oldDocument, BsonDocument newDocument)
+        public static async Task UpdateDocumentAsync(string collectionName, BsonDocument oldDocument, BsonDocument newDocument)
         {
             IMongoCollection<BsonDocument> collection = GetCollection(collectionName);
             var result = await collection.UpdateOneAsync(oldDocument, new BsonDocument("$set", newDocument));
         }
 
 
-        public async Task<BsonDocument> GetDocumentByNameAsync(string collectionName, string documentName)
+        public static async Task<BsonDocument> GetDocumentByNameAsync(string collectionName, string documentName)
         {
             IMongoCollection<BsonDocument> collection = GetCollection(collectionName);
             BsonDocument filter = new BsonDocument("TitleName", documentName);
@@ -86,7 +76,7 @@ namespace WatchManager.Models
 
 
         // filterParameter = "Film" or "Serial" or "Anime"
-        public async Task<List<BsonDocument>> GetTypeFilteredListFromCollectionAsync(string collectionName, string filterParameter)
+        public static async Task<List<BsonDocument>> GetTypeFilteredListFromCollectionAsync(string collectionName, string filterParameter)
         {
             IMongoCollection<BsonDocument> collection = GetCollection(collectionName);
             BsonDocument filter = new BsonDocument("TitleType", filterParameter);
@@ -108,7 +98,7 @@ namespace WatchManager.Models
         }
 
 
-        public async Task<List<BsonDocument>> GetListOfDocumentsFromCollectionAsync(string collectionName)
+        public static async Task<List<BsonDocument>> GetListOfDocumentsFromCollectionAsync(string collectionName)
         {
             IMongoCollection<BsonDocument> collection = GetCollection(collectionName);
             BsonDocument filter = new BsonDocument();
@@ -132,14 +122,14 @@ namespace WatchManager.Models
 
 
         // Если коллекции нет, то она создастся
-        public async Task InsertDocumentIntoCollectionAsync(BsonDocument document, string collectionName)
+        public static async Task InsertDocumentIntoCollectionAsync(BsonDocument document, string collectionName)
         {
             IMongoCollection<BsonDocument> accountsCollection = GetCollection(collectionName);
             await accountsCollection.InsertOneAsync(document);
         }
 
 
-        private IMongoCollection<BsonDocument> GetCollection(string collectionName)
+        private static IMongoCollection<BsonDocument> GetCollection(string collectionName)
         {
             MongoClient client = ConnectToDatabaseAndGetClient(connectionString);
             IMongoDatabase database = GetDatabase(client, databaseName);
@@ -148,14 +138,14 @@ namespace WatchManager.Models
         }
 
 
-        private IMongoDatabase GetDatabase(MongoClient client, string databaseName)
+        private static IMongoDatabase GetDatabase(MongoClient client, string databaseName)
         {
             IMongoDatabase database = client.GetDatabase(databaseName);
             return database;
         }
 
 
-        private MongoClient ConnectToDatabaseAndGetClient(string connectionString)
+        private static MongoClient ConnectToDatabaseAndGetClient(string connectionString)
         {
             MongoClient client = new MongoClient(connectionString);
             return client;

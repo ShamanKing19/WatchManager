@@ -16,6 +16,7 @@ namespace WatchManager.Models
         public BsonString TitleName { get; set; }
         public BsonString TitleType { get; set; }
 
+        // Это должен быть словарь <string, string>
         [BsonIgnoreIfNull]
         public ObservableCollection<SeasonModel> Seasons { get; set; }
 

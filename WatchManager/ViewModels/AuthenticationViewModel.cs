@@ -44,7 +44,7 @@ namespace WatchManager.ViewModels
 
         public AuthenticationViewModel(NavigationStore navigationStore)
         {
-            SwitchViewModelCommand = new SwitchToWatchViewModelCommand(navigationStore, () => new WatchViewModel(navigationStore));
+            SwitchViewModelCommand = new SwitchToWatchViewModelCommand(navigationStore, () => new WatchViewModel(navigationStore, Login));
         }
     }
 }

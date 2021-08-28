@@ -168,7 +168,7 @@ namespace WatchManager.ViewModels
         public ICommand AddDocumentCommand { get; }
         #endregion 
 
-        public AddDocumentViewModel(NavigationStore navigationStore)
+        public AddDocumentViewModel(NavigationStore navigationStore, string userLogin)
         {
             TitleTypeList = new List<string> { "Film", "Serial", "Anime" };
             DEFAULT_TYPE_VALUE = TitleTypeList[0];
@@ -176,27 +176,14 @@ namespace WatchManager.ViewModels
             SeasonsCount = DEFAULT_VALUE;
             CurrentSeason = DEFAULT_VALUE;
             CurrentEpisode = DEFAULT_VALUE;
-            BackToWatchPageCommand = new BackToWatchPageCommand(navigationStore, () => new WatchViewModel(navigationStore));
-            // Сюда надо передать объект DocumentModel со всеми данными тайтла, либо передать метод, собирающий данные с формы
-            AddDocumentCommand = new AddDocumentCommand
+            BackToWatchPageCommand = new BackToWatchPageCommand(navigationStore, () => new WatchViewModel(navigationStore, userLogin));
+            AddDocumentCommand = new InsertNewDocumentCommand
                 (
                     navigationStore,
-                    () => new WatchViewModel(navigationStore),
-                    _document
+                    () => new WatchViewModel(navigationStore, userLogin),
+                    _document,
+                    userLogin
                 );
-        }
-
-
-        private DocumentModel CreateNewDocument()
-        {
-            if (TitleType == "Film")
-            {
-                return new DocumentModel(TitleName, TitleType, false);
-            }
-            else
-            {
-                return new DocumentModel(TitleName, TitleType, SeasonsCollection, new SeasonModel(CurrentSeason, CurrentEpisode ));
-            }
         }
 
 

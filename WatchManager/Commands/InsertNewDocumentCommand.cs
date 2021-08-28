@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -11,23 +12,24 @@ using WatchManager.ViewModels;
 
 namespace WatchManager.Commands
 {
-    public class AddDocumentCommand : CommandBase
+    public class InsertNewDocumentCommand : CommandBase
     {
         private NavigationStore _navigtationStore;
         private Func<BaseViewModel> _createViewModel;
         private DocumentModel _document;
+        private string _userLogin;
 
 
-        public AddDocumentCommand(NavigationStore navigtationStore, Func<BaseViewModel> createViewModel, DocumentModel document)
+        public InsertNewDocumentCommand(NavigationStore navigtationStore, Func<BaseViewModel> createViewModel, DocumentModel document, string userLogin)
         {
             _navigtationStore = navigtationStore;
             _createViewModel = createViewModel;
             _document = document;
+            _userLogin = userLogin;
         }
         public override void Execute(object parameter)
         {
-            // Вот здесь запись будет сохраняться в базу данных
-            MessageBox.Show(_document.ToString());
+            DatabaseModel.InsertDocumentIntoCollectionAsync(_document.ToBsonDocument(), _userLogin);
             _navigtationStore.CurrentViewModel = _createViewModel();
         }
     }

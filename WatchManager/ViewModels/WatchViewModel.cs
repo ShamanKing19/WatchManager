@@ -53,7 +53,7 @@ namespace WatchManager.ViewModels
         public ICommand DeleteRowCommand { get; }
 
 
-        public WatchViewModel(NavigationStore navigationStore)
+        public WatchViewModel(NavigationStore navigationStore, string userLogin)
         {
             RowCollection = new() { 
                 "Naruto: Shippuden",
@@ -66,8 +66,7 @@ namespace WatchManager.ViewModels
                 "Доктор Хаус",
                 "Локи"
             };
-            SwitchToAddViewModelCommand = new SwitchToAddPageCommand(navigationStore, () => new AddDocumentViewModel(navigationStore));
-
+            SwitchToAddViewModelCommand = new SwitchToAddPageCommand(navigationStore, () => new AddDocumentViewModel(navigationStore, userLogin));
         }
 
 
