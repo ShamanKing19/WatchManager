@@ -11,26 +11,71 @@ namespace WatchManager.Models
 {
     public class DocumentModel
     {
+        private Dictionary<string, string> _seasonsDict;
+        
         // По идее этим записям ID не нужен, вместо них используется логин пользователя
         // Для разрешения одинаковых логинов можно будет попробовать сделать
         // id названием коллекции, хотя не факт что сработает, потому что набор символов одинаковый
         [BsonId]
         public ObjectId Id { get; set; }
-        public BsonString TitleName { get; set; }
-        public BsonString TitleType { get; set; }
+        public string TitleName { get; set; }
+        public string TitleType { get; set; }
 
-        [BsonIgnoreIfNull]
+
+        [BsonIgnore]
         public ObservableCollection<SeasonModel> Seasons { get; set; }
+        
 
-        [BsonIgnoreIfNull]
+        [BsonIgnoreIfNull][BsonElement("Seasons")]
+        public Dictionary<string, string> SeasonsDict
+        {
+            get
+            {
+                if (Seasons != null)
+                {
+                    _seasonsDict = new Dictionary<string, string>();
+                    foreach (var season in Seasons)
+                    {
+                        _seasonsDict[season.SeasonNumber] = season.SeasonEpisodesCount;
+                    }
+                }
+                return _seasonsDict;
+
+            }
+            set
+            {
+                _seasonsDict = value;
+            }
+        }
+
+
+        [BsonIgnore]
         public SeasonModel CurrentEpisode { get; set; }
+        
+
+        [BsonIgnoreIfNull][BsonElement("CurrentEpisode")]
+        public Dictionary<string, string> CurrentEpisodeDict
+        {
+            get
+            {
+                if (CurrentEpisode != null)
+                {
+                    return new Dictionary<string, string>
+                    {
+                        {CurrentEpisode.SeasonNumber, CurrentEpisode.SeasonEpisodesCount }
+                    };
+                }
+                return null;
+            }
+        }
+
 
         [BsonDefaultValue(false)]
         public bool Watched { get; set; }
 
 
         // Фильм
-        public DocumentModel(BsonString titleName, BsonString titleType, bool watched)
+        public DocumentModel(string titleName, string titleType, bool watched)
         {
             TitleName = titleName;
             TitleType = titleType;
@@ -39,7 +84,7 @@ namespace WatchManager.Models
 
 
         // Сериал/аниме
-        public DocumentModel(BsonString titleName, BsonString titleType, ObservableCollection<SeasonModel> seasons, SeasonModel currentEpisode)
+        public DocumentModel(string titleName, string titleType, ObservableCollection<SeasonModel> seasons, SeasonModel currentEpisode)
         {
             TitleName = titleName;
             TitleType = titleType;
@@ -48,22 +93,11 @@ namespace WatchManager.Models
         }
 
 
+        // Нужен для создания пустого объекта, через которой
+        // передаются данные для записи в команду
         public DocumentModel()
         {
 
-        }
-
-
-        public override string ToString()
-        {
-            if (TitleType == "Film")
-            {
-                return $"{TitleName}, {TitleType}, {Watched}";
-            }
-            else
-            {
-                return $"{TitleName}, {TitleType}, {Seasons}, {CurrentEpisode}, {Watched}";
-            }
         }
     }
 }

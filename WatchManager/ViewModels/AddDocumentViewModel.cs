@@ -66,7 +66,7 @@ namespace WatchManager.ViewModels
                 if (TitleType != "Film")
                 {
                     CorrectCurrentSeason(value);
-                    GenerateSeasonsAndEpisodesContainer();
+                    SetSeasonsCollection();
                 }
                 OnPropertyChanged(nameof(SeasonsCount));
             }
@@ -167,7 +167,7 @@ namespace WatchManager.ViewModels
         }
 
 
-        private void GenerateSeasonsAndEpisodesContainer()
+        private void SetSeasonsCollection()
         {
             SeasonsCollection = new ObservableCollection<SeasonModel>();
             int value = Int32.Parse(SeasonsCount);
