@@ -8,28 +8,25 @@
              xmlns:components="clr-namespace:WatchManager.Components" 
              d:DataContext="{d:DesignInstance Type=vm:WatchViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="380" d:DesignWidth="640">
-
+             d:DesignHeight="400" d:DesignWidth="700">
 
 
     <Grid Background="#4c4c53">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="460*"/>
-            <ColumnDefinition Width="180*"/>
+            <ColumnDefinition Width="26*"/>
+            <ColumnDefinition Width="9*"/>
         </Grid.ColumnDefinitions>
-         
-        <DataGrid ItemsSource="{Binding RowCollection}"></DataGrid>
-        
-        <!--
-        <components:DocumentCollectionTable Grid.Column="0" />
-        -->
-        <!-- Нужно заменить на StackPanel-->
-        <Grid Grid.Column="1">
+
+        <components:DataCollectionTable Grid.Column="0" Margin="24,24,24,24"/>
+
+        <!-- TODO: заменить на StackPanel-->
+        <Grid Grid.Column="1" Margin="0 18 0 0">
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="8*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -41,7 +38,7 @@
             <components:AddButton Grid.Column="0" Grid.Row="2"/>
             <components:EditButton Grid.Column="1" Grid.Row="2"/>
             <components:DeleteButton Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"/>
-        
+
         </Grid>
     </Grid>
 

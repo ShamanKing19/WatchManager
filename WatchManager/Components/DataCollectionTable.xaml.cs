@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace WatchManager.Components
 {
     /// <summary>
-    /// Логика взаимодействия для MainTable.xaml
+    /// Логика взаимодействия для DataCollectionTable.xaml
     /// </summary>
-    public partial class DocumentCollectionTable : UserControl
+    public partial class DataCollectionTable : UserControl
     {
-        public DocumentCollectionTable()
+        public DataCollectionTable()
         {
             InitializeComponent();
         }
