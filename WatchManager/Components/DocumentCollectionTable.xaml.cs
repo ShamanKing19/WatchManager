@@ -18,9 +18,9 @@ namespace WatchManager.Components
     /// <summary>
     /// Логика взаимодействия для MainTable.xaml
     /// </summary>
-    public partial class MainTable : UserControl
+    public partial class DocumentCollectionTable : UserControl
     {
-        public MainTable()
+        public DocumentCollectionTable()
         {
             InitializeComponent();
         }

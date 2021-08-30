@@ -17,9 +17,12 @@
             <ColumnDefinition Width="460*"/>
             <ColumnDefinition Width="180*"/>
         </Grid.ColumnDefinitions>
-
-        <components:MainTable Grid.Column="0" />
-
+         
+        <DataGrid ItemsSource="{Binding RowCollection}"></DataGrid>
+        
+        <!--
+        <components:DocumentCollectionTable Grid.Column="0" />
+        -->
         <!-- Нужно заменить на StackPanel-->
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>

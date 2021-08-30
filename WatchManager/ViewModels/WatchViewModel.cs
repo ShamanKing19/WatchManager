@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -7,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using WatchManager.Commands;
+using WatchManager.Models;
 using WatchManager.Stores;
 
 namespace WatchManager.ViewModels
@@ -16,6 +19,7 @@ namespace WatchManager.ViewModels
         private bool _isFilmsSelected;
         private bool _isSerialsSelected;
         private bool _isAnimeSelected;
+        private string _userLogin;
 
         public bool IsFilmsSelected
         {
@@ -45,7 +49,7 @@ namespace WatchManager.ViewModels
             }
         }
 
-        public ObservableCollection<string> RowCollection { get; set; }
+        public ObservableCollection<DocumentModel> RowCollection { get; set; } = new ObservableCollection<DocumentModel>();
 
         public ICommand SwitchToSettingsViewModelCommand{ get; }
         public ICommand SwitchToAddViewModelCommand { get; }
@@ -55,21 +59,20 @@ namespace WatchManager.ViewModels
 
         public WatchViewModel(NavigationStore navigationStore, string userLogin)
         {
-            RowCollection = new() { 
-                "Naruto: Shippuden",
-                "JOJO: Bizzare Adventure",
-                "Hunter x Hunter",
-                "Интерстеллар",
-                "Карты, деньги, два ствола",
-                "Остров проклятых",
-                "Гримм",
-                "Доктор Хаус",
-                "Локи"
-            };
+            _userLogin = userLogin;
+            SetRowCollectionAsync(userLogin); // TODO: Придумать это делать в отдельном потоке
             SwitchToAddViewModelCommand = new SwitchToAddPageCommand(navigationStore, () => new AddDocumentViewModel(navigationStore, userLogin));
         }
 
 
-
+        private async void SetRowCollectionAsync(string userLogin)
+        {
+            
+            List<BsonDocument> titleList = await DatabaseModel.GetListOfDocumentsFromCollectionAsync(userLogin);
+            foreach (BsonDocument doc in titleList)
+            {
+                RowCollection.Add(BsonSerializer.Deserialize<DocumentModel>(doc));
+            }
+        }
     }
 }
