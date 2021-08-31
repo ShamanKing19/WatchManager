@@ -11,16 +11,16 @@
              d:DesignHeight="400" d:DesignWidth="700">
 
 
-    <Grid Background="#4c4c53">
+    <Grid  Background="#4c4c53">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="26*"/>
             <ColumnDefinition Width="9*"/>
         </Grid.ColumnDefinitions>
 
-        <components:DataCollectionTable Grid.Column="0" Margin="24,24,24,24"/>
+        <components:DataCollectionTable Grid.Column="0" Margin="10,10,10,10"/>
 
         <!-- TODO: заменить на StackPanel-->
-        <Grid Grid.Column="1" Margin="0 18 0 0">
+        <Grid Grid.Column="1" Margin="0,18,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="3*"/>

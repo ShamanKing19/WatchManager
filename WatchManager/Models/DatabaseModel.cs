@@ -14,10 +14,6 @@ namespace WatchManager.Models
         static readonly string connectionString = "mongodb://localhost";
         static readonly string databaseName = "EpisodeManager";
         static readonly string accountsCollectionName = "Accounts";
-        static readonly string userdataCollectionName = "testuserData";
-
-
-       
 
 
         public static async void CreateAccountAsync(string username, string password)
