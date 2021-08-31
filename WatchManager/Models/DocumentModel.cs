@@ -10,9 +10,7 @@ using System.Threading.Tasks;
 namespace WatchManager.Models
 {
     public class DocumentModel
-    {
-        private Dictionary<string, string> _seasonsDict;
-        
+    {       
         // По идее этим записям ID не нужен, вместо них используется логин пользователя
         // Для разрешения одинаковых логинов можно будет попробовать сделать
         // id названием коллекции, хотя не факт что сработает, потому что набор символов одинаковый
@@ -22,10 +20,12 @@ namespace WatchManager.Models
         public string TitleType { get; set; }
 
 
-        [BsonIgnore]
+        [BsonIgnoreIfNull]
+        [BsonElement("Seasons")]
         public ObservableCollection<SeasonModel> Seasons { get; set; }
         
 
+        /* Словарь с сезонами, созданный из коллецкии Seasons
         [BsonIgnoreIfNull][BsonElement("Seasons")]
         public Dictionary<string, string> SeasonsDict
         {
@@ -47,33 +47,16 @@ namespace WatchManager.Models
                 _seasonsDict = value;
             }
         }
+        */
 
-
-        [BsonIgnore]
+        [BsonIgnoreIfNull]
         public SeasonModel CurrentEpisode { get; set; }
-        
-
-        [BsonIgnoreIfNull][BsonElement("CurrentEpisode")]
-        public Dictionary<string, string> CurrentEpisodeDict
-        {
-            get
-            {
-                if (CurrentEpisode != null)
-                {
-                    return new Dictionary<string, string>
-                    {
-                        {CurrentEpisode.SeasonNumber, CurrentEpisode.SeasonEpisodesCount }
-                    };
-                }
-                return null;
-            }
-        }
 
 
         [BsonDefaultValue(false)]
         public bool Watched { get; set; }
 
-
+        #region Contstructors
         // Фильм
         public DocumentModel(string titleName, string titleType, bool watched)
         {
@@ -99,5 +82,6 @@ namespace WatchManager.Models
         {
 
         }
+        #endregion
     }
 }

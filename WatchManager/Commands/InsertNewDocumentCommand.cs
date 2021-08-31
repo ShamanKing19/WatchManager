@@ -27,11 +27,11 @@ namespace WatchManager.Commands
             _document = document;
             _userLogin = userLogin;
         }
-        public override void Execute(object parameter)
+        public override async void Execute(object parameter)
         {
             // TODO: новая вьюмодель создаётся раньше чем вносится запись в БД в другом потоке
             // надо что-то с эти придумать
-            DatabaseModel.InsertDocumentIntoCollectionAsync(_document.ToBsonDocument(), _userLogin);
+            await DatabaseModel.InsertDocumentIntoCollectionAsync(_document.ToBsonDocument(), _userLogin);
             _navigtationStore.CurrentViewModel = _createViewModel();
         }
     }

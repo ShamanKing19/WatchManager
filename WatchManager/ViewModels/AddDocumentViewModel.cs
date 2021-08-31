@@ -77,6 +77,7 @@ namespace WatchManager.ViewModels
             set
             {
                 _seasonsCollection = value;
+
                 _document.Seasons = value;
                 OnPropertyChanged(nameof(SeasonsCollection));
             }
@@ -93,7 +94,7 @@ namespace WatchManager.ViewModels
                     _document.CurrentEpisode.SeasonNumber = value;
                 }
                 OnPropertyChanged(nameof(CurrentSeason));
-                
+
             }
         }
         public string CurrentEpisode
@@ -110,7 +111,7 @@ namespace WatchManager.ViewModels
                 OnPropertyChanged(nameof(CurrentEpisode));
             }
         }
-        public bool Watched 
+        public bool Watched
         {
             get => _watched;
             set
@@ -140,7 +141,7 @@ namespace WatchManager.ViewModels
                 OnPropertyChanged(nameof(FilmTypeVisibility));
             }
         }
-        
+
         #endregion
 
         #region Commands
@@ -165,6 +166,17 @@ namespace WatchManager.ViewModels
                     userLogin
                 );
         }
+
+
+        private Dictionary<string, string> GetDictFromCollection(ObservableCollection<SeasonModel> collection)
+        {
+            Dictionary<string, string> newDict = new();
+            foreach (var season in collection)
+            {
+                newDict[season.SeasonNumber] = season.SeasonEpisodesCount;
+            }
+            return newDict;
+        } 
 
 
         private void SetSeasonsCollection()
