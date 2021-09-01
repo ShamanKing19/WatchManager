@@ -20,8 +20,9 @@ namespace WatchManager.ViewModels
         #endregion
 
         #region Constants
-        private const string DEFAULT_VALUE = "1";
+        private const int TITLE_LENGTH_LIMIT = 100;
         private const int SEASONS_LIMIT = 50;
+        private const string DEFAULT_VALUE = "1";
         private readonly string DEFAULT_TYPE_VALUE;
         #endregion
 
@@ -62,13 +63,17 @@ namespace WatchManager.ViewModels
             get => _seasonsCount;
             set
             {
-                _seasonsCount = value;
-                if (TitleType != "Film")
+                int.TryParse(value, out int intValue);
+                if (IsValid(value) && intValue <= SEASONS_LIMIT)
                 {
-                    CorrectCurrentSeason(value);
-                    SetSeasonsCollection();
+                    _seasonsCount = value;
+                    if (TitleType != "Film")
+                    {
+                        CorrectCurrentSeason(value);
+                        SetSeasonsCollection();
+                    }
+                    OnPropertyChanged(nameof(SeasonsCount));
                 }
-                OnPropertyChanged(nameof(SeasonsCount));
             }
         }
         public ObservableCollection<SeasonModel> SeasonsCollection
@@ -87,14 +92,16 @@ namespace WatchManager.ViewModels
             get => _currentSeason;
             set
             {
-                _currentSeason = value;
-                // TODO: Сделать это красивее
-                if (TitleType != "Film")
-                {
-                    _document.CurrentEpisode.SeasonNumber = value;
+                if (IsValid(value))
+                { 
+                    _currentSeason = value;
+                    // TODO: Сделать это красивее
+                    if (TitleType != "Film")
+                    {
+                        _document.CurrentEpisode.SeasonNumber = value;
+                    }
+                    OnPropertyChanged(nameof(CurrentSeason));
                 }
-                OnPropertyChanged(nameof(CurrentSeason));
-
             }
         }
         public string CurrentEpisode
@@ -102,13 +109,16 @@ namespace WatchManager.ViewModels
             get => _currentEpisode;
             set
             {
-                _currentEpisode = value;
-                // TODO: Сделать это красивее
-                if (TitleType != "Film")
+                if (IsValid(value))
                 {
-                    _document.CurrentEpisode.SeasonEpisodesCount = value;
+                    _currentEpisode = value;
+                    // TODO: Сделать это красивее
+                    if (TitleType != "Film")
+                    {
+                        _document.CurrentEpisode.SeasonEpisodesCount = value;
+                    }
+                    OnPropertyChanged(nameof(CurrentEpisode));
                 }
-                OnPropertyChanged(nameof(CurrentEpisode));
             }
         }
         public bool Watched
@@ -154,9 +164,9 @@ namespace WatchManager.ViewModels
             TitleTypeList = new List<string> { "Film", "Serial", "Anime" };
             DEFAULT_TYPE_VALUE = TitleTypeList[0];
             TitleType = DEFAULT_TYPE_VALUE;
-            SeasonsCount = DEFAULT_VALUE;
             CurrentSeason = DEFAULT_VALUE;
             CurrentEpisode = DEFAULT_VALUE;
+            SetSeasonsCollection();
             BackToWatchPageCommand = new BackToWatchPageCommand(navigationStore, () => new WatchViewModel(navigationStore, userLogin));
             AddDocumentCommand = new InsertNewDocumentCommand
                 (
@@ -181,11 +191,16 @@ namespace WatchManager.ViewModels
 
         private void SetSeasonsCollection()
         {
-            SeasonsCollection = new ObservableCollection<SeasonModel>();
-            int value = Int32.Parse(SeasonsCount);
-            for (int i = 1; i <= value; i++)
+            int value;
+            bool isInt= int.TryParse(SeasonsCount, out value);
+            
+            if (isInt)
             {
-                SeasonsCollection.Add(new SeasonModel(i.ToString(), "0"));
+                SeasonsCollection = new ObservableCollection<SeasonModel>();
+                for (int i = 1; i <= value; i++)
+                {
+                    SeasonsCollection.Add(new SeasonModel(i.ToString(), "0"));
+                }
             }
         }
 
@@ -195,6 +210,7 @@ namespace WatchManager.ViewModels
             if (TitleType == "Film")
             {
                 _document.CurrentEpisode = null;
+                _document.Seasons = null;
             }
             else
             {
@@ -209,6 +225,22 @@ namespace WatchManager.ViewModels
             
         }
 
+
+        private bool IsValid(string val)
+        {
+            if (val.Length == 0)
+            {
+                return true;
+            }
+            else
+            {
+                int value;
+                bool isInt = int.TryParse(val, out value);
+
+                return isInt;
+            }
+            
+        }
 
         private void ChangeFieldsVisibitity(string value)
         {
