@@ -19,7 +19,6 @@ namespace WatchManager.ViewModels
         private bool _isFilmsSelected;
         private bool _isSerialsSelected;
         private bool _isAnimeSelected;
-        private string _userLogin;
         private DocumentModel _selectedDocument;
 
 
@@ -58,6 +57,7 @@ namespace WatchManager.ViewModels
             {
                 _selectedDocument = value;
                 SwitchToEditViewModelCommand.Document = value;
+                DeleteRowCommand.Document = value;
             }
         }
 
@@ -66,21 +66,21 @@ namespace WatchManager.ViewModels
         public ICommand SwitchToSettingsViewModelCommand{ get; }
         public ICommand SwitchToAddViewModelCommand { get; }
         public SwitchToEditPageCommand SwitchToEditViewModelCommand { get; private set; }
-        public ICommand DeleteRowCommand { get; }
+        public DeleteDocumentCommand DeleteRowCommand { get; private set; }
 
 
         public WatchViewModel(NavigationStore navigationStore, string userLogin)
         {
-            _userLogin = userLogin;
             SetRowCollectionAsync(userLogin); // TODO: Придумать это делать асинхронно в отдельном потоке
             SwitchToAddViewModelCommand = new SwitchToAddPageCommand(navigationStore, () => new AddDocumentViewModel(navigationStore, userLogin));
             SwitchToEditViewModelCommand = new SwitchToEditPageCommand(navigationStore, () => new AddDocumentViewModel(navigationStore, userLogin, SelectedDocument), SelectedDocument);
+            DeleteRowCommand = new DeleteDocumentCommand(userLogin, SelectedDocument, SetRowCollectionAsync);
         }
 
 
         private async void SetRowCollectionAsync(string userLogin)
         {
-            
+            RowCollection.Clear();
             List<BsonDocument> titleList = await DatabaseModel.GetListOfDocumentsFromCollectionAsync(userLogin);
             foreach (BsonDocument doc in titleList)
             {

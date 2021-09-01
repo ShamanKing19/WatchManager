@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WatchManager.Components"
+             xmlns:local="clr-namespace:WatchManager.Components" 
+             xmlns:viewmodels="clr-namespace:WatchManager.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:WatchViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="45" d:DesignWidth="165">
     
@@ -67,7 +69,7 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    
-    
-    <Button Style="{DynamicResource DeleteButton}" Width="165" Height="45" Content="Delete"></Button>
+
+
+    <Button Command="{Binding DeleteRowCommand}" Style="{DynamicResource DeleteButton}" Width="165" Height="45" Content="Delete"></Button>
 </UserControl>
