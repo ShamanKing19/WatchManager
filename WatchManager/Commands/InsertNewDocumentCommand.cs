@@ -31,9 +31,15 @@ namespace WatchManager.Commands
 
         public override async void Execute(object parameter)
         {
-            // TODO: Убрать async и await и сделать динамическое обновление записей в таблице
-            await DatabaseModel.InsertDocumentIntoCollectionAsync(_document.ToBsonDocument(), _userLogin);
-            _navigtationStore.CurrentViewModel = _createViewModel();
+            bool isValidFilm = _document.TitleType == "Film" && _document.TitleName != null && _document.TitleName != "";
+            bool isValidSerial = _document.TitleType != "Film" && _document.TitleName != null && _document.TitleName != "" && _document.Seasons != null && _document.CurrentEpisode.SeasonNumber != "0" & _document.CurrentEpisode.SeasonEpisodesCount != "0" && _document.CurrentEpisode.SeasonNumber != "" & _document.CurrentEpisode.SeasonEpisodesCount != "";
+            
+            if (isValidFilm || isValidSerial)
+            {
+                // TODO: Убрать async и await и сделать динамическое обновление записей в таблице
+                await DatabaseModel.InsertDocumentIntoCollectionAsync(_document.ToBsonDocument(), _userLogin);
+                _navigtationStore.CurrentViewModel = _createViewModel();
+            }
         }
     }
 }
