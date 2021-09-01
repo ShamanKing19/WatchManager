@@ -15,7 +15,7 @@ namespace WatchManager.ViewModels
     public class AddDocumentViewModel : BaseViewModel
     {
         #region View Parameters Fields
-        private List<string> _titleTypeList;
+        private List<string> _titleTypeList = new List<string> { "Film", "Serial", "Anime" };
         private Visibility _filmTypeVisibility;
         #endregion
 
@@ -23,7 +23,6 @@ namespace WatchManager.ViewModels
         private const int TITLE_LENGTH_LIMIT = 200;
         private const int SEASONS_LIMIT = 50;
         private const string DEFAULT_VALUE = "1";
-        private readonly string DEFAULT_TYPE_VALUE;
         #endregion
 
         #region Document Model Private Fields
@@ -73,7 +72,7 @@ namespace WatchManager.ViewModels
                     if (TitleType != "Film")
                     {
                         CorrectCurrentSeason(value);
-                        SetSeasonsCollection();
+                        SetEmptySeasonsCollection();
                     }
                     OnPropertyChanged(nameof(SeasonsCount));
                 }
@@ -96,7 +95,7 @@ namespace WatchManager.ViewModels
             set
             {
                 if (IsValid(value))
-                { 
+                {
                     _currentSeason = value;
                     // TODO: Сделать это красивее
                     if (TitleType != "Film")
@@ -159,44 +158,68 @@ namespace WatchManager.ViewModels
 
         #region Commands
         public ICommand BackToWatchPageCommand { get; }
-        public ICommand AddDocumentCommand { get; }
+        public ICommand InsertDocumentCommand { get; }
         #endregion 
 
+
+        // Add case
         public AddDocumentViewModel(NavigationStore navigationStore, string userLogin)
         {
-            TitleTypeList = new List<string> { "Film", "Serial", "Anime" };
-            DEFAULT_TYPE_VALUE = TitleTypeList[0];
-            TitleType = DEFAULT_TYPE_VALUE;
-            CurrentSeason = DEFAULT_VALUE;
-            CurrentEpisode = DEFAULT_VALUE;
-            SetSeasonsCollection();
+            SetFieldsToAddDocument();
             BackToWatchPageCommand = new BackToWatchPageCommand(navigationStore, () => new WatchViewModel(navigationStore, userLogin));
-            AddDocumentCommand = new InsertNewDocumentCommand
+            InsertDocumentCommand = new InsertNewDocumentCommand
                 (
                     navigationStore,
                     () => new WatchViewModel(navigationStore, userLogin),
-                    _document,
-                    userLogin
+                    userLogin,
+                    _document                    
+                );
+        }
+
+        // Edit case
+        public AddDocumentViewModel(NavigationStore navigationStore, string userLogin, DocumentModel oldDocument)
+        {
+            SetFieldsToEditDocument(oldDocument);
+            BackToWatchPageCommand = new BackToWatchPageCommand(navigationStore, () => new WatchViewModel(navigationStore, userLogin));
+            InsertDocumentCommand = new InsertNewDocumentCommand
+                (
+                    navigationStore,
+                    () => new WatchViewModel(navigationStore, userLogin),
+                    userLogin,
+                    oldDocument,
+                    _document
                 );
         }
 
 
-        private Dictionary<string, string> GetDictFromCollection(ObservableCollection<SeasonModel> collection)
+        private void SetFieldsToEditDocument(DocumentModel document)
         {
-            Dictionary<string, string> newDict = new();
-            foreach (var season in collection)
+            TitleName = document.TitleName;
+            TitleType = document.TitleType;
+
+            if (document.TitleType != TitleTypeList[0])
             {
-                newDict[season.SeasonNumber] = season.SeasonEpisodesCount;
+                CurrentSeason = document.CurrentEpisode.SeasonNumber;
+                CurrentEpisode = document.CurrentEpisode.SeasonEpisodesCount;
+                SeasonsCount = document.Seasons.Count.ToString();
+                SeasonsCollection = document.Seasons;
             }
-            return newDict;
-        } 
+            Watched = document.Watched;
+        }
 
 
-        private void SetSeasonsCollection()
+        private void SetFieldsToAddDocument()
         {
-            int value;
-            bool isInt= int.TryParse(SeasonsCount, out value);
-            
+            TitleType = TitleTypeList[0];
+            CurrentSeason = DEFAULT_VALUE;
+            CurrentEpisode = DEFAULT_VALUE;
+            SetEmptySeasonsCollection();
+        }
+
+
+        private void SetEmptySeasonsCollection()
+        {
+            bool isInt= int.TryParse(SeasonsCount, out int value);
             if (isInt)
             {
                 SeasonsCollection = new ObservableCollection<SeasonModel>();
@@ -255,18 +278,6 @@ namespace WatchManager.ViewModels
             {
                 FilmTypeVisibility = Visibility.Visible;
             }
-        }
-
-
-        private bool IsNumber(string value)
-        {
-            return Int32.TryParse(value, out int input);
-        }
-
-
-        private bool IsEmpty(string value)
-        {
-            return value.Length == 0;
         }
     }
 }

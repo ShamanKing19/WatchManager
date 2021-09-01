@@ -20,6 +20,7 @@ namespace WatchManager.Commands
         }
         public override void Execute(object parameter)
         {
+
             _navigtationStore.CurrentViewModel = _createViewModel();
         }
     }

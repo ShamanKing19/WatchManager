@@ -224,6 +224,7 @@
 
 
     <DataGrid   ItemsSource="{Binding RowCollection}"
+                SelectedItem="{Binding SelectedDocument}"
                 Style="{DynamicResource DataGridStyle}"
                 ColumnHeaderStyle="{DynamicResource HeadersStyle}"
                 RowStyle="{DynamicResource RowStyle}" 

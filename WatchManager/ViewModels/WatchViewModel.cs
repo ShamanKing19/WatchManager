@@ -20,6 +20,8 @@ namespace WatchManager.ViewModels
         private bool _isSerialsSelected;
         private bool _isAnimeSelected;
         private string _userLogin;
+        private DocumentModel _selectedDocument;
+
 
         public bool IsFilmsSelected
         {
@@ -49,19 +51,30 @@ namespace WatchManager.ViewModels
             }
         }
 
+        public DocumentModel SelectedDocument
+        {
+            get => _selectedDocument;
+            set
+            {
+                _selectedDocument = value;
+                SwitchToEditViewModelCommand.Document = value;
+            }
+        }
+
         public ObservableCollection<DocumentModel> RowCollection { get; set; } = new ObservableCollection<DocumentModel>();
 
         public ICommand SwitchToSettingsViewModelCommand{ get; }
         public ICommand SwitchToAddViewModelCommand { get; }
-        public ICommand SwitchToEditViewModelCommand { get; }
+        public SwitchToEditPageCommand SwitchToEditViewModelCommand { get; private set; }
         public ICommand DeleteRowCommand { get; }
 
 
         public WatchViewModel(NavigationStore navigationStore, string userLogin)
         {
             _userLogin = userLogin;
-            SetRowCollectionAsync(userLogin); // TODO: Придумать это делать в отдельном потоке
+            SetRowCollectionAsync(userLogin); // TODO: Придумать это делать асинхронно в отдельном потоке
             SwitchToAddViewModelCommand = new SwitchToAddPageCommand(navigationStore, () => new AddDocumentViewModel(navigationStore, userLogin));
+            SwitchToEditViewModelCommand = new SwitchToEditPageCommand(navigationStore, () => new AddDocumentViewModel(navigationStore, userLogin, SelectedDocument), SelectedDocument);
         }
 
 
