@@ -9,6 +9,9 @@
              d:DesignHeight="40" d:DesignWidth="82.5">
 
     <UserControl.Resources>
+        <SolidColorBrush x:Key="SecondaryColor" Color="#7c67ab"/>
+        <SolidColorBrush x:Key="PrimaryFontColor" Color="White"/>
+
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -18,7 +21,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="Button.Static.Background" Color="#7c67ab"/>
         <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
         <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
         <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
@@ -29,9 +31,9 @@
         <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
         <Style x:Key="SaveButton" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
             <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
             <Setter Property="FontSize" Value="16.67"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>

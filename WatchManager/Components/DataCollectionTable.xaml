@@ -10,19 +10,18 @@
              d:DesignHeight="315" d:DesignWidth="500">
     
     <UserControl.Resources>
-        <SolidColorBrush x:Key="FirstColor" Color="#4c4c53"/>
-        <SolidColorBrush x:Key="SecondColor" Color="#7c67ab"/>
-        <SolidColorBrush x:Key="ThirdColor" Color="Transparent"/>
-        <SolidColorBrush x:Key="HeaderTextColor" Color="White"/>
-        <SolidColorBrush x:Key="DataTextColor" Color="White"/>
-        <SolidColorBrush x:Key="HighlightColor" Color="Orange"/>
+        <SolidColorBrush x:Key="PrimaryColor" Color="#4c4c53"/>
+        <SolidColorBrush x:Key="SecondaryColor" Color="#7c67ab"/>
+        <SolidColorBrush x:Key="AddtitionalColor" Color="Transparent"/>
+        <SolidColorBrush x:Key="PrimaryFontColor" Color="White"/>
+        <SolidColorBrush x:Key="SecondaryFontColor" Color="White"/>
         <SolidColorBrush x:Key="HeadersRowColor" Color="Transparent"/>
         <SolidColorBrush x:Key="{x:Static DataGrid.FocusBorderBrushKey}" Color="#FF000000"/>
 
         
         <Style x:Key="DataGridStyle" TargetType="{x:Type DataGrid}">
             <Setter Property="GridLinesVisibility" Value="None"/>
-            <Setter Property="Background" Value="{StaticResource SecondColor}"/>
+            <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
             <Setter Property="Padding" Value="6"/>
             <Setter Property="FontSize" Value="16.67"/>
             <Setter Property="BorderBrush" Value="#FF688CAF"/>
@@ -84,13 +83,13 @@
         <Style x:Key="HeadersStyle" TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="Margin" Value="0 0 0 8"/>
             <Setter Property="Background" Value="{StaticResource HeadersRowColor}"/>
-            <Setter Property="Foreground" Value="{StaticResource HeaderTextColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
             <Setter Property="FontSize" Value="16.67"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="ContentTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <Border Background="{StaticResource FirstColor}" Height="40" CornerRadius="15">
+                        <Border Background="{StaticResource PrimaryColor}" Height="40" CornerRadius="15">
                             <TextBlock Text="{Binding}" TextAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </DataTemplate>
@@ -99,7 +98,7 @@
         </Style>
 
         <Style x:Key="RowStyle" TargetType="{x:Type DataGridRow}">
-            <Setter Property="Background" Value="{StaticResource FirstColor}"/>
+            <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
             <Setter Property="Margin" Value="0 2"/>
             <Setter Property="SnapsToDevicePixels" Value="true"/>
             <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
@@ -138,8 +137,8 @@
         </Style>
 
         <Style x:Key="BasicCellStyle" TargetType="{x:Type DataGridCell}">
-            <Setter Property="Background" Value="{StaticResource ThirdColor}"/>
-            <Setter Property="Foreground" Value="{StaticResource DataTextColor}"/>
+            <Setter Property="Background" Value="{StaticResource AddtitionalColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0"/>
@@ -180,8 +179,8 @@
         </Style>
 
         <Style x:Key="WatchedCellStyle" TargetType="{x:Type DataGridCell}">
-            <Setter Property="Background" Value="{StaticResource ThirdColor}"/>
-            <Setter Property="Foreground" Value="{StaticResource DataTextColor}"/>
+            <Setter Property="Background" Value="{StaticResource AddtitionalColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0"/>

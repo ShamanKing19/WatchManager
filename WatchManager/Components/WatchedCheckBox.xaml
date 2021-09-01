@@ -7,8 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="150">
     <UserControl.Resources>
+        <SolidColorBrush x:Key="PrimaryColor" Color="#4c4c53"/>
+        <SolidColorBrush x:Key="AdditionalColor" Color="#eebcec"/>
+        <SolidColorBrush x:Key="PrimaryFontColor" Color="White"/>
+        <SolidColorBrush x:Key="SecondaryFontColor" Color="#4c4c53"/>
+
         <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
             <Setter Property="FontSize" Value="16.67"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -33,7 +38,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="OptionMark.Static.Glyph" Color="#4c4c53"/>
         <SolidColorBrush x:Key="OptionMark.MouseOver.Background" Color="#FFF3F9FF"/>
         <SolidColorBrush x:Key="OptionMark.MouseOver.Glyph" Color="#FF212121"/>
         <SolidColorBrush x:Key="OptionMark.Pressed.Background" Color="#FFD9ECFF"/>
@@ -48,10 +52,10 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Border x:Name="checkBoxBorder" Background="#eebeec" CornerRadius="15">
+                        <Border x:Name="checkBoxBorder" Background="{StaticResource AdditionalColor}" CornerRadius="15">
                             <Grid x:Name="markGrid">
-                                <Path x:Name="optionMark" HorizontalAlignment="Center" VerticalAlignment="Center" Data="F1 M 9.97498,1.22334L 4.6983,9.09834L 4.52164,9.09834L 0,5.19331L 1.27664,3.52165L 4.255,6.08833L 8.33331,1.52588e-005L 9.97498,1.22334 Z " Fill="{StaticResource OptionMark.Static.Glyph}" Margin="6" Opacity="0" Stretch="Uniform"/>
-                                <Rectangle x:Name="indeterminateMark" Fill="{StaticResource OptionMark.Static.Glyph}" Margin="2" Opacity="0"/>
+                                <Path x:Name="optionMark" HorizontalAlignment="Center" VerticalAlignment="Center" Data="F1 M 9.97498,1.22334L 4.6983,9.09834L 4.52164,9.09834L 0,5.19331L 1.27664,3.52165L 4.255,6.08833L 8.33331,1.52588e-005L 9.97498,1.22334 Z " Fill="{StaticResource PrimaryColor}" Margin="6" Opacity="0" Stretch="Uniform"/>
+                                <Rectangle x:Name="indeterminateMark" Fill="{StaticResource PrimaryColor}" Margin="2" Opacity="0"/>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -92,7 +96,7 @@
 
     </UserControl.Resources>
 
-    <Border Background="#4c4c53" CornerRadius="15" Height="30">
+    <Border Background="{StaticResource PrimaryColor}" CornerRadius="15" Height="30">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="7*"/>

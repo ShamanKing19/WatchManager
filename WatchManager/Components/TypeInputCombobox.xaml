@@ -11,10 +11,15 @@
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <UserControl.Resources>
+        <SolidColorBrush x:Key="PrimaryColor" Color="#4c4c53"/>
+        <SolidColorBrush x:Key="AdditionalColor" Color="#eebcec"/>
+        <SolidColorBrush x:Key="PrimaryFontColor" Color="White"/>
+        <SolidColorBrush x:Key="SecondaryFontColor" Color="#4c4c53"/>
+
         <Style x:Name="Title" TargetType="{x:Type TextBlock}">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
             <Setter Property="FontSize" Value="16.67"/>
         </Style>
         
@@ -46,9 +51,7 @@
             </Setter>
         </Style>
         
-        <SolidColorBrush x:Key="ComboBox.Static.Background" Color="#eebcec"/>
         <SolidColorBrush x:Key="ComboBox.Static.Border" Color="#FFACACAC"/>
-        <SolidColorBrush x:Key="ComboBox.Static.Glyph" Color="#4c4c53"/>
         <SolidColorBrush x:Key="ComboBox.Static.Editable.Background" Color="#FFFFFFFF"/>
         <SolidColorBrush x:Key="ComboBox.Static.Editable.Border" Color="#FFABADB3"/>
         <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Background" Color="Transparent"/>
@@ -92,9 +95,9 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ToggleButton}">
-                        <Border x:Name="templateRoot" CornerRadius="15" Background="{StaticResource ComboBox.Static.Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{StaticResource ComboBox.Static.Border}" SnapsToDevicePixels="true">
+                        <Border x:Name="templateRoot" CornerRadius="15" Background="{StaticResource AdditionalColor}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{StaticResource ComboBox.Static.Border}" SnapsToDevicePixels="true">
                             <Border x:Name="splitBorder" BorderThickness="0" BorderBrush="Transparent" HorizontalAlignment="Right" Margin="0 0 8 0" SnapsToDevicePixels="true" Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}">
-                                <Path x:Name="arrow" Data="F1 M 0,0 L 2.667,2.66665 L 5.3334,0 L 5.3334,-1.78168 L 2.6667,0.88501 L0,-1.78168 L0,0 Z" Fill="{StaticResource ComboBox.Static.Glyph}" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
+                                <Path x:Name="arrow" Data="F1 M 0,0 L 2.667,2.66665 L 5.3334,0 L 5.3334,-1.78168 L 2.6667,0.88501 L0,-1.78168 L0,0 Z" Fill="{StaticResource PrimaryColor}" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
                             </Border>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -200,7 +203,7 @@
                     </theme:SystemDropShadowChrome>
                 </Popup>
                 <ToggleButton x:Name="toggleButton" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Grid.ColumnSpan="2" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource ComboBoxToggleButton}"/>
-                <Border x:Name="border" Background="{StaticResource ComboBox.Static.Background}" Margin="{TemplateBinding BorderThickness}">
+                <Border x:Name="border" Background="{StaticResource AdditionalColor}" Margin="{TemplateBinding BorderThickness}">
                     <TextBox x:Name="PART_EditableTextBox" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}" Margin="{TemplateBinding Padding}" Style="{StaticResource ComboBoxEditableTextBox}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
                 </Border>
             </Grid>
@@ -279,9 +282,9 @@
         
         <Style x:Key="ComboBoxTitleType" TargetType="{x:Type ComboBox}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource ComboBox.Static.Background}"/>
+            <Setter Property="Background" Value="{StaticResource AdditionalColor}"/>
             <Setter Property="BorderBrush" Value="{StaticResource ComboBox.Static.Border}"/>
-            <Setter Property="Foreground" Value="#4c4c53"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="16.67"/>
@@ -307,7 +310,7 @@
     </UserControl.Resources>
 
 
-    <Border Background="#4c4c53" CornerRadius="15" Height="30">
+    <Border Background="{StaticResource PrimaryColor}" CornerRadius="15" Height="30">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="11*"/>

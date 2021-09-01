@@ -11,10 +11,15 @@
              d:DesignHeight="215" d:DesignWidth="210">
 
     <UserControl.Resources>
+        <SolidColorBrush x:Key="PrimaryColor" Color="#4c4c53"/>
+        <SolidColorBrush x:Key="SecondaryColor" Color="#7c67ab"/>
+        <SolidColorBrush x:Key="PrimaryFontColor" Color="White"/>
+        <SolidColorBrush x:Key="SecondaryFontColor" Color="#4c4c53"/>
+
         <!-- DataGrid style-->
         <Style x:Key="SeasonsInputTable" TargetType="{x:Type DataGrid}">
-            <Setter Property="Background" Value="#7c67ab"/>
-            <Setter Property="RowBackground" Value="#7c67ab"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="RowBackground" Value="{StaticResource SecondaryColor}"/>
             <Setter Property="ColumnWidth" Value="*"/>
             <Setter Property="BorderBrush" Value="#FF688CAF"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -76,7 +81,7 @@
         
         <!-- DataGridColumnHeader style -->
         <Style x:Key="ColumnHeaderStyle" TargetType="DataGridColumnHeader">
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
             <Setter Property="FontSize" Value="16.67" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -92,13 +97,14 @@
         
         <!-- DatagridCellStyle-->
         <Style x:Key="CellStyle" TargetType="DataGridCell">
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
             <Setter Property="FontSize" Value="16.67"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type DataGridCell}">
-                        <Border x:Name="DataGridRow" Background="#4c4c53" CornerRadius="10" Margin="6 2">
+                        <Border x:Name="DataGridRow" Background="{TemplateBinding Background}" CornerRadius="10" Margin="6 2">
                             <ContentPresenter x:Name="RowContent" HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="True" />
                         </Border>
                         <ControlTemplate.Triggers>
@@ -114,7 +120,7 @@
 
     </UserControl.Resources>
 
-    <Border Background="#7c67ab" Height="215" Width="205" CornerRadius="15">
+    <Border Background="{StaticResource SecondaryColor}" Height="215" Width="205" CornerRadius="15">
         <DataGrid 
                 Height="200" 
                 Width="200" 
