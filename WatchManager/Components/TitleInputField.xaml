@@ -79,7 +79,7 @@
                 <ColumnDefinition Width="53*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Title"/>
-            <TextBox Text="{Binding TitleName}" Style="{DynamicResource TitleInputField}" Grid.Column="1"/>
+            <TextBox Text="{Binding TitleName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TitleInputField}" Grid.Column="1"/>
         </Grid>
     </Border>
 

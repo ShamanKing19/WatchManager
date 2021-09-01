@@ -20,7 +20,7 @@ namespace WatchManager.ViewModels
         #endregion
 
         #region Constants
-        private const int TITLE_LENGTH_LIMIT = 100;
+        private const int TITLE_LENGTH_LIMIT = 200;
         private const int SEASONS_LIMIT = 50;
         private const string DEFAULT_VALUE = "1";
         private readonly string DEFAULT_TYPE_VALUE;
@@ -43,8 +43,11 @@ namespace WatchManager.ViewModels
             get => _titleName;
             set
             {
-                _titleName = value;
-                _document.TitleName = value;
+                if (value.Length <= TITLE_LENGTH_LIMIT)
+                {
+                    _titleName = value;
+                    _document.TitleName = value;
+                }
             }
         }
         public string TitleType
