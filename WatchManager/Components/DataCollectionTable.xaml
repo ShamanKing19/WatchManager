@@ -12,7 +12,9 @@
     <UserControl.Resources>
         <SolidColorBrush x:Key="PrimaryColor" Color="#4c4c53"/>
         <SolidColorBrush x:Key="SecondaryColor" Color="#7c67ab"/>
-        <SolidColorBrush x:Key="AddtitionalColor" Color="Transparent"/>
+        <SolidColorBrush x:Key="AdditionalColor" Color="Transparent"/>
+        <SolidColorBrush x:Key="SelectedItemColor" Color="#eebcec"/>
+        <SolidColorBrush x:Key="SelectedItemFontColor" Color="#4c4c53"/>
         <SolidColorBrush x:Key="PrimaryFontColor" Color="White"/>
         <SolidColorBrush x:Key="SecondaryFontColor" Color="White"/>
         <SolidColorBrush x:Key="HeadersRowColor" Color="Transparent"/>
@@ -137,9 +139,9 @@
         </Style>
 
         <Style x:Key="BasicCellStyle" TargetType="{x:Type DataGridCell}">
-            <Setter Property="Background" Value="{StaticResource AddtitionalColor}"/>
+            <Setter Property="Background" Value="{StaticResource AdditionalColor}"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="6"/>
@@ -148,20 +150,17 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type DataGridCell}">
-                        <Border CornerRadius="10" MinWidth="100" MaxWidth="{TemplateBinding MaxWidth}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" Margin="{TemplateBinding Margin}" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="True">
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        <Border CornerRadius="0" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" Margin="{TemplateBinding Margin}" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="{TemplateBinding VerticalAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
-                    <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                </Trigger>
-                <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                    <Setter Property="BorderBrush" Value="{DynamicResource {x:Static DataGrid.FocusBorderBrushKey}}"/>
+                    <Setter Property="Background" Value="{StaticResource SelectedItemColor}"/>
+                    <Setter Property="Foreground" Value="{StaticResource SelectedItemFontColor}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
                 </Trigger>
                 <MultiTrigger>
                     <MultiTrigger.Conditions>
@@ -170,7 +169,46 @@
                     </MultiTrigger.Conditions>
                     <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
                     <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}"/>
+                    <Setter Property="Foreground" Value="{StaticResource SelectedItemFontColor}"/>
+                </MultiTrigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="LeftCellStyle" TargetType="{x:Type DataGridCell}">
+            <Setter Property="Background" Value="{StaticResource AdditionalColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                        <Border CornerRadius="15 0 0 15" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" Margin="{TemplateBinding Margin}" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="{TemplateBinding VerticalAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{StaticResource SelectedItemColor}"/>
+                    <Setter Property="Foreground" Value="{StaticResource SelectedItemFontColor}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsSelected" Value="true"/>
+                        <Condition Property="Selector.IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                    <Setter Property="Foreground" Value="{StaticResource SelectedItemFontColor}"/>
                 </MultiTrigger>
                 <Trigger Property="IsEnabled" Value="false">
                     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
@@ -179,10 +217,10 @@
         </Style>
 
         <Style x:Key="WatchedCellStyle" TargetType="{x:Type DataGridCell}">
-            <Setter Property="Background" Value="{StaticResource AddtitionalColor}"/>
-            <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="{StaticResource AdditionalColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="6"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
@@ -190,16 +228,16 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type DataGridCell}">
-                        <Border CornerRadius="10" MinWidth="100" MaxWidth="{TemplateBinding MaxWidth}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" Margin="{TemplateBinding Margin}" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="True">
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        <Border CornerRadius="0 15 15 0" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" Margin="{TemplateBinding Margin}" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="Center" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                    <Setter Property="Background" Value="{StaticResource SelectedItemColor}"/>
+                    <Setter Property="Foreground" Value="{StaticResource SelectedItemFontColor}"/>
                     <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                 </Trigger>
                 <Trigger Property="IsKeyboardFocusWithin" Value="True">
@@ -212,7 +250,7 @@
                     </MultiTrigger.Conditions>
                     <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
                     <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}"/>
+                    <Setter Property="Foreground" Value="{StaticResource SelectedItemFontColor}"/>
                 </MultiTrigger>
                 <Trigger Property="IsEnabled" Value="false">
                     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
@@ -220,6 +258,10 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="CheckBoxStyle" TargetType="{x:Type CheckBox}">
+            
+        </Style>
+        
     </UserControl.Resources>
 
 
@@ -232,10 +274,10 @@
                 >
               
         <DataGrid.Columns>
-            <DataGridTextColumn Header="Title" Width="*" MaxWidth="200" IsReadOnly="True" Binding="{Binding TitleName}"/>
-            <DataGridTextColumn Header="Season" Width="auto" IsReadOnly="True" Binding="{Binding CurrentEpisode.SeasonNumber}"/>
-            <DataGridTextColumn Header="Episode" Width="auto" IsReadOnly="True" Binding="{Binding CurrentEpisode.SeasonEpisodesCount}"/>
-            <DataGridCheckBoxColumn Header="Watched" Width="auto" IsReadOnly="True" Binding="{Binding Watched}"/>
+            <DataGridTextColumn Header="Title" Width="4*" MaxWidth="200" IsReadOnly="True" Binding="{Binding TitleName}" CellStyle="{StaticResource LeftCellStyle}"/>
+            <DataGridTextColumn Header="Season" Width="*" IsReadOnly="True" Binding="{Binding CurrentEpisode.SeasonNumber}"/>
+            <DataGridTextColumn Header="Episode" Width="*" IsReadOnly="True" Binding="{Binding CurrentEpisode.SeasonEpisodesCount}"/>
+            <DataGridCheckBoxColumn Header="Watched" Width="*" IsReadOnly="True" Binding="{Binding Watched}" CellStyle="{StaticResource WatchedCellStyle}"/>
             <!-- ??? <DataGridTemplateColumn/> ??? -->
         </DataGrid.Columns>
     </DataGrid>
