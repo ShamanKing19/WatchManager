@@ -34,7 +34,7 @@
             </Grid.ColumnDefinitions>
 
             <components:TripleCheckbox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
-            <components:SettingsButton Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
+            <components:WatchButton Margin="6" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
             <components:AddButton Grid.Column="0" Grid.Row="2"/>
             <components:EditButton Grid.Column="1" Grid.Row="2"/>
             <components:DeleteButton Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"/>

@@ -32,13 +32,14 @@ namespace WatchManager.Models
 
 
         // TODO: сделать универсальным для изменения любого значения, не добавляя параметр
-        private static async Task ChangeDocumentCurrentEpisodeAsync(string collectionName, string documentName, SeasonModel newValue)
+        public static async Task ChangeDocumentCurrentEpisodeAsync(string collectionName, string documentName, SeasonModel newValue, bool watched)
         {
-            BsonDocument oldDocument = await GetDocumentByNameAsync(collectionName, documentName);
-            DocumentModel user = BsonSerializer.Deserialize<DocumentModel>(oldDocument);
-            user.CurrentEpisode = newValue;
-            BsonDocument newDocument = user.ToBsonDocument();
-            await UpdateDocumentAsync(collectionName, oldDocument, newDocument);
+            BsonDocument oldBsonDocument = await GetDocumentByNameAsync(collectionName, documentName);
+            DocumentModel oldDocument = BsonSerializer.Deserialize<DocumentModel>(oldBsonDocument);
+            oldDocument.CurrentEpisode = newValue;
+            oldDocument.Watched = watched;
+            BsonDocument newBsonDocument = oldDocument.ToBsonDocument();
+            await UpdateDocumentAsync(collectionName, oldBsonDocument, newBsonDocument);
         }
 
 

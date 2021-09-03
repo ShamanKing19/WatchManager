@@ -25,30 +25,6 @@ namespace WatchManager.Models
         public ObservableCollection<SeasonModel> Seasons { get; set; }
         
 
-        /* Словарь с сезонами, созданный из коллецкии Seasons
-        [BsonIgnoreIfNull][BsonElement("Seasons")]
-        public Dictionary<string, string> SeasonsDict
-        {
-            get
-            {
-                if (Seasons != null)
-                {
-                    _seasonsDict = new Dictionary<string, string>();
-                    foreach (var season in Seasons)
-                    {
-                        _seasonsDict[season.SeasonNumber] = season.SeasonEpisodesCount;
-                    }
-                }
-                return _seasonsDict;
-
-            }
-            set
-            {
-                _seasonsDict = value;
-            }
-        }
-        */
-
         [BsonIgnoreIfNull]
         public SeasonModel CurrentEpisode { get; set; }
 
@@ -83,5 +59,67 @@ namespace WatchManager.Models
 
         }
         #endregion
+
+
+        public void WatchEpisode()
+        {
+            if (TitleType == "Film")
+            {
+                Watched = true;
+            }
+            else
+            {
+                if (IsLastEpisode())
+                {
+                    SetNextSeason();
+                }
+                else
+                {
+                    SetNextEpisode();
+                }
+            }
+        }
+        private void SetNextEpisode()
+        {
+            CurrentEpisode.SeasonEpisodesCount = (int.Parse(CurrentEpisode.SeasonEpisodesCount) + 1).ToString();
+            Watched = false;
+        }
+
+        private bool IsLastEpisode()
+        {
+            int currentEpisode = int.Parse(CurrentEpisode.SeasonEpisodesCount);
+            int currentSeason = int.Parse(CurrentEpisode.SeasonNumber);
+
+            return currentEpisode + 1 > int.Parse(Seasons[currentSeason - 1].SeasonEpisodesCount);
+        }
+
+        private void SetNextSeason()
+        {
+            if (!IsLastSeasonsEpisode() && !IsLastSeason())
+            {
+                CurrentEpisode.SeasonNumber = (int.Parse(CurrentEpisode.SeasonNumber) + 1).ToString();
+                CurrentEpisode.SeasonEpisodesCount = "1";
+                Watched = false;
+            }
+            else
+            {
+                Watched = true;
+            }
+        }
+
+        private bool IsLastSeason()
+        {
+            bool lastSeason = int.Parse(CurrentEpisode.SeasonNumber) == Seasons.Count;
+            return lastSeason;
+        }
+
+        private bool IsLastSeasonsEpisode()
+        {
+            int currentEpisode = int.Parse(CurrentEpisode.SeasonEpisodesCount);
+            int lastSeasonsEpisode = int.Parse(Seasons[Seasons.Count - 1].SeasonEpisodesCount);
+            return currentEpisode == lastSeasonsEpisode && IsLastSeason();
+        }
+
+
     }
 }

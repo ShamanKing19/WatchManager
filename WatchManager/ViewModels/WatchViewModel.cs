@@ -58,6 +58,7 @@ namespace WatchManager.ViewModels
                 _selectedDocument = value;
                 SwitchToEditViewModelCommand.Document = value;
                 DeleteRowCommand.Document = value;
+                WatchEpisodeCommand.Document = value;
             }
         }
 
@@ -67,6 +68,7 @@ namespace WatchManager.ViewModels
         public ICommand SwitchToAddViewModelCommand { get; }
         public SwitchToEditPageCommand SwitchToEditViewModelCommand { get; private set; }
         public DeleteDocumentCommand DeleteRowCommand { get; private set; }
+        public WatchCommand WatchEpisodeCommand { get; set; }
 
 
         public WatchViewModel(NavigationStore navigationStore, string userLogin)
@@ -75,6 +77,7 @@ namespace WatchManager.ViewModels
             SwitchToAddViewModelCommand = new SwitchToAddPageCommand(navigationStore, () => new AddDocumentViewModel(navigationStore, userLogin));
             SwitchToEditViewModelCommand = new SwitchToEditPageCommand(navigationStore, () => new AddDocumentViewModel(navigationStore, userLogin, SelectedDocument), SelectedDocument);
             DeleteRowCommand = new DeleteDocumentCommand(userLogin, SelectedDocument, SetRowCollectionAsync);
+            WatchEpisodeCommand = new WatchCommand(userLogin, SetRowCollectionAsync);
         }
 
 
