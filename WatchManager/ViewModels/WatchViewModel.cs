@@ -16,12 +16,14 @@ namespace WatchManager.ViewModels
 {
     public class WatchViewModel : BaseViewModel
     {
+        #region Private fields
         private bool _isFilmsSelected;
         private bool _isSerialsSelected;
         private bool _isAnimeSelected;
         private DocumentModel _selectedDocument;
+        #endregion
 
-
+        #region Properties
         public bool IsFilmsSelected
         {
             get => _isFilmsSelected;
@@ -49,7 +51,6 @@ namespace WatchManager.ViewModels
                 OnPropertyChanged(nameof(IsAnimeSelected));
             }
         }
-
         public DocumentModel SelectedDocument
         {
             get => _selectedDocument;
@@ -58,18 +59,23 @@ namespace WatchManager.ViewModels
                 _selectedDocument = value;
                 SwitchToEditViewModelCommand.Document = value;
                 DeleteRowCommand.Document = value;
-                WatchEpisodeCommand.Document = value;
+                WatchEpisodeCommand.Document = _selectedDocument;
+                WatchEpisodeCommand.Collection = RowCollection;
+                OnPropertyChanged(nameof(SelectedDocument));
             }
         }
 
         public ObservableCollection<DocumentModel> RowCollection { get; set; } = new ObservableCollection<DocumentModel>();
+        #endregion
 
+
+        #region Commands
         public ICommand SwitchToSettingsViewModelCommand{ get; }
         public ICommand SwitchToAddViewModelCommand { get; }
         public SwitchToEditPageCommand SwitchToEditViewModelCommand { get; private set; }
         public DeleteDocumentCommand DeleteRowCommand { get; private set; }
         public WatchCommand WatchEpisodeCommand { get; set; }
-
+        #endregion
 
         public WatchViewModel(NavigationStore navigationStore, string userLogin)
         {
@@ -77,7 +83,7 @@ namespace WatchManager.ViewModels
             SwitchToAddViewModelCommand = new SwitchToAddPageCommand(navigationStore, () => new AddDocumentViewModel(navigationStore, userLogin));
             SwitchToEditViewModelCommand = new SwitchToEditPageCommand(navigationStore, () => new AddDocumentViewModel(navigationStore, userLogin, SelectedDocument), SelectedDocument);
             DeleteRowCommand = new DeleteDocumentCommand(userLogin, SelectedDocument, SetRowCollectionAsync);
-            WatchEpisodeCommand = new WatchCommand(userLogin, SetRowCollectionAsync);
+            WatchEpisodeCommand = new WatchCommand(userLogin);
         }
 
 

@@ -270,7 +270,8 @@
                 Style="{DynamicResource DataGridStyle}"
                 ColumnHeaderStyle="{DynamicResource HeadersStyle}"
                 RowStyle="{DynamicResource RowStyle}" 
-                CellStyle="{DynamicResource BasicCellStyle}" 
+                CellStyle="{DynamicResource BasicCellStyle}"
+                IsSynchronizedWithCurrentItem="True"
                 >
               
         <DataGrid.Columns>
