@@ -16,7 +16,7 @@ namespace WatchManager.Commands
     {
         private NavigationStore _navigtationStore;
         private Func<BaseViewModel> _createViewModel;
-        private DocumentModel _oldDocument;
+        private BsonDocument _oldDocument; // Преобразовал к этому BsonDocument, чтобы не менялось значение как у _newDocument, потому что они ссылаются на один участок памяти
         private DocumentModel _newDocument;
         private string _userLogin;
 
@@ -29,14 +29,14 @@ namespace WatchManager.Commands
             _userLogin = userLogin;
         }
 
-        public InsertNewDocumentCommand(NavigationStore navigtationStore, Func<BaseViewModel> createViewModel, string userLogin, DocumentModel oldDocument, DocumentModel newDocument)
+        public InsertNewDocumentCommand(NavigationStore navigtationStore, Func<BaseViewModel> createViewModel, string userLogin, BsonDocument oldDocument, DocumentModel newDocument)
         {
             _navigtationStore = navigtationStore;
             _createViewModel = createViewModel;
             _oldDocument = oldDocument;
             _newDocument = newDocument;
             _userLogin = userLogin;
-            _newDocument.Id = _oldDocument.Id;
+            _newDocument.Id = _oldDocument.GetValue("_id").AsObjectId;
         }
 
 
@@ -55,7 +55,7 @@ namespace WatchManager.Commands
                 }
                 else
                 {
-                    await DatabaseModel.UpdateDocumentAsync(_userLogin, _oldDocument.ToBsonDocument(), _newDocument.ToBsonDocument());
+                    await DatabaseModel.UpdateDocumentAsync(_userLogin, _oldDocument, _newDocument.ToBsonDocument());
                 }
                 
                 _navigtationStore.CurrentViewModel = _createViewModel();

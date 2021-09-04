@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -84,7 +85,6 @@ namespace WatchManager.ViewModels
             set
             {
                 _seasonsCollection = value;
-
                 _document.Seasons = value;
                 OnPropertyChanged(nameof(SeasonsCollection));
             }
@@ -186,7 +186,7 @@ namespace WatchManager.ViewModels
                     navigationStore,
                     () => new WatchViewModel(navigationStore, userLogin),
                     userLogin,
-                    oldDocument,
+                    oldDocument.ToBsonDocument(),
                     _document
                 );
         }
