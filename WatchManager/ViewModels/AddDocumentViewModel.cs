@@ -225,7 +225,7 @@ namespace WatchManager.ViewModels
                 SeasonsCollection = new ObservableCollection<SeasonModel>();
                 for (int i = 1; i <= value; i++)
                 {
-                    SeasonsCollection.Add(new SeasonModel(i.ToString(), "0"));
+                    SeasonsCollection.Add(new SeasonModel(i.ToString(), ""));
                 }
             }
         }
