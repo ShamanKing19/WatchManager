@@ -73,7 +73,8 @@ namespace WatchManager.ViewModels
                     if (TitleType != "Film")
                     {
                         CorrectCurrentSeason(value);
-                        SetEmptySeasonsCollection();
+                        //SetEmptySeasonsCollection();
+                        SetSeasonsCollection(SeasonsCollection);
                     }
                     OnPropertyChanged(nameof(SeasonsCount));
                 }
@@ -213,19 +214,30 @@ namespace WatchManager.ViewModels
             TitleType = TitleTypeList[0];
             CurrentSeason = DEFAULT_VALUE;
             CurrentEpisode = DEFAULT_VALUE;
-            SetEmptySeasonsCollection();
+            SetSeasonsCollection(SeasonsCollection);
         }
 
 
-        private void SetEmptySeasonsCollection()
+        private void SetSeasonsCollection(ObservableCollection<SeasonModel> collection)
         {
-            bool isInt= int.TryParse(SeasonsCount, out int value);
+            bool isInt = int.TryParse(SeasonsCount, out int newSeasonsCount);
+
+
             if (isInt)
             {
-                SeasonsCollection = new ObservableCollection<SeasonModel>();
-                for (int i = 1; i <= value; i++)
+                if (SeasonsCollection is null) SeasonsCollection = new ObservableCollection<SeasonModel>();
+                int difference = newSeasonsCount - SeasonsCollection.Count;
+
+                for (int i = 0; i < Math.Abs(difference); i++)
                 {
-                    SeasonsCollection.Add(new SeasonModel(i.ToString(), ""));
+                    if (difference < 0)
+                    {
+                        SeasonsCollection.Remove(SeasonsCollection.Last());
+                    }
+                    else if (difference > 0)
+                    {
+                        SeasonsCollection.Add(new SeasonModel((SeasonsCollection.Count+1).ToString(), ""));
+                    }
                 }
             }
         }
