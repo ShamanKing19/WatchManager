@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WatchManager.Views" 
              xmlns:components="clr-namespace:WatchManager.Components" 
-             xmlns:vm="clr-namespace:WatchManager.ViewModels"
+             xmlns:vm="clr-namespace:WatchManager.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=vm:AuthenticationViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="700">
 
@@ -74,6 +75,6 @@
         <TextBlock Grid.Row="0" Text="{Binding Title}" Style="{StaticResource Logo}"></TextBlock>
         <TextBox  Grid.Row="1" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputField}"></TextBox>
         <components:BindablePasswordBox Grid.Row="2" Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
-        <Button Grid.Row="3" Content="Auth"  Command="{Binding SwitchViewModelCommand}" CommandParameter="{Binding Login}" Style="{StaticResource AuthButton}"></Button>
+        <Button Grid.Row="3" Content="Auth"  Command="{Binding AuthenticationCommand}" CommandParameter="{Binding Login}" Style="{StaticResource AuthButton}"></Button>
     </Grid>
 </UserControl>

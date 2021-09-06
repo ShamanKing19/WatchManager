@@ -16,6 +16,15 @@ namespace WatchManager.Models
         static readonly string accountsCollectionName = "Accounts";
 
 
+        public static BsonDocument GetAccount(string userName)
+        {
+            IMongoCollection<BsonDocument> collection = GetCollection(accountsCollectionName);
+            FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("Login", userName);
+            IFindFluent<BsonDocument, BsonDocument> account = collection.Find(filter);
+            return account.FirstOrDefault();
+        }
+
+
         public static async void CreateAccountAsync(string username, string password)
         {
             BsonDocument doc = new AccountModel(username, password).ToBsonDocument();

@@ -25,6 +25,7 @@ namespace WatchManager.ViewModels
             set
             {
                 _login = value;
+                AuthenticationCommand.Login = value;
                 OnPropertyChanged(nameof(Login));
             }
         }
@@ -34,17 +35,17 @@ namespace WatchManager.ViewModels
             set
             {
                 _password = value;
+                AuthenticationCommand.Password = value;
                 OnPropertyChanged(nameof(Password));
             }
         }
 
-        public ICommand SwitchViewModelCommand { get; }
-        //public ICommand AuthenticationCommand{ get; }
+        public AuthenticationCommand AuthenticationCommand { get; }
 
-
+        
         public AuthenticationViewModel(NavigationStore navigationStore)
         {
-            SwitchViewModelCommand = new SwitchToWatchViewModelCommand(navigationStore, () => new WatchViewModel(navigationStore, Login));
+            AuthenticationCommand = new AuthenticationCommand(navigationStore, () => new WatchViewModel(navigationStore, Login));
         }
     }
 }
