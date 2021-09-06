@@ -41,11 +41,12 @@ namespace WatchManager.ViewModels
         }
 
         public AuthenticationCommand AuthenticationCommand { get; }
-
+        public SwitchToRegistrationPageCommand RegistrationCommand { get; }
         
         public AuthenticationViewModel(NavigationStore navigationStore)
         {
             AuthenticationCommand = new AuthenticationCommand(navigationStore, () => new WatchViewModel(navigationStore, Login));
+            RegistrationCommand = new SwitchToRegistrationPageCommand(navigationStore, () => new RegistrationViewModel(navigationStore));
         }
     }
 }

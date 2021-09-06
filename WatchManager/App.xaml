@@ -6,6 +6,9 @@
              xmlns:viewmodels="clr-namespace:WatchManager.ViewModels"
              >
     <Application.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:RegistrationViewModel}">
+            <views:RegistrationPage/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodels:AuthenticationViewModel}">
             <views:AuthenticationPage/>
         </DataTemplate>
