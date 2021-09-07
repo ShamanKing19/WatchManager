@@ -135,8 +135,8 @@
         <TextBox Text="{Binding Login}" Margin="15" Grid.Row="1" Grid.ColumnSpan="2" Style="{DynamicResource RegisterTextBoxStyle}"/>
         <TextBox Text="{Binding Password}" Margin="15" Grid.Row="2" Grid.ColumnSpan="2" Style="{DynamicResource RegisterTextBoxStyle}"/>
         <TextBox Text="{Binding Email}" Margin="15" Grid.Row="3" Grid.ColumnSpan="2" Style="{DynamicResource RegisterTextBoxStyle}"/>
-        <Button Command="{Binding BackToAuthenticationPageCommand}" Content="Back" Margin="15" Grid.Row="4" Grid.Column="0" Style="{DynamicResource BackButton}"/>
-        <Button Command="{Binding RegisterAccountCommand}" Content="Register" Margin="15" Grid.Row="4" Grid.Column="1" Style="{DynamicResource BackButton}"/>
+        <Button Command="{Binding BackToAuthenticationPageCommand}" Content="Back" IsCancel="True" Margin="15" Grid.Row="4" Grid.Column="0" Style="{DynamicResource BackButton}"/>
+        <Button Command="{Binding RegisterAccountCommand}" Content="Register" IsDefault="True" Margin="15" Grid.Row="4" Grid.Column="1" Style="{DynamicResource BackButton}"/>
 
     </Grid>
 </UserControl>

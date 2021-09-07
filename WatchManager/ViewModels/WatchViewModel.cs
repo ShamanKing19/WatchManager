@@ -17,9 +17,10 @@ namespace WatchManager.ViewModels
     public class WatchViewModel : BaseViewModel
     {
         #region Private fields
-        private bool _isFilmsSelected;
-        private bool _isSerialsSelected;
-        private bool _isAnimeSelected;
+        private string _userLogin;
+        private bool _isFilmsSelected = true;
+        private bool _isSerialsSelected = true;
+        private bool _isAnimeSelected = true;
         private DocumentModel _selectedDocument;
         #endregion
 
@@ -31,6 +32,7 @@ namespace WatchManager.ViewModels
             {
                 _isFilmsSelected = value;
                 OnPropertyChanged(nameof(IsFilmsSelected));
+                SetRowCollectionAsync(_userLogin);
             }
         }
         public bool IsSerialsSelected
@@ -40,6 +42,8 @@ namespace WatchManager.ViewModels
             {
                 _isSerialsSelected = value;
                 OnPropertyChanged(nameof(IsSerialsSelected));
+                SetRowCollectionAsync(_userLogin);
+
             }
         }
         public bool IsAnimeSelected
@@ -49,6 +53,8 @@ namespace WatchManager.ViewModels
             {
                 _isAnimeSelected = value;
                 OnPropertyChanged(nameof(IsAnimeSelected));
+                SetRowCollectionAsync(_userLogin);
+
             }
         }
         public DocumentModel SelectedDocument
@@ -68,7 +74,6 @@ namespace WatchManager.ViewModels
         public ObservableCollection<DocumentModel> RowCollection { get; set; } = new ObservableCollection<DocumentModel>();
         #endregion
 
-
         #region Commands
         public ICommand SwitchToSettingsViewModelCommand{ get; }
         public ICommand SwitchToAddViewModelCommand { get; }
@@ -79,6 +84,7 @@ namespace WatchManager.ViewModels
 
         public WatchViewModel(NavigationStore navigationStore, string userLogin)
         {
+            _userLogin = userLogin;
             SetRowCollectionAsync(userLogin); // TODO: Придумать это делать асинхронно в отдельном потоке
             SwitchToAddViewModelCommand = new SwitchToAddPageCommand(navigationStore, () => new AddDocumentViewModel(navigationStore, userLogin));
             SwitchToEditViewModelCommand = new SwitchToEditPageCommand(navigationStore, () => new AddDocumentViewModel(navigationStore, userLogin, SelectedDocument), SelectedDocument);
@@ -91,9 +97,13 @@ namespace WatchManager.ViewModels
         {
             RowCollection.Clear();
             List<BsonDocument> titleList = await DatabaseModel.GetListOfDocumentsFromCollectionAsync(userLogin);
-            foreach (BsonDocument doc in titleList)
+            foreach (BsonDocument bsonDoc in titleList)
             {
-                RowCollection.Add(BsonSerializer.Deserialize<DocumentModel>(doc));
+                DocumentModel document = BsonSerializer.Deserialize<DocumentModel>(bsonDoc);
+                if ((document.TitleType == "Film" && IsFilmsSelected) || (document.TitleType =="Serial" && IsSerialsSelected) || (document.TitleType == "Anime" && IsAnimeSelected))
+                {
+                    RowCollection.Add(document);
+                }
             }
         }
     }
