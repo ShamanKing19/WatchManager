@@ -17,7 +17,6 @@ namespace WatchManager.Commands
         private readonly Func<BaseViewModel> _createViewModel;
         private string _login;
         private string _password;
-        private string collectionName = "Accounts";
 
         public string Login
         {
@@ -29,6 +28,7 @@ namespace WatchManager.Commands
             get => _password;
             set => _password = value;
         }
+
         public AuthenticationCommand(NavigationStore navigtationStore, Func<BaseViewModel> createViewModel)
         {
             _navigtationStore = navigtationStore;

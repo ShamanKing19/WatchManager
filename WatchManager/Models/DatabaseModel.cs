@@ -25,9 +25,9 @@ namespace WatchManager.Models
         }
 
 
-        public static async void CreateAccountAsync(string username, string password)
+        public static async void CreateAccountAsync(string username, string password, string email)
         {
-            BsonDocument doc = new AccountModel(username, password).ToBsonDocument();
+            BsonDocument doc = new AccountModel(username, password, email).ToBsonDocument();
             await InsertDocumentIntoCollectionAsync(doc, accountsCollectionName);
         }
 

@@ -14,11 +14,13 @@ namespace WatchManager.Models
         public ObjectId Id { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
+        public string Email { get; set; }
 
-        public AccountModel(string login, string password)
+        public AccountModel(string login, string password, string email)
         {
             Login = login;
             Password = password;
+            Email = email;
         }
     }
 }

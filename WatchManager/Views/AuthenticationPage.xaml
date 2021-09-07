@@ -69,6 +69,8 @@
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+
         </Grid.RowDefinitions>
 
         
@@ -76,5 +78,6 @@
         <TextBox  Grid.Row="1" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputField}"></TextBox>
         <components:BindablePasswordBox Grid.Row="2" Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
         <Button Grid.Row="3" Content="Auth"  Command="{Binding AuthenticationCommand}" CommandParameter="{Binding Login}" Style="{StaticResource AuthButton}"></Button>
+        <components:RegistrationButton Grid.Row="5" Width="150" Height="30"/>
     </Grid>
 </UserControl>
