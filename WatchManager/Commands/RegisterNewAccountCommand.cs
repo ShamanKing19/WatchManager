@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WatchManager.Models;
 using WatchManager.Stores;
 using WatchManager.ViewModels;
@@ -24,8 +25,28 @@ namespace WatchManager.Commands
         }
         public override void Execute(object parameter)
         {
-            Task.Run(() => DatabaseModel.CreateAccountAsync(NewAccount.Login, NewAccount.Password, NewAccount.Email));
-            _navigtationStore.CurrentViewModel = _createViewModel();
+            if ((NewAccount.Login != null) && (NewAccount.Password != null) && (NewAccount.Email != null))
+            {
+                if (IsAccountUnique(NewAccount))
+                {
+                    Task.Run(() => DatabaseModel.CreateAccountAsync(NewAccount.Login, NewAccount.Password, NewAccount.Email));
+                    _navigtationStore.CurrentViewModel = _createViewModel();
+                }
+            }
+        }
+
+        private bool IsAccountUnique(AccountModel account)
+        {
+            if (DatabaseModel.GetAccount(account.Login) == null)
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("This login is already used!");
+                return false;
+            }
+
         }
     }
 }
