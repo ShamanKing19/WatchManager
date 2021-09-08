@@ -3,22 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WatchManager.Views" xmlns:viewmodels="clr-namespace:WatchManager.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:RegistrationViewModel}"
+             xmlns:local="clr-namespace:WatchManager.Views" 
+             xmlns:viewmodels="clr-namespace:WatchManager.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:RegistrationViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="700">
 
     <UserControl.Resources>
         <SolidColorBrush x:Key="PrimaryColor" Color="#4c4c53"/>
         <SolidColorBrush x:Key="SecondaryColor" Color="#7c67ab"/>
-        <SolidColorBrush x:Key="AdditionalColor" Color="Transparent"/>
+        <SolidColorBrush x:Key="AdditionalColor" Color="#c55959"/>
         <SolidColorBrush x:Key="PrimaryFontColor" Color="White"/>
         <SolidColorBrush x:Key="SecondaryFontColor" Color="White"/>
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
         <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
         <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
-        
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+
+        <Style x:Key="HeaderStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="48"/>
+            <Setter Property="Foreground" Value="{StaticResource ResourceKey= PrimaryFontColor}"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
         <Style x:Key="RegisterTextBoxStyle" TargetType="{x:Type TextBox}">
             <Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="10"/>
             <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
             <Setter Property="Foreground" Value="{DynamicResource PrimaryFontColor}"/>
             <Setter Property="FontSize" Value="16.67"/>
@@ -32,7 +51,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Border x:Name="border" CornerRadius="15" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="True">
+                        <Border x:Name="border" CornerRadius="20" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="True">
                             <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -69,21 +88,16 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
-        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
-        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
-        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
-        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
-        
+
         <Style x:Key="BackButton" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
             <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
             <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
             <Setter Property="FontSize" Value="16.67"/>
+            <Setter Property="MinWidth" Value="100"/>
+            <Setter Property="MaxWidth" Value="200"/>
+            <Setter Property="Margin" Value="15" />
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -116,27 +130,28 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
     </UserControl.Resources>
-    
+
     <Grid Background="{StaticResource PrimaryColor}">
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-
+            <RowDefinition Height="104*"/>
+            <RowDefinition Height="215*"/>
+            <RowDefinition Height="81*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+        
+        <TextBlock Text="{Binding RegistrationText}" Style="{DynamicResource HeaderStyle}"/>
 
-        <TextBox Text="{Binding Login}" Margin="15" Grid.Row="1" Grid.ColumnSpan="2" Style="{DynamicResource RegisterTextBoxStyle}"/>
-        <TextBox Text="{Binding Password}" Margin="15" Grid.Row="2" Grid.ColumnSpan="2" Style="{DynamicResource RegisterTextBoxStyle}"/>
-        <TextBox Text="{Binding Email}" Margin="15" Grid.Row="3" Grid.ColumnSpan="2" Style="{DynamicResource RegisterTextBoxStyle}"/>
-        <Button Command="{Binding BackToAuthenticationPageCommand}" Content="Back" IsCancel="True" Margin="15" Grid.Row="4" Grid.Column="0" Style="{DynamicResource BackButton}"/>
-        <Button Command="{Binding RegisterAccountCommand}" Content="Register" IsDefault="True" Margin="15" Grid.Row="4" Grid.Column="1" Style="{DynamicResource BackButton}"/>
+        <StackPanel Margin="100 0" VerticalAlignment="Center" Grid.Row="1">
+            <TextBox Text="{Binding Login}" Style="{DynamicResource RegisterTextBoxStyle}"/>
+            <TextBox Text="{Binding Password}" Style="{DynamicResource RegisterTextBoxStyle}"/>
+            <TextBox Text="{Binding Email}" Style="{DynamicResource RegisterTextBoxStyle}"/>
+        </StackPanel>
+
+        <StackPanel Margin="0 0 0 10" Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2">
+            <Button Command="{Binding BackToAuthenticationPageCommand}" Background="{StaticResource AdditionalColor}" Content="Back" IsCancel="True" Style="{DynamicResource BackButton}"/>
+            <Button Command="{Binding RegisterAccountCommand}" Content="Register" IsDefault="True" Style="{DynamicResource BackButton}"/>
+        </StackPanel>
 
     </Grid>
 </UserControl>

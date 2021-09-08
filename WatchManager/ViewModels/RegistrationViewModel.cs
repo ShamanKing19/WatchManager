@@ -14,7 +14,9 @@ namespace WatchManager.ViewModels
         private string _login;
         private string _password;
         private string _email;
-        
+
+        public string RegistrationText { get; } = "Registration";
+
         public string Login
         {
             get => _login;
