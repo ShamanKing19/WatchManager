@@ -14,6 +14,14 @@
         <SolidColorBrush x:Key="PrimaryFontColor" Color="White"/>
         <SolidColorBrush x:Key="SecondaryFontColor" Color="#4c4c53"/>
 
+        <SolidColorBrush x:Key="ActiveColor" Color="#7c67ab"/>
+        <SolidColorBrush x:Key="InactiveColor" Color="#6b4d94"/>
+        <SolidColorBrush x:Key="CheckedMouseOverColor" Color="#7859bc"/>
+        <SolidColorBrush x:Key="UncheckedMouseOverColor" Color="#7859bc"/>
+        <SolidColorBrush x:Key="CheckedPressedColor" Color="#7859bc"/>
+        <SolidColorBrush x:Key="UncheckedPressedColor" Color="#7859bc"/>
+
+
         <!--#region CommonProperties -->
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -34,9 +42,7 @@
             </Setter>
         </Style>
         <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070"/>
-        <SolidColorBrush x:Key="OptionMark.MouseOver.Background" Color="#8f71d3"/>
         <SolidColorBrush x:Key="OptionMark.MouseOver.Border" Color="#FF5593FF"/>
-        <SolidColorBrush x:Key="OptionMark.Pressed.Background" Color="#8f71d3"/>
         <SolidColorBrush x:Key="OptionMark.Pressed.Border" Color="#FF3C77DD"/>
         <SolidColorBrush x:Key="OptionMark.Disabled.Background" Color="#FFE6E6E6"/>
         <SolidColorBrush x:Key="OptionMark.Disabled.Border" Color="#FFBCBCBC"/>
@@ -55,7 +61,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+                        <Grid x:Name="templateRoot" SnapsToDevicePixels="True">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
@@ -63,25 +69,40 @@
                             <ContentPresenter x:Name="contentPresenter" Grid.Column="0" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Grid>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="HasContent" Value="true">
-                                <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.MouseOver.Border}"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Disabled.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Disabled.Border}"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Pressed.Border}"/>
-
-                            </Trigger>
                             <Trigger Property="IsChecked" Value="true">
-                                <Setter Property="Background" Value="#6f43d1"/>
+                                <Setter Property="Background" Value="{StaticResource ActiveColor}"/>
                             </Trigger>
-                            <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="Background" Value="{StaticResource InactiveColor}"/>
                             </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="true"/>
+                                    <Condition Property="IsMouseOver" Value="true"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="{StaticResource CheckedMouseOverColor}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="false"/>
+                                    <Condition Property="IsMouseOver" Value="true"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="{StaticResource UncheckedMouseOverColor}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="true"/>
+                                    <Condition Property="IsPressed" Value="true"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="{StaticResource CheckedPressedColor}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="false"/>
+                                    <Condition Property="IsPressed" Value="true"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="{StaticResource UncheckedPressedColor}"/>
+                            </MultiTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -109,20 +130,40 @@
                             <ContentPresenter x:Name="contentPresenter" Grid.Column="0" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Grid>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="HasContent" Value="true"></Trigger>
-                            <Trigger Property="IsMouseOver" Value="true"></Trigger>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Disabled.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Disabled.Border}"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Pressed.Border}"/>
-                            </Trigger>
                             <Trigger Property="IsChecked" Value="true">
-                                <Setter Property="Background" Value="{StaticResource AdditionalColor}"/>
+                                <Setter Property="Background" Value="{StaticResource ActiveColor}"/>
                             </Trigger>
-                            <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="Background" Value="{StaticResource InactiveColor}"/>
                             </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="true"/>
+                                    <Condition Property="IsMouseOver" Value="true"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="{StaticResource CheckedMouseOverColor}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="false"/>
+                                    <Condition Property="IsMouseOver" Value="true"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="{StaticResource UncheckedMouseOverColor}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="true"/>
+                                    <Condition Property="IsPressed" Value="true"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="{StaticResource CheckedPressedColor}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="false"/>
+                                    <Condition Property="IsPressed" Value="true"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="{StaticResource UncheckedPressedColor}"/>
+                            </MultiTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -150,26 +191,40 @@
                             <ContentPresenter x:Name="contentPresenter" Grid.Column="0" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Grid>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="HasContent" Value="true">
-                                <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}"/>
-                                <Setter Property="Padding" Value="0"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.MouseOver.Border}"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Disabled.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Disabled.Border}"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Pressed.Border}"/>
-
-                            </Trigger>
                             <Trigger Property="IsChecked" Value="true">
-                                <Setter Property="Background" Value="#6f43d1"/>
+                                <Setter Property="Background" Value="{StaticResource ActiveColor}"/>
                             </Trigger>
-                            <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="Background" Value="{StaticResource InactiveColor}"/>
                             </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="true"/>
+                                    <Condition Property="IsMouseOver" Value="true"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="{StaticResource CheckedMouseOverColor}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="false"/>
+                                    <Condition Property="IsMouseOver" Value="true"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="{StaticResource UncheckedMouseOverColor}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="true"/>
+                                    <Condition Property="IsPressed" Value="true"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="{StaticResource CheckedPressedColor}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="false"/>
+                                    <Condition Property="IsPressed" Value="true"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="{StaticResource UncheckedPressedColor}"/>
+                            </MultiTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
