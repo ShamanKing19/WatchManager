@@ -73,11 +73,11 @@
 
         </Grid.RowDefinitions>
 
-        
-        <TextBlock Grid.Row="0" Text="{Binding Title}" Style="{StaticResource Logo}"></TextBlock>
-        <TextBox  Grid.Row="1" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputField}"></TextBox>
-        <components:BindablePasswordBox Grid.Row="2" Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
-        <Button Grid.Row="3" Content="Auth"  Command="{Binding AuthenticationCommand}" CommandParameter="{Binding Login}" Style="{StaticResource AuthButton}"></Button>
+
+        <TextBlock Grid.Row="0" Text="{Binding Title}" Style="{StaticResource Logo}"/>
+        <components:LoginInputField Grid.Row="1" Height="50" Width="500"/>
+        <components:PasswordInputField Password="{Binding Password}" Grid.Row="2" Height="50" Width="500"/>
+        <components:AuthButton Grid.Row="3" Height="50" Width="500"/>
         <components:RegistrationButton Grid.Row="5" Width="150" Height="30"/>
     </Grid>
 </UserControl>
