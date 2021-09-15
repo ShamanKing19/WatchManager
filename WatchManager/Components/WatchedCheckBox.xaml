@@ -6,12 +6,7 @@
              xmlns:local="clr-namespace:WatchManager.Components"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="150">
-    <UserControl.Resources>
-        <SolidColorBrush x:Key="PrimaryColor" Color="#4c4c53"/>
-        <SolidColorBrush x:Key="AdditionalColor" Color="#eebcec"/>
-        <SolidColorBrush x:Key="PrimaryFontColor" Color="White"/>
-        <SolidColorBrush x:Key="SecondaryFontColor" Color="#4c4c53"/>
-
+    <UserControl.Resources> 
         <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
             <Setter Property="FontSize" Value="16.67"/>
@@ -47,7 +42,6 @@
         <SolidColorBrush x:Key="OptionMark.Disabled.Glyph" Color="#FF707070"/>
         <Style x:Key="CheckBoxStyle" TargetType="{x:Type CheckBox}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>

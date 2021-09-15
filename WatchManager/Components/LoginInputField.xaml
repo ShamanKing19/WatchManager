@@ -6,19 +6,10 @@
              xmlns:local="clr-namespace:WatchManager.Components" xmlns:viewmodels="clr-namespace:WatchManager.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AuthenticationViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="60" d:DesignWidth="600">
-    
-    <UserControl.Resources>
-        <SolidColorBrush x:Key="PrimaryColor" Color="#4c4c53"/>
-        <SolidColorBrush x:Key="SecondaryColor" Color="#7c67ab"/>
-        <SolidColorBrush x:Key="AdditionalColor" Color="#6f43d1"/>
-        <SolidColorBrush x:Key="PrimaryFontColor" Color="White"/>
-        <SolidColorBrush x:Key="SecondaryFontColor" Color="#4c4c53"/>
-        
-        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
-        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
 
+    <UserControl.Resources>
         <Style x:Key="LoginInputField" TargetType="{x:Type TextBox}">
-            <Setter Property="FontSize" Value="16.67"/>
+            <Setter Property="FontSize" Value="{StaticResource PrimaryFontSize}"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
             <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -33,12 +24,6 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter Property="Opacity" TargetName="border" Value="0.56"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
-                            </Trigger>
-                            <Trigger Property="IsKeyboardFocused" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

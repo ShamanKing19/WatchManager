@@ -7,9 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="150">
     <UserControl.Resources>
-        <SolidColorBrush x:Key="SecondaryColor" Color="#7c67ab"/>
-        <SolidColorBrush x:Key="PrimaryFontColor" Color="White"/>
-        
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -32,7 +29,7 @@
             <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
             <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
             <Setter Property="Foreground" Value="{DynamicResource PrimaryFontColor}"/>
-            <Setter Property="FontSize" Value="16.67"/>
+            <Setter Property="FontSize" Value="{StaticResource ButtonFontSize}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>

@@ -7,12 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="45" d:DesignWidth="165">
     <UserControl.Resources>
-        <SolidColorBrush x:Key="PrimaryColor" Color="#4c4c53"/>
-        <SolidColorBrush x:Key="SecondaryColor" Color="#7c67ab"/>
-        <SolidColorBrush x:Key="PrimaryFontColor" Color="White"/>
-        <SolidColorBrush x:Key="WatchButtonColor" Color="#eebcec"/>
-        <SolidColorBrush x:Key="SecondaryFontColor" Color="#4c4c53"/>
-        
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -32,9 +26,9 @@
         <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
         <Style x:Key="WatchButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource WatchButtonColor}"/>
+            <Setter Property="Background" Value="{StaticResource AdditionalColor}"/>
             <Setter Property="Foreground" Value="{StaticResource SecondaryFontColor}"/>
-            <Setter Property="FontSize" Value="16.67"/>
+            <Setter Property="FontSize" Value="{StaticResource PrimaryFontSize}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>

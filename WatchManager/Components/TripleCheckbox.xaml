@@ -8,20 +8,6 @@
              d:DesignHeight="45" d:DesignWidth="165">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="PrimaryColor" Color="#4c4c53"/>
-        <SolidColorBrush x:Key="SecondaryColor" Color="#7c67ab"/>
-        <SolidColorBrush x:Key="AdditionalColor" Color="#6f43d1"/>
-        <SolidColorBrush x:Key="PrimaryFontColor" Color="White"/>
-        <SolidColorBrush x:Key="SecondaryFontColor" Color="#4c4c53"/>
-
-        <SolidColorBrush x:Key="ActiveColor" Color="#7c67ab"/>
-        <SolidColorBrush x:Key="InactiveColor" Color="#6b4d94"/>
-        <SolidColorBrush x:Key="CheckedMouseOverColor" Color="#7859bc"/>
-        <SolidColorBrush x:Key="UncheckedMouseOverColor" Color="#7859bc"/>
-        <SolidColorBrush x:Key="CheckedPressedColor" Color="#7859bc"/>
-        <SolidColorBrush x:Key="UncheckedPressedColor" Color="#7859bc"/>
-
-
         <!--#region CommonProperties -->
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -56,7 +42,7 @@
             <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
             <Setter Property="BorderBrush" Value="{StaticResource OptionMark.Static.Border}"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="16.67"/>
+            <Setter Property="FontSize" Value="{StaticResource PrimaryFontSize}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -70,38 +56,38 @@
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="true">
-                                <Setter Property="Background" Value="{StaticResource ActiveColor}"/>
+                                <Setter Property="Background" Value="{StaticResource ActiveFilterColor}"/>
                             </Trigger>
                             <Trigger Property="IsChecked" Value="False">
-                                <Setter Property="Background" Value="{StaticResource InactiveColor}"/>
+                                <Setter Property="Background" Value="{StaticResource InactiveFilterColor}"/>
                             </Trigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsChecked" Value="true"/>
                                     <Condition Property="IsMouseOver" Value="true"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource CheckedMouseOverColor}"/>
+                                <Setter Property="Background" Value="{StaticResource CheckedMouseOverFilterColor}"/>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsChecked" Value="false"/>
                                     <Condition Property="IsMouseOver" Value="true"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource UncheckedMouseOverColor}"/>
+                                <Setter Property="Background" Value="{StaticResource UncheckedMouseOverFilterColor}"/>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsChecked" Value="true"/>
                                     <Condition Property="IsPressed" Value="true"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource CheckedPressedColor}"/>
+                                <Setter Property="Background" Value="{StaticResource CheckedPressedFilterColor}"/>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsChecked" Value="false"/>
                                     <Condition Property="IsPressed" Value="true"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource UncheckedPressedColor}"/>
+                                <Setter Property="Background" Value="{StaticResource UncheckedPressedFilterColor}"/>
                             </MultiTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -117,7 +103,7 @@
             <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
             <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
-            <Setter Property="FontSize" Value="16.67"/>
+            <Setter Property="FontSize" Value="{StaticResource PrimaryFontSize}"/>
             <Setter Property="BorderThickness" Value="1 0 1 0"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -131,38 +117,38 @@
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="true">
-                                <Setter Property="Background" Value="{StaticResource ActiveColor}"/>
+                                <Setter Property="Background" Value="{StaticResource ActiveFilterColor}"/>
                             </Trigger>
                             <Trigger Property="IsChecked" Value="False">
-                                <Setter Property="Background" Value="{StaticResource InactiveColor}"/>
+                                <Setter Property="Background" Value="{StaticResource InactiveFilterColor}"/>
                             </Trigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsChecked" Value="true"/>
                                     <Condition Property="IsMouseOver" Value="true"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource CheckedMouseOverColor}"/>
+                                <Setter Property="Background" Value="{StaticResource CheckedMouseOverFilterColor}"/>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsChecked" Value="false"/>
                                     <Condition Property="IsMouseOver" Value="true"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource UncheckedMouseOverColor}"/>
+                                <Setter Property="Background" Value="{StaticResource UncheckedMouseOverFilterColor}"/>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsChecked" Value="true"/>
                                     <Condition Property="IsPressed" Value="true"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource CheckedPressedColor}"/>
+                                <Setter Property="Background" Value="{StaticResource CheckedPressedFilterColor}"/>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsChecked" Value="false"/>
                                     <Condition Property="IsPressed" Value="true"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource UncheckedPressedColor}"/>
+                                <Setter Property="Background" Value="{StaticResource UncheckedPressedFilterColor}"/>
                             </MultiTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -178,7 +164,7 @@
             <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
             <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
-            <Setter Property="FontSize" Value="16.67"/>
+            <Setter Property="FontSize" Value="{StaticResource PrimaryFontSize}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -192,38 +178,38 @@
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="true">
-                                <Setter Property="Background" Value="{StaticResource ActiveColor}"/>
+                                <Setter Property="Background" Value="{StaticResource ActiveFilterColor}"/>
                             </Trigger>
                             <Trigger Property="IsChecked" Value="False">
-                                <Setter Property="Background" Value="{StaticResource InactiveColor}"/>
+                                <Setter Property="Background" Value="{StaticResource InactiveFilterColor}"/>
                             </Trigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsChecked" Value="true"/>
                                     <Condition Property="IsMouseOver" Value="true"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource CheckedMouseOverColor}"/>
+                                <Setter Property="Background" Value="{StaticResource CheckedMouseOverFilterColor}"/>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsChecked" Value="false"/>
                                     <Condition Property="IsMouseOver" Value="true"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource UncheckedMouseOverColor}"/>
+                                <Setter Property="Background" Value="{StaticResource UncheckedMouseOverFilterColor}"/>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsChecked" Value="true"/>
                                     <Condition Property="IsPressed" Value="true"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource CheckedPressedColor}"/>
+                                <Setter Property="Background" Value="{StaticResource CheckedPressedFilterColor}"/>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsChecked" Value="false"/>
                                     <Condition Property="IsPressed" Value="true"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource UncheckedPressedColor}"/>
+                                <Setter Property="Background" Value="{StaticResource UncheckedPressedFilterColor}"/>
                             </MultiTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

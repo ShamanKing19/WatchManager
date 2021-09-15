@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:WatchManager"
              xmlns:views="clr-namespace:WatchManager.Views"
              xmlns:viewmodels="clr-namespace:WatchManager.ViewModels"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              >
     <Application.Resources>
         <DataTemplate DataType="{x:Type viewmodels:RegistrationViewModel}">
@@ -18,5 +19,35 @@
         <DataTemplate DataType="{x:Type viewmodels:AddDocumentViewModel}">
             <views:AddDocumentPage/>
         </DataTemplate>
+
+        <System:Double x:Key="PrimaryFontSize">16.67</System:Double>
+        <System:Double x:Key="ButtonFontSize">16.67</System:Double>
+        <System:Int32 x:Key="DefaultButtonCornerRadius">10</System:Int32>
+        <System:Int32 x:Key="AdditionalButtonCornerRadius">20</System:Int32>
+        <System:Int32 x:Key="ContainerCornerRadius">10</System:Int32>
+
+
+
+        <SolidColorBrush x:Key="PrimaryColor" Color="#4c4c53"/>
+        <SolidColorBrush x:Key="SecondaryColor" Color="#7c67ab"/>
+        <SolidColorBrush x:Key="SecondaryDarkerColor" Color="#6f43d1"/>
+        <SolidColorBrush x:Key="AdditionalColor" Color="#eebcec"/>
+        <SolidColorBrush x:Key="PrimaryFontColor" Color="White"/>
+        <SolidColorBrush x:Key="SecondaryFontColor" Color="#4c4c53"/>
+        <SolidColorBrush x:Key="AdditionalFontColor" Color="#eebcec"/>
+        <SolidColorBrush x:Key="ExtraColor" Color="IndianRed"/>
+        <SolidColorBrush x:Key="RowColor" Color="#4c4c53"/>
+        <SolidColorBrush x:Key="SelectedItemColor" Color="#eebcec"/>
+        <SolidColorBrush x:Key="SelectedItemFontColor" Color="#4c4c53"/>
+        <SolidColorBrush x:Key="HeadersRowColor" Color="Transparent"/>
+        <SolidColorBrush x:Key="ActiveFilterColor" Color="#7c67ab"/>
+        <SolidColorBrush x:Key="InactiveFilterColor" Color="#6b4d94"/>
+        <SolidColorBrush x:Key="CheckedMouseOverFilterColor" Color="#7859bc"/>
+        <SolidColorBrush x:Key="UncheckedMouseOverFilterColor" Color="#7859bc"/>
+        <SolidColorBrush x:Key="CheckedPressedFilterColor" Color="#7859bc"/>
+        <SolidColorBrush x:Key="UncheckedPressedFilterColor" Color="#7859bc"/>
+        
+        
+
     </Application.Resources>
 </Application>

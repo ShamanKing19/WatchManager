@@ -8,11 +8,8 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:WatchViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="45" d:DesignWidth="165">
-    
-    <UserControl.Resources>
-        <SolidColorBrush x:Key="AdditionalColor" Color="#c55959"/>
-        <SolidColorBrush x:Key="PrimaryFontColor" Color="White"/>
 
+    <UserControl.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -32,10 +29,10 @@
         <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
         <Style x:Key="DeleteButton" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource AdditionalColor}"/>
+            <Setter Property="Background" Value="{StaticResource ExtraColor}"/>
             <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
-            <Setter Property="FontSize" Value="16.67"/>
+            <Setter Property="FontSize" Value="{StaticResource ButtonFontSize}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>

@@ -11,7 +11,7 @@
              d:DesignHeight="400" d:DesignWidth="700">
 
 
-    <Grid  Background="#4c4c53">
+    <Grid Background="{StaticResource PrimaryColor}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="26*"/>
             <ColumnDefinition Width="9*"/>

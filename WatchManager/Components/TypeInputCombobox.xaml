@@ -11,16 +11,11 @@
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="PrimaryColor" Color="#4c4c53"/>
-        <SolidColorBrush x:Key="AdditionalColor" Color="#eebcec"/>
-        <SolidColorBrush x:Key="PrimaryFontColor" Color="White"/>
-        <SolidColorBrush x:Key="SecondaryFontColor" Color="#4c4c53"/>
-
         <Style x:Name="Title" TargetType="{x:Type TextBlock}">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
-            <Setter Property="FontSize" Value="16.67"/>
+            <Setter Property="FontSize" Value="{StaticResource PrimaryFontSize}"/>
         </Style>
         
         <!-- Combobox -->

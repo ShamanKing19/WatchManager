@@ -8,24 +8,13 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:WatchViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="315" d:DesignWidth="500">
-    
-    <UserControl.Resources>
-        <SolidColorBrush x:Key="PrimaryColor" Color="#4c4c53"/>
-        <SolidColorBrush x:Key="SecondaryColor" Color="#7c67ab"/>
-        <SolidColorBrush x:Key="AdditionalColor" Color="Transparent"/>
-        <SolidColorBrush x:Key="SelectedItemColor" Color="#eebcec"/>
-        <SolidColorBrush x:Key="SelectedItemFontColor" Color="#4c4c53"/>
-        <SolidColorBrush x:Key="PrimaryFontColor" Color="White"/>
-        <SolidColorBrush x:Key="SecondaryFontColor" Color="White"/>
-        <SolidColorBrush x:Key="HeadersRowColor" Color="Transparent"/>
-        <SolidColorBrush x:Key="{x:Static DataGrid.FocusBorderBrushKey}" Color="#FF000000"/>
 
-        
+    <UserControl.Resources>
         <Style x:Key="DataGridStyle" TargetType="{x:Type DataGrid}">
             <Setter Property="GridLinesVisibility" Value="None"/>
             <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
             <Setter Property="Padding" Value="6"/>
-            <Setter Property="FontSize" Value="16.67"/>
+            <Setter Property="FontSize" Value="{StaticResource PrimaryFontSize}"/>
             <Setter Property="BorderBrush" Value="#FF688CAF"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="RowDetailsVisibilityMode" Value="Collapsed"/>
@@ -86,7 +75,7 @@
             <Setter Property="Margin" Value="0 0 0 8"/>
             <Setter Property="Background" Value="{StaticResource HeadersRowColor}"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
-            <Setter Property="FontSize" Value="16.67"/>
+            <Setter Property="FontSize" Value="{StaticResource PrimaryFontSize}"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="ContentTemplate">
                 <Setter.Value>
@@ -107,7 +96,7 @@
             <Setter Property="ValidationErrorTemplate">
                 <Setter.Value>
                     <ControlTemplate>
-                        <TextBlock Foreground="Red" Margin="2,0,0,0" Text="!" VerticalAlignment="Center"/>
+                        <TextBlock Margin="2,0,0,0" Text="!" VerticalAlignment="Center"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -139,7 +128,7 @@
         </Style>
 
         <Style x:Key="BasicCellStyle" TargetType="{x:Type DataGridCell}">
-            <Setter Property="Background" Value="{StaticResource AdditionalColor}"/>
+            <Setter Property="Background" Value="{StaticResource RowColor}"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -178,7 +167,7 @@
         </Style>
 
         <Style x:Key="LeftCellStyle" TargetType="{x:Type DataGridCell}">
-            <Setter Property="Background" Value="{StaticResource AdditionalColor}"/>
+            <Setter Property="Background" Value="{StaticResource RowColor}"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -217,7 +206,7 @@
         </Style>
 
         <Style x:Key="WatchedCellStyle" TargetType="{x:Type DataGridCell}">
-            <Setter Property="Background" Value="{StaticResource AdditionalColor}"/>
+            <Setter Property="Background" Value="{StaticResource RowColor}"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Stretch"/>

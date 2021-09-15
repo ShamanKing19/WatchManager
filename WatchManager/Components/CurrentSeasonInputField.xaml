@@ -9,16 +9,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="200">
     <UserControl.Resources>
-        <SolidColorBrush x:Key="PrimaryColor" Color="#4c4c53"/>
-        <SolidColorBrush x:Key="AdditionalColor" Color="#eebcec"/>
-        <SolidColorBrush x:Key="PrimaryFontColor" Color="White"/>
-        <SolidColorBrush x:Key="SecondaryFontColor" Color="#4c4c53"/>
-
         <Style x:Name="Title" TargetType="{x:Type TextBlock}">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
-            <Setter Property="FontSize" Value="16.67"/>
+            <Setter Property="FontSize" Value="{StaticResource PrimaryFontSize}"/>
         </Style>
 
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
@@ -28,7 +23,7 @@
             <Setter Property="Background" Value="{StaticResource AdditionalColor}"/>
             <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
             <Setter Property="Foreground" Value="{StaticResource SecondaryFontColor}"/>
-            <Setter Property="FontSize" Value="16.67"/>
+            <Setter Property="FontSize" Value="{StaticResource PrimaryFontSize}"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="KeyboardNavigation.TabNavigation" Value="Cycle"/>

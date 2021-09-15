@@ -11,11 +11,6 @@
              d:DesignHeight="215" d:DesignWidth="210">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="PrimaryColor" Color="#4c4c53"/>
-        <SolidColorBrush x:Key="SecondaryColor" Color="#7c67ab"/>
-        <SolidColorBrush x:Key="PrimaryFontColor" Color="White"/>
-        <SolidColorBrush x:Key="SecondaryFontColor" Color="#4c4c53"/>
-
         <!-- DataGrid style-->
         <Style x:Key="SeasonsInputTable" TargetType="{x:Type DataGrid}">
             <Setter Property="Background" Value="Transparent"/>
@@ -82,7 +77,7 @@
         <!-- DataGridColumnHeader style -->
         <Style x:Key="ColumnHeaderStyle" TargetType="DataGridColumnHeader">
             <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
-            <Setter Property="FontSize" Value="16.67" />
+            <Setter Property="FontSize" Value="{StaticResource PrimaryFontSize}" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
@@ -99,7 +94,7 @@
         <Style x:Key="CellStyle" TargetType="DataGridCell">
             <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
-            <Setter Property="FontSize" Value="16.67"/>
+            <Setter Property="FontSize" Value="{StaticResource PrimaryFontSize}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>

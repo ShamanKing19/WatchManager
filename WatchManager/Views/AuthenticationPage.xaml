@@ -14,7 +14,7 @@
 
     <UserControl.Resources>
         <Style x:Key="Logo">
-            <Setter Property="Control.Foreground" Value="White"/>
+            <Setter Property="Control.Foreground" Value="{StaticResource PrimaryFontColor}"/>
             <Setter Property="Control.FontSize" Value="44"/>
             <Setter Property="Control.HorizontalAlignment" Value="Center"/>
             <Setter Property="Control.VerticalAlignment" Value="Center"/>
