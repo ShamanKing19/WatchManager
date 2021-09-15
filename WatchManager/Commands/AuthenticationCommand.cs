@@ -1,8 +1,10 @@
 ﻿using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using WatchManager.Models;
@@ -40,7 +42,7 @@ namespace WatchManager.Commands
             return true;
         }
 
-        public override  void Execute(object parameter)
+        public override void Execute(object parameter)
         {
             BsonDocument account = DatabaseModel.GetAccount(Login);
             AuthenticationViewModel authVM = (AuthenticationViewModel)_navigtationStore.CurrentViewModel;
@@ -51,6 +53,7 @@ namespace WatchManager.Commands
             }
             else if (authVM.Password == account.GetValue("Password")) 
             {
+                Task.Run(() => SaveUserInfoAsync(authVM.Login, authVM.Password));
                 _navigtationStore.CurrentViewModel = _createViewModel();
             }
             else
@@ -59,5 +62,19 @@ namespace WatchManager.Commands
             }
         }
 
+        private async void SaveUserInfoAsync(string login, string password)
+        {
+            JsonSerializerOptions options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+
+            using (FileStream fs = new FileStream("AuthorizationInfo.json", FileMode.OpenOrCreate))
+            {
+                // TODO: хэшировать значения
+                AuthorizedUserModel userModel = new AuthorizedUserModel(login, password);
+                await JsonSerializer.SerializeAsync<AuthorizedUserModel>(fs, userModel, options);
+            }
+        }
     }
 }

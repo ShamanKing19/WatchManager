@@ -2,30 +2,42 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
+using WatchManager.Models;
 using WatchManager.Stores;
 using WatchManager.ViewModels;
 
 namespace WatchManager
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e)
+        protected override async void OnStartup(StartupEventArgs e)
         {
-            NavigationStore navigationStore = new();
-            navigationStore.CurrentViewModel = new AuthenticationViewModel(navigationStore);
-            MainWindow = new MainWindow()
+            using (FileStream fs = new FileStream("AuthorizationInfo.json", FileMode.OpenOrCreate))
             {
-                DataContext = new MainViewModel(navigationStore)
-            };
-            MainWindow.Show();
+                AuthorizedUserModel userModel = new AuthorizedUserModel();
+                if (fs.Length > 0)
+                {
+                    userModel = await JsonSerializer.DeserializeAsync<AuthorizedUserModel>(fs);
+                }
 
-            base.OnStartup(e);
+
+                NavigationStore navigationStore = new();
+                navigationStore.CurrentViewModel = userModel.IsLogged ? new WatchViewModel(navigationStore, userModel.Login) : new AuthenticationViewModel(navigationStore);
+                MainWindow = new MainWindow()
+                {
+                    DataContext = new MainViewModel(navigationStore)
+                };
+                
+                MainWindow.Show();
+
+
+                base.OnStartup(e);
+            }
         }
     }
 }
