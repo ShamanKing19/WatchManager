@@ -80,6 +80,7 @@ namespace WatchManager.ViewModels
         public SwitchToEditPageCommand SwitchToEditViewModelCommand { get; private set; }
         public DeleteDocumentCommand DeleteRowCommand { get; private set; }
         public WatchCommand WatchEpisodeCommand { get; set; }
+        public BackToAuthenticationPageCommand BackToAuthenticationPageCommand { get; set; }
         #endregion
 
         public WatchViewModel(NavigationStore navigationStore, string userLogin)
@@ -90,6 +91,7 @@ namespace WatchManager.ViewModels
             SwitchToEditViewModelCommand = new SwitchToEditPageCommand(navigationStore, () => new AddDocumentViewModel(navigationStore, userLogin, SelectedDocument), SelectedDocument);
             DeleteRowCommand = new DeleteDocumentCommand(userLogin, SelectedDocument, SetRowCollectionAsync);
             WatchEpisodeCommand = new WatchCommand(userLogin);
+            BackToAuthenticationPageCommand = new BackToAuthenticationPageCommand(navigationStore, () => new AuthenticationViewModel(navigationStore));
         }
 
 

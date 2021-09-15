@@ -26,6 +26,7 @@
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
                 <RowDefinition Height="8*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -38,6 +39,7 @@
             <components:AddButton Grid.Column="0" Grid.Row="2"/>
             <components:EditButton Grid.Column="1" Grid.Row="2"/>
             <components:DeleteButton Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"/>
+            <components:LeaveAccountButton Margin="6" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"/>
 
         </Grid>
     </Grid>
