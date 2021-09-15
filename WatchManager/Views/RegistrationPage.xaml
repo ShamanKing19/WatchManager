@@ -16,7 +16,15 @@
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
         <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
         <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
-        
+
+        <Style x:Key="RegistrationPageTitleStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
         <Style x:Key="RegisterTextBoxStyle" TargetType="{x:Type TextBox}">
             <Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
             <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
@@ -77,7 +85,7 @@
         <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
         <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
         <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
-        
+
         <Style x:Key="BackButton" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
             <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
@@ -117,26 +125,27 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    
+
     <Grid Background="{StaticResource PrimaryColor}">
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="91*"/>
+            <RowDefinition Height="226*"/>
+            <RowDefinition Height="83*"/>
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <TextBlock Text="{Binding RegistrationTitle}" Grid.Row="0" Grid.ColumnSpan="2" Style="{DynamicResource RegistrationPageTitleStyle}"/>
 
-        <TextBox Text="{Binding Login}" Margin="15" Grid.Row="1" Grid.ColumnSpan="2" Style="{DynamicResource RegisterTextBoxStyle}"/>
-        <TextBox Text="{Binding Password}" Margin="15" Grid.Row="2" Grid.ColumnSpan="2" Style="{DynamicResource RegisterTextBoxStyle}"/>
-        <TextBox Text="{Binding Email}" Margin="15" Grid.Row="3" Grid.ColumnSpan="2" Style="{DynamicResource RegisterTextBoxStyle}"/>
-        <Button Command="{Binding BackToAuthenticationPageCommand}" Content="Back" IsCancel="True" Margin="15" Grid.Row="4" Grid.Column="0" Style="{DynamicResource BackButton}"/>
-        <Button Command="{Binding RegisterAccountCommand}" Content="Register" IsDefault="True" Margin="15" Grid.Row="4" Grid.Column="1" Style="{DynamicResource BackButton}"/>
+        <StackPanel VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2">
+            <TextBox Text="{Binding Login}" MaxWidth="500" Height="50" Style="{DynamicResource RegisterTextBoxStyle}"/>
+            <TextBox Text="{Binding Password}" Margin="0 15" MaxWidth="500" Height="50" Style="{DynamicResource RegisterTextBoxStyle}"/>
+            <TextBox Text="{Binding Email}" MaxWidth="500" Height="50" Style="{DynamicResource RegisterTextBoxStyle}"/>
+        </StackPanel>
+        <Button Command="{Binding BackToAuthenticationPageCommand}" Content="Back" IsCancel="True" Margin="15,15,15,15" Grid.Row="2" Grid.Column="0" Style="{DynamicResource BackButton}"/>
+        <Button Command="{Binding RegisterAccountCommand}" Content="Register" IsDefault="True" Margin="15,15,15,15" Grid.Row="2" Grid.Column="1" Style="{DynamicResource BackButton}"/>
 
     </Grid>
 </UserControl>

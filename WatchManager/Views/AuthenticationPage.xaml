@@ -18,49 +18,7 @@
             <Setter Property="Control.FontSize" Value="44"/>
             <Setter Property="Control.HorizontalAlignment" Value="Center"/>
             <Setter Property="Control.VerticalAlignment" Value="Center"/>
-
         </Style>
-
-        <Style x:Key="InputField">
-            <Setter Property="Control.Background" Value="#7c67ab"/>
-            <Setter Property="Control.HorizontalAlignment" Value="Center"/>
-            <Setter Property="Control.VerticalAlignment" Value="Center"/>
-            <Setter Property="Control.Height" Value="50"/>
-            <Setter Property="Control.Width" Value="500"/>
-            <Setter Property="Control.Foreground" Value="White"/>
-            <Setter Property="Control.FontSize" Value="34"/>
-            <Setter Property="Control.HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="Control.VerticalContentAlignment" Value="Center"/>
-        </Style>
-
-        <Style x:Key="AuthButton">
-            <Setter Property="Control.Visibility" Value="Visible"/>
-            <Setter Property="Button.IsDefault" Value="True"/>
-            <Setter Property="Control.Height" Value="50"/>
-            <Setter Property="Control.Width" Value="500"/>
-            <Setter Property="Control.Background" Value="#7c67ab"/>
-            <Setter Property="Control.Foreground" Value="White"/>
-            <Setter Property="Control.FontSize" Value="36"/>
-            <Setter Property="Control.VerticalContentAlignment" Value="Center"/>
-
-
-        </Style>
-
-        <ControlTemplate x:Key="ButtonTemplate" TargetType="Button">
-            <Border BorderBrush="Orange" BorderThickness="3" CornerRadius="20"
-                    TextBlock.Foreground="White">
-                <Border.Background>
-                    <LinearGradientBrush>
-                        <GradientStopCollection>
-                            <GradientStop Offset="0" Color="LimeGreen"></GradientStop>
-                            <GradientStop Offset="1" Color="LightBlue"></GradientStop>
-                        </GradientStopCollection>
-                    </LinearGradientBrush>
-                </Border.Background>
-                <ContentPresenter RecognizesAccessKey="True"></ContentPresenter>
-            </Border>
-        </ControlTemplate>
-
     </UserControl.Resources>
 
     <Grid Background="#FF4C4C53">
