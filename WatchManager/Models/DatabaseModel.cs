@@ -11,7 +11,7 @@ namespace WatchManager.Models
 {
     static class DatabaseModel
     {
-        static readonly string connectionString = "mongodb://localhost";
+        static readonly string connectionString = "mongodb+srv://defaultUser:1234@cluster0.yyfgs.mongodb.net/myFirstDatabase?authSource=admin&replicaSet=atlas-mu0lz8-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true";
         static readonly string databaseName = "EpisodeManager";
         static readonly string accountsCollectionName = "Accounts";
 
