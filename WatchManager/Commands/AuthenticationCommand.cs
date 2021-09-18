@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using WatchManager.Models;
+using WatchManager.StaticClasses;
 using WatchManager.Stores;
 using WatchManager.ViewModels;
 
@@ -45,15 +46,15 @@ namespace WatchManager.Commands
         public override void Execute(object parameter)
         {
             BsonDocument account = DatabaseModel.GetAccount(Login);
-            AuthenticationViewModel authVM = (AuthenticationViewModel)_navigtationStore.CurrentViewModel;
+            //AuthenticationViewModel authVM = (AuthenticationViewModel)_navigtationStore.CurrentViewModel;
             
             if (account == null)
             {
                 MessageBox.Show("No such account");
             }
-            else if (authVM.Password == account.GetValue("Password")) 
+            else if (Password == account.GetValue("Password")) 
             {
-                Task.Run(() => SaveUserInfoAsync(authVM.Login, authVM.Password));
+                Task.Run(() => SaveUserInfoAsync(Login, Password));
                 _navigtationStore.CurrentViewModel = _createViewModel();
             }
             else

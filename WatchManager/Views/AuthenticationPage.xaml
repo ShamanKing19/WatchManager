@@ -34,7 +34,7 @@
 
         <TextBlock Grid.Row="0" Text="{Binding Title}" Style="{StaticResource Logo}"/>
         <components:LoginInputField Grid.Row="1" Height="50" Width="500"/>
-        <components:PasswordInputField Password="{Binding Password}" Grid.Row="2" Height="50" Width="500"/>
+        <components:PasswordInputField Password="{Binding Password, Mode=OneWayToSource}" Grid.Row="2" Height="50" Width="500"/>
         <components:AuthButton Grid.Row="3" Height="50" Width="500"/>
         <components:RegistrationButton Grid.Row="5" Width="150" Height="30"/>
     </Grid>

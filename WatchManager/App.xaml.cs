@@ -4,6 +4,8 @@ using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,15 +29,18 @@ namespace WatchManager
 
 
                 NavigationStore navigationStore = new();
-                navigationStore.CurrentViewModel = userModel.IsLogged ? new WatchViewModel(navigationStore, userModel.Login) : new AuthenticationViewModel(navigationStore);
-                MainWindow = new MainWindow()
-                {
-                    DataContext = new MainViewModel(navigationStore)
-                };
                 
+                if (userModel.IsLogged)
+                {
+                    navigationStore.CurrentViewModel = new WatchViewModel(navigationStore, userModel.Login);
+                }
+                else
+                {
+                    navigationStore.CurrentViewModel = new AuthenticationViewModel(navigationStore);
+                }
+
+                MainWindow = new MainWindow() { DataContext = new MainViewModel(navigationStore) };
                 MainWindow.Show();
-
-
                 base.OnStartup(e);
             }
         }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using WatchManager.Commands;
+using WatchManager.StaticClasses;
 using WatchManager.Stores;
 
 namespace WatchManager.ViewModels
@@ -24,8 +25,8 @@ namespace WatchManager.ViewModels
             get => _login;
             set
             {
-                _login = value;
-                AuthenticationCommand.Login = value;
+                _login = HashFunction.GetHash(value);
+                AuthenticationCommand.Login = HashFunction.GetHash(value);
                 OnPropertyChanged(nameof(Login));
             }
         }
@@ -34,8 +35,8 @@ namespace WatchManager.ViewModels
             get => _password;
             set
             {
-                _password = value;
-                AuthenticationCommand.Password = value;
+                _password = HashFunction.GetHash(value);
+                AuthenticationCommand.Password = HashFunction.GetHash(value);
                 OnPropertyChanged(nameof(Password));
             }
         }

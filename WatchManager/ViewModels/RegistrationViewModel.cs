@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WatchManager.Commands;
 using WatchManager.Models;
+using WatchManager.StaticClasses;
 using WatchManager.Stores;
 
 namespace WatchManager.ViewModels
@@ -21,8 +22,8 @@ namespace WatchManager.ViewModels
             get => _login;
             set
             {
-                _login = value;
-                RegisterAccountCommand.NewAccount.Login = value;
+                _login = HashFunction.GetHash(value);
+                RegisterAccountCommand.NewAccount.Login = HashFunction.GetHash(value);
             }
         }
         public string Password
@@ -30,8 +31,8 @@ namespace WatchManager.ViewModels
             get => _password;
             set
             {
-                _password = value;
-                RegisterAccountCommand.NewAccount.Password = value;
+                _password = HashFunction.GetHash(value);
+                RegisterAccountCommand.NewAccount.Password = HashFunction.GetHash(value);
             }
         }
         public string Email

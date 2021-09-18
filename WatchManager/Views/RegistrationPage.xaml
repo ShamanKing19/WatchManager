@@ -135,8 +135,8 @@
         <TextBlock Text="{Binding RegistrationTitle}" Grid.Row="0" Grid.ColumnSpan="2" Style="{DynamicResource RegistrationPageTitleStyle}"/>
 
         <StackPanel VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2">
-            <TextBox Text="{Binding Login}" MaxWidth="500" Height="50" Style="{DynamicResource RegisterTextBoxStyle}"/>
-            <TextBox Text="{Binding Password}" Margin="0 15" MaxWidth="500" Height="50" Style="{DynamicResource RegisterTextBoxStyle}"/>
+            <TextBox Text="{Binding Login, Mode=OneWayToSource}" MaxWidth="500" Height="50" Style="{DynamicResource RegisterTextBoxStyle}"/>
+            <TextBox Text="{Binding Password, Mode=OneWayToSource}" Margin="0 15" MaxWidth="500" Height="50" Style="{DynamicResource RegisterTextBoxStyle}"/>
             <TextBox Text="{Binding Email}" MaxWidth="500" Height="50" Style="{DynamicResource RegisterTextBoxStyle}"/>
         </StackPanel>
         <Button Command="{Binding BackToAuthenticationPageCommand}" Content="Back" IsCancel="True" Margin="15,15,15,15" Grid.Row="2" Grid.Column="0" Style="{DynamicResource BackButton}"/>

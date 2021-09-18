@@ -35,6 +35,6 @@
 
 
 
-    <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource LoginInputField}"/>
+    <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" Style="{DynamicResource LoginInputField}"/>
 
 </UserControl>
