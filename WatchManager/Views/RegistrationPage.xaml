@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WatchManager.Views" xmlns:viewmodels="clr-namespace:WatchManager.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:RegistrationViewModel}"
+             xmlns:local="clr-namespace:WatchManager.Views" 
+             xmlns:viewmodels="clr-namespace:WatchManager.ViewModels" xmlns:components="clr-namespace:WatchManager.Components"
+             d:DataContext="{d:DesignInstance Type=viewmodels:RegistrationViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="700">
 
@@ -20,49 +22,15 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
-        <Style x:Key="RegisterTextBoxStyle" TargetType="{x:Type TextBox}">
-            <Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
-            <Setter Property="Foreground" Value="{DynamicResource PrimaryFontColor}"/>
-            <Setter Property="FontSize" Value="16.67"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-            <Setter Property="AllowDrop" Value="true"/>
-            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
-            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Border x:Name="border" CornerRadius="15" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="True">
-                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
-                            </Trigger>
-                            <Trigger Property="IsKeyboardFocused" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <MultiTrigger>
-                    <MultiTrigger.Conditions>
-                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
-                        <Condition Property="IsSelectionActive" Value="false"/>
-                    </MultiTrigger.Conditions>
-                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
-                </MultiTrigger>
-            </Style.Triggers>
-        </Style>
+        <Style x:Key="RegistrationInputField" TargetType="{x:Type components:InputFieldWithTitle}">
+            <Setter Property="TitleBackground" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="InputBackground" Value="{StaticResource AdditionalColor}"/>
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="Height" Value="30" />
+            <Setter Property="MaxWidth" Value="300" />
 
+        </Style>
+        
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -119,6 +87,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+    
+    
     </UserControl.Resources>
 
     <Grid Background="{StaticResource PrimaryColor}">
@@ -134,11 +104,14 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="{Binding RegistrationTitle}" Grid.Row="0" Grid.ColumnSpan="2" Style="{DynamicResource RegistrationPageTitleStyle}"/>
 
-        <StackPanel VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2">
-            <TextBox Text="{Binding Login, Mode=OneWayToSource}" MaxWidth="500" Height="50" Style="{DynamicResource RegisterTextBoxStyle}"/>
-            <TextBox Text="{Binding Password, Mode=OneWayToSource}" Margin="0 15" MaxWidth="500" Height="50" Style="{DynamicResource RegisterTextBoxStyle}"/>
-            <TextBox Text="{Binding Email}" MaxWidth="500" Height="50" Style="{DynamicResource RegisterTextBoxStyle}"/>
-        </StackPanel>
+        <Border Background="{StaticResource SecondaryColor}" Margin="180 20" CornerRadius="20" Grid.Row="1" Grid.ColumnSpan="2">
+            <StackPanel VerticalAlignment="Center">
+                <components:InputFieldWithTitle Text="{Binding Login, Mode=OneWayToSource}" Title="Login" Style="{StaticResource RegistrationInputField}"/>
+                <components:InputFieldWithTitle Text="{Binding Password, Mode=OneWayToSource}" Title="Password" Margin="0 15" Style="{StaticResource RegistrationInputField}"/>
+                <components:InputFieldWithTitle Text="{Binding Email, Mode=OneWayToSource}" Title="Email" Style="{StaticResource RegistrationInputField}"/>
+            </StackPanel>
+        </Border>
+        
         <Button Command="{Binding BackToAuthenticationPageCommand}" Content="Back" IsCancel="True" Margin="15,15,15,15" Grid.Row="2" Grid.Column="0" Style="{DynamicResource BackButton}"/>
         <Button Command="{Binding RegisterAccountCommand}" Content="Register" IsDefault="True" Margin="15,15,15,15" Grid.Row="2" Grid.Column="1" Style="{DynamicResource BackButton}"/>
 
