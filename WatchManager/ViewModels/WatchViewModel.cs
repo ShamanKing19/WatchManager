@@ -16,11 +16,13 @@ namespace WatchManager.ViewModels
 {
     public class WatchViewModel : BaseViewModel
     {
+        private const bool _defaultCheckbockState = false;
+
         #region Private fields
         private string _userLogin;
-        private bool _isFilmsSelected = true;
-        private bool _isSerialsSelected = true;
-        private bool _isAnimeSelected = true;
+        private bool _isFilmsSelected = _defaultCheckbockState;
+        private bool _isSerialsSelected = _defaultCheckbockState;
+        private bool _isAnimeSelected = _defaultCheckbockState;
         private DocumentModel _selectedDocument;
         #endregion
 
@@ -95,6 +97,9 @@ namespace WatchManager.ViewModels
         }
 
 
+
+        // При нажатии на фильтр будет показываться только то, что выбрано
+        // Новый функционал
         private async void SetRowCollectionAsync(string userLogin)
         {
             RowCollection.Clear();
@@ -102,7 +107,28 @@ namespace WatchManager.ViewModels
             foreach (BsonDocument bsonDoc in titleList)
             {
                 DocumentModel document = BsonSerializer.Deserialize<DocumentModel>(bsonDoc);
-                if ((document.TitleType == "Film" && IsFilmsSelected) || (document.TitleType =="Serial" && IsSerialsSelected) || (document.TitleType == "Anime" && IsAnimeSelected))
+                if (!(IsFilmsSelected || IsSerialsSelected || IsAnimeSelected))
+                {
+                    RowCollection.Add(document);
+                }
+                else if ((document.TitleType == "Film" && IsFilmsSelected) || (document.TitleType =="Serial" && IsSerialsSelected) || (document.TitleType == "Anime" && IsAnimeSelected))
+                {
+                    RowCollection.Add(document);
+                }
+            }
+        }
+
+
+        // Выбранная категория перестаёт отображаться
+        // Старый функционал
+        private async void SetRowCollectionAsyncOld(string userLogin)
+        {
+            RowCollection.Clear();
+            List<BsonDocument> titleList = await DatabaseModel.GetListOfDocumentsFromCollectionAsync(userLogin);
+            foreach (BsonDocument bsonDoc in titleList)
+            {
+                DocumentModel document = BsonSerializer.Deserialize<DocumentModel>(bsonDoc);
+                if ((document.TitleType == "Film" && IsFilmsSelected) || (document.TitleType == "Serial" && IsSerialsSelected) || (document.TitleType == "Anime" && IsAnimeSelected))
                 {
                     RowCollection.Add(document);
                 }

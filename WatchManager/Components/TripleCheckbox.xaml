@@ -228,8 +228,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <CheckBox Content="Films" Grid.Column="0" Style="{DynamicResource LeftCheckBox}" IsChecked="{Binding IsFilmsSelected}"></CheckBox>
-        <CheckBox Content="Serials" Grid.Column="1" Style="{DynamicResource MiddleCheckBox}" IsChecked="{Binding IsSerialsSelected}"></CheckBox>
-        <CheckBox Content="Anime" Grid.Column="2" Style="{DynamicResource RightCheckBox}" IsChecked="{Binding IsAnimeSelected}"> </CheckBox>
+        <CheckBox Content="Films" IsChecked="{Binding IsFilmsSelected}" Grid.Column="0" Style="{DynamicResource LeftCheckBox}"></CheckBox>
+        <CheckBox Content="Serials" IsChecked="{Binding IsSerialsSelected}" Grid.Column="1" Style="{DynamicResource MiddleCheckBox}"></CheckBox>
+        <CheckBox Content="Anime" IsChecked="{Binding IsAnimeSelected}" Grid.Column="2" Style="{DynamicResource RightCheckBox}"> </CheckBox>
     </Grid>
 </UserControl>
