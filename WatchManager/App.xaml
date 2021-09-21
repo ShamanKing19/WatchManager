@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:WatchManager"
              xmlns:views="clr-namespace:WatchManager.Views"
              xmlns:viewmodels="clr-namespace:WatchManager.ViewModels"
+             xmlns:components="clr-namespace:WatchManager.Components"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              >
     <Application.Resources>
@@ -46,8 +47,13 @@
         <SolidColorBrush x:Key="UncheckedMouseOverFilterColor" Color="#7859bc"/>
         <SolidColorBrush x:Key="CheckedPressedFilterColor" Color="#7859bc"/>
         <SolidColorBrush x:Key="UncheckedPressedFilterColor" Color="#7859bc"/>
-        
-        
+
+
+        <Style x:Key="InputFieldWithTitleStyle" TargetType="{x:Type components:InputFieldWithTitle}">
+            <Setter Property="TitleBackground" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="InputBackground" Value="{StaticResource AdditionalColor}"/>
+            <Setter Property="CornerRadius" Value="15"/>
+        </Style>
 
     </Application.Resources>
 </Application>

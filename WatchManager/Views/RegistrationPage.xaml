@@ -22,14 +22,6 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
-        <Style x:Key="RegistrationInputField" TargetType="{x:Type components:InputFieldWithTitle}">
-            <Setter Property="TitleBackground" Value="{StaticResource PrimaryColor}"/>
-            <Setter Property="InputBackground" Value="{StaticResource AdditionalColor}"/>
-            <Setter Property="CornerRadius" Value="15"/>
-            <Setter Property="Height" Value="30" />
-            <Setter Property="MaxWidth" Value="300" />
-
-        </Style>
         
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -106,9 +98,9 @@
 
         <Border Background="{StaticResource SecondaryColor}" Margin="180 20" CornerRadius="20" Grid.Row="1" Grid.ColumnSpan="2">
             <StackPanel VerticalAlignment="Center">
-                <components:InputFieldWithTitle Text="{Binding Login, Mode=OneWayToSource}" Title="Login" Style="{StaticResource RegistrationInputField}"/>
-                <components:InputFieldWithTitle Text="{Binding Password, Mode=OneWayToSource}" Title="Password" Margin="0 15" Style="{StaticResource RegistrationInputField}"/>
-                <components:InputFieldWithTitle Text="{Binding Email, Mode=OneWayToSource}" Title="Email" Style="{StaticResource RegistrationInputField}"/>
+                <components:InputFieldWithTitle Text="{Binding Login, Mode=OneWayToSource}" Title="Login" Height="30" Margin="10 0" Style="{StaticResource InputFieldWithTitleStyle}"/>
+                <components:InputFieldWithTitle Text="{Binding Password, Mode=OneWayToSource}" Title="Password" Height="30" Margin="10 15" Style="{StaticResource InputFieldWithTitleStyle}"/>
+                <components:InputFieldWithTitle Text="{Binding Email, Mode=OneWayToSource}" Title="Email" Height="30" Margin="10 0" Style="{StaticResource InputFieldWithTitleStyle}"/>
             </StackPanel>
         </Border>
         

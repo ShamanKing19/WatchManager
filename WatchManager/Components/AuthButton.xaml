@@ -27,9 +27,9 @@
         <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
         <Style x:Key="LoginButton" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
+            <Setter Property="Background" Value="{StaticResource AdditionalColor}"/>
             <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-            <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource SecondaryFontColor}"/>
             <Setter Property="FontSize" Value="{StaticResource ButtonFontSize}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
