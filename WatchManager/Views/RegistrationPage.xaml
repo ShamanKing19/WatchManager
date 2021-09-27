@@ -85,9 +85,9 @@
 
     <Grid Background="{StaticResource PrimaryColor}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="91*"/>
-            <RowDefinition Height="226*"/>
-            <RowDefinition Height="83*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.6*"/>
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -96,7 +96,7 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="{Binding RegistrationTitle}" Grid.Row="0" Grid.ColumnSpan="2" Style="{DynamicResource RegistrationPageTitleStyle}"/>
 
-        <Border Background="{StaticResource SecondaryColor}" Margin="180 20" CornerRadius="20" Grid.Row="1" Grid.ColumnSpan="2">
+        <Border Grid.Row="1" Grid.ColumnSpan="2" Width="400" Background="{StaticResource SecondaryColor}" CornerRadius="{StaticResource AdditionalCornerRadius}">
             <StackPanel VerticalAlignment="Center">
                 <components:InputFieldWithTitle Text="{Binding Login, Mode=OneWayToSource}" Title="Login" Height="30" Margin="10 0" Style="{StaticResource InputFieldWithTitleStyle}"/>
                 <components:InputFieldWithTitle Text="{Binding Password, Mode=OneWayToSource}" Title="Password" Height="30" Margin="10 15" Style="{StaticResource InputFieldWithTitleStyle}"/>
@@ -104,8 +104,8 @@
             </StackPanel>
         </Border>
         
-        <Button Command="{Binding BackToAuthenticationPageCommand}" Content="Back" IsCancel="True" Margin="15,15,15,15" Grid.Row="2" Grid.Column="0" Style="{DynamicResource BackButton}"/>
-        <Button Command="{Binding RegisterAccountCommand}" Content="Register" IsDefault="True" Margin="15,15,15,15" Grid.Row="2" Grid.Column="1" Style="{DynamicResource BackButton}"/>
+        <Button Command="{Binding BackToAuthenticationPageCommand}" Content="Back" IsCancel="True" Margin="80 20" Grid.Row="2" Grid.Column="0" Style="{DynamicResource BackButton}"/>
+        <Button Command="{Binding RegisterAccountCommand}" Content="Register" IsDefault="True" Margin="80 20" Grid.Row="2" Grid.Column="1" Style="{DynamicResource BackButton}"/>
 
     </Grid>
 </UserControl>

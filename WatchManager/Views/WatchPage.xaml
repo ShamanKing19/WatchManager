@@ -17,29 +17,30 @@
             <ColumnDefinition Width="9*"/>
         </Grid.ColumnDefinitions>
 
-        <components:DataCollectionTable Grid.Column="0" Margin="10,10,10,10"/>
+        <components:DataCollectionTable Grid.Column="0" Margin="10"/>
 
         <!-- TODO: заменить на StackPanel-->
         <Grid Grid.Column="1" Margin="0,18,0,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="8*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <components:TripleCheckbox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
-            <components:WatchButton Margin="6" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
-            <components:AddButton Grid.Column="0" Grid.Row="2"/>
-            <components:EditButton Grid.Column="1" Grid.Row="2"/>
-            <components:DeleteButton Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"/>
-            <components:LeaveAccountButton Margin="6" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"/>
+            <components:TripleCheckbox Grid.Row="0"/>
+            <components:WatchButton Margin="6" Grid.Row="1"/>
+            <components:AddButton Margin="6" Grid.Row="2"/>
+            <components:EditButton Margin="6" Grid.Row="3"/>
+            <components:DeleteButton Margin="6" Grid.Row="4"/>
+            <components:LeaveAccountButton Margin="6" Grid.Row="7"/>
 
         </Grid>
     </Grid>

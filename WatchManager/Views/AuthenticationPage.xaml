@@ -24,22 +24,22 @@
     <Grid Background="#FF4C4C53">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
         </Grid.RowDefinitions>
 
 
         <TextBlock Grid.Row="0" Text="{Binding Title}" Style="{StaticResource Logo}"/>
-        <Border Background="{StaticResource SecondaryColor}" CornerRadius="15" Width="550" Grid.Row="1">
+        <Border Width="520" Grid.Row="1" Background="{StaticResource SecondaryColor}" CornerRadius="{StaticResource PrimaryCornerRadius}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <components:InputFieldWithTitle Title="Login" Text="{Binding Login, Mode=OneWayToSource}" Grid.Row="0" Height="50" Width="500" Style="{StaticResource InputFieldWithTitleStyle}"/>
-                <components:PasswordInputField Password="{Binding Password, Mode=OneWayToSource}" Grid.Row="1" Height="50" Width="500"/>
-                <components:AuthButton Grid.Row="2" Height="50" Width="500"/>
+                <components:InputFieldWithTitle Title="Login" Grid.Row="0" Height="40" Width="500" CornerRadius="20" Text="{Binding Login, Mode=OneWayToSource}" Style="{StaticResource InputFieldWithTitleStyle}"/>
+                <components:PasswordInputField Grid.Row="1" Height="40" Width="500" Password="{Binding Password, Mode=OneWayToSource}"/>
+                <components:AuthButton Grid.Row="2" Height="40" Width="500"/>
             </Grid>
         </Border>
         <components:RegistrationButton Grid.Row="5" Width="150" Height="30"/>

@@ -23,14 +23,16 @@
 
         <System:Double x:Key="PrimaryFontSize">16.67</System:Double>
         <System:Double x:Key="ButtonFontSize">16.67</System:Double>
-        <System:Int32 x:Key="DefaultButtonCornerRadius">10</System:Int32>
-        <System:Int32 x:Key="AdditionalButtonCornerRadius">20</System:Int32>
-        <System:Int32 x:Key="ContainerCornerRadius">10</System:Int32>
+        <System:Double x:Key="DefaultCornerRadiusValue">10</System:Double>
+        <System:Double x:Key="AdditionalCornerRadiusValue">20</System:Double>
+        <System:Double x:Key="ContainerCornerRadius">10</System:Double>
 
         <System:Double x:Key="ScrollWidth">8</System:Double>
         <System:Double x:Key="ScrollHeight">8</System:Double>
         <System:Double x:Key="ScrollCornerRadiusValue">4</System:Double>
         <CornerRadius x:Key="ScrollCornerRadius" TopLeft="{StaticResource ScrollCornerRadiusValue}" TopRight="{StaticResource ScrollCornerRadiusValue}" BottomRight="{StaticResource ScrollCornerRadiusValue}" BottomLeft="{StaticResource ScrollCornerRadiusValue}"/>
+        <CornerRadius x:Key="PrimaryCornerRadius" TopLeft="{StaticResource DefaultCornerRadiusValue}" TopRight="{StaticResource DefaultCornerRadiusValue}" BottomRight="{StaticResource DefaultCornerRadiusValue}" BottomLeft="{StaticResource DefaultCornerRadiusValue}"/>
+        <CornerRadius x:Key="AdditionalCornerRadius" TopLeft="{StaticResource AdditionalCornerRadiusValue}" TopRight="{StaticResource AdditionalCornerRadiusValue}" BottomRight="{StaticResource AdditionalCornerRadiusValue}" BottomLeft="{StaticResource AdditionalCornerRadiusValue}"/>
         <SolidColorBrush x:Key="ScrollForegroundColor" Color="#eebcec"/>
         <SolidColorBrush x:Key="ScrollBackgroundColor" Color="#4c4c53"/>
 

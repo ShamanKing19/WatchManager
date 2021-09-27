@@ -40,7 +40,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border CornerRadius="10" x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
+                        <Border CornerRadius="{StaticResource PrimaryCornerRadius}" x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
                             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -67,6 +67,6 @@
         </Style>
     </UserControl.Resources>
 
-    <Button Command="{Binding SwitchToEditViewModelCommand}" Style="{DynamicResource EditButton}" Content="Edit" Width="82.5" Height="45"/>
+    <Button Content="Edit" Command="{Binding SwitchToEditViewModelCommand}" Style="{DynamicResource EditButton}"/>
 
 </UserControl>
