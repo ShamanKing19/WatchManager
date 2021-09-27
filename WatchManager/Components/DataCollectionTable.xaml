@@ -11,14 +11,6 @@
              d:DesignHeight="315" d:DesignWidth="500">
 
     <UserControl.Resources>
-        <sys:Double x:Key="ScrollWidth">8</sys:Double>
-        <sys:Double x:Key="ScrollHeight">8</sys:Double>
-        <sys:Double x:Key="ScrollCornerRadiusValue">4</sys:Double>
-        <CornerRadius x:Key="ScrollCornerRadius" TopLeft="{StaticResource ScrollCornerRadiusValue}" TopRight="{StaticResource ScrollCornerRadiusValue}" BottomRight="{StaticResource ScrollCornerRadiusValue}" BottomLeft="{StaticResource ScrollCornerRadiusValue}"/>
-        <SolidColorBrush x:Key="ScrollForegroundColor" Color="#eebcec"/>
-        <SolidColorBrush x:Key="ScrollBackgroundColor" Color="#6f43d1"/>
-
-
         <Style x:Key="DataGridStyle" TargetType="{x:Type DataGrid}">
             <Setter Property="GridLinesVisibility" Value="None"/>
             <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
@@ -49,14 +41,15 @@
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="auto"/>
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
-                                            <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Visibility="{Binding HeadersVisibility, Converter={x:Static DataGrid.HeadersVisibilityConverter}, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                            <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Visibility="{Binding HeadersVisibility, Converter={x:Static DataGrid.HeadersVisibilityConverter}, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
                                             <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" CanContentScroll="{TemplateBinding CanContentScroll}" />
                                             <ScrollBar x:Name="PART_VerticalScrollBar" Grid.Column="2" Grid.Row="1" Maximum="{TemplateBinding ScrollableHeight}" Orientation="Vertical" ViewportSize="{TemplateBinding ViewportHeight}" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
                                         </Grid>
@@ -80,7 +73,7 @@
         </Style>
 
         <Style x:Key="HeadersStyle" TargetType="{x:Type DataGridColumnHeader}">
-            <Setter Property="Margin" Value="0 0 0 8"/>
+            <Setter Property="Margin" Value="0 0 0 4"/>
             <Setter Property="Background" Value="{StaticResource HeadersRowColor}"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryFontColor}"/>
             <Setter Property="FontSize" Value="{StaticResource PrimaryFontSize}"/>
@@ -88,8 +81,8 @@
             <Setter Property="ContentTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <Border Background="{StaticResource PrimaryColor}" Height="40" CornerRadius="15">
-                            <TextBlock Text="{Binding}" TextAlignment="Center" VerticalAlignment="Center"/>
+                        <Border Background="{StaticResource PrimaryColor}" CornerRadius="15">
+                            <TextBlock Text="{Binding}" Padding="6"  TextAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </DataTemplate>
                 </Setter.Value>
@@ -98,7 +91,7 @@
 
         <Style x:Key="RowStyle" TargetType="{x:Type DataGridRow}">
             <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
-            <Setter Property="Margin" Value="0 2"/>
+            <Setter Property="Margin" Value="0 0 0 2"/>
             <Setter Property="SnapsToDevicePixels" Value="true"/>
             <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
             <Setter Property="ValidationErrorTemplate">
@@ -219,7 +212,7 @@
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Stretch"/>
             <Setter Property="Margin" Value="0"/>
-            <Setter Property="Padding" Value="6"/>
+            <Setter Property="Padding" Value="0"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Template">
@@ -324,7 +317,7 @@
 
         <!-- Вот это сам ползунок -->
         <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
-            <Setter Property="Width" Value="8"/>
+            <Setter Property="Width" Value="{StaticResource ScrollWidth}"/>
             <Setter Property="SnapsToDevicePixels" Value="True" />
             <Setter Property="OverridesDefaultStyle" Value="true" />
             <Setter Property="IsTabStop" Value="false" />

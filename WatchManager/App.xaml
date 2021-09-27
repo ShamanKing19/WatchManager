@@ -27,6 +27,13 @@
         <System:Int32 x:Key="AdditionalButtonCornerRadius">20</System:Int32>
         <System:Int32 x:Key="ContainerCornerRadius">10</System:Int32>
 
+        <System:Double x:Key="ScrollWidth">8</System:Double>
+        <System:Double x:Key="ScrollHeight">8</System:Double>
+        <System:Double x:Key="ScrollCornerRadiusValue">4</System:Double>
+        <CornerRadius x:Key="ScrollCornerRadius" TopLeft="{StaticResource ScrollCornerRadiusValue}" TopRight="{StaticResource ScrollCornerRadiusValue}" BottomRight="{StaticResource ScrollCornerRadiusValue}" BottomLeft="{StaticResource ScrollCornerRadiusValue}"/>
+        <SolidColorBrush x:Key="ScrollForegroundColor" Color="#eebcec"/>
+        <SolidColorBrush x:Key="ScrollBackgroundColor" Color="#4c4c53"/>
+
 
 
         <SolidColorBrush x:Key="PrimaryColor" Color="#4c4c53"/>
