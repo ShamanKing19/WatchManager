@@ -63,7 +63,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="{Binding ElementName=Input, Path=Title}" Padding="20 0"/>
-            <TextBox Text="{Binding ElementName=Input, Path=Text}" Style="{DynamicResource CurrentSeasonInputField}" Grid.Column="1"/>
+            <TextBox Text="{Binding ElementName=Input, Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource CurrentSeasonInputField}" Grid.Column="1"/>
         </Grid>
     </Border>
 </UserControl>
