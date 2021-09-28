@@ -66,7 +66,6 @@ namespace WatchManager.ViewModels
             {
                 _selectedDocument = value;
                 SwitchToEditViewModelCommand.Document = value;
-                DeleteRowCommand.Document = value;
                 WatchEpisodeCommand.Document = _selectedDocument;
                 WatchEpisodeCommand.Collection = RowCollection;
                 OnPropertyChanged(nameof(SelectedDocument));
@@ -80,7 +79,6 @@ namespace WatchManager.ViewModels
         public ICommand SwitchToSettingsViewModelCommand{ get; }
         public ICommand SwitchToAddViewModelCommand { get; }
         public SwitchToEditPageCommand SwitchToEditViewModelCommand { get; private set; }
-        public DeleteDocumentCommand DeleteRowCommand { get; private set; }
         public WatchCommand WatchEpisodeCommand { get; set; }
         public BackToAuthenticationPageCommand BackToAuthenticationPageCommand { get; set; }
         #endregion
@@ -90,8 +88,7 @@ namespace WatchManager.ViewModels
             _userLogin = userLogin;
             SetRowCollectionAsync(userLogin); // TODO: Придумать это делать асинхронно в отдельном потоке
             SwitchToAddViewModelCommand = new SwitchToAddPageCommand(navigationStore, () => new AddDocumentViewModel(navigationStore, userLogin));
-            SwitchToEditViewModelCommand = new SwitchToEditPageCommand(navigationStore, () => new AddDocumentViewModel(navigationStore, userLogin, SelectedDocument), SelectedDocument);
-            DeleteRowCommand = new DeleteDocumentCommand(userLogin, SelectedDocument, SetRowCollectionAsync);
+            SwitchToEditViewModelCommand = new SwitchToEditPageCommand(navigationStore, () => new AddDocumentViewModel(navigationStore, userLogin, SelectedDocument, SetRowCollectionAsync), SelectedDocument);
             WatchEpisodeCommand = new WatchCommand(userLogin);
             BackToAuthenticationPageCommand = new BackToAuthenticationPageCommand(navigationStore, () => new AuthenticationViewModel(navigationStore));
         }

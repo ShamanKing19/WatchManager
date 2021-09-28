@@ -158,8 +158,9 @@ namespace WatchManager.ViewModels
         #endregion
 
         #region Commands
-        public ICommand BackToWatchPageCommand { get; }
+        public BackToWatchPageCommand BackToWatchPageCommand { get; }
         public ICommand InsertDocumentCommand { get; }
+        public DeleteDocumentCommand DeleteRowCommand { get; private set; }
         #endregion 
 
 
@@ -178,7 +179,7 @@ namespace WatchManager.ViewModels
         }
 
         // Edit case
-        public AddDocumentViewModel(NavigationStore navigationStore, string userLogin, DocumentModel oldDocument)
+        public AddDocumentViewModel(NavigationStore navigationStore, string userLogin, DocumentModel oldDocument, Action<string> setRowCollectionAsync)
         {
             SetFieldsToEditDocument(oldDocument);
             BackToWatchPageCommand = new BackToWatchPageCommand(navigationStore, () => new WatchViewModel(navigationStore, userLogin));
@@ -190,6 +191,7 @@ namespace WatchManager.ViewModels
                     oldDocument.ToBsonDocument(),
                     _document
                 );
+            DeleteRowCommand = new DeleteDocumentCommand(userLogin, oldDocument, setRowCollectionAsync, BackToWatchPageCommand);
         }
 
 

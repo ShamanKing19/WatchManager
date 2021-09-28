@@ -12,6 +12,7 @@ namespace WatchManager.Commands
         private string _userLogin;
         private DocumentModel _document;
         private Action<string> _SetRowCollection;
+        private BackToWatchPageCommand _backToWatchPageCommand;
 
         public DocumentModel Document
         {
@@ -19,11 +20,12 @@ namespace WatchManager.Commands
             set => _document = value;
         }
 
-        public DeleteDocumentCommand(string userLogin, DocumentModel document, Action<string> SetRowCollection)
+        public DeleteDocumentCommand(string userLogin, DocumentModel document, Action<string> SetRowCollection, BackToWatchPageCommand backToWatchPageCommand)
         {
             _userLogin = userLogin;
             _document = document;
             _SetRowCollection = SetRowCollection;
+            _backToWatchPageCommand = backToWatchPageCommand;
         }
 
         public override async void Execute(object parameter)
@@ -32,7 +34,7 @@ namespace WatchManager.Commands
             {
                 await DatabaseModel.DeleteDocumentAsync(_userLogin, _document.TitleName);
                 _SetRowCollection(_userLogin);
-
+                _backToWatchPageCommand.Execute(parameter);
             }
         }
     }
