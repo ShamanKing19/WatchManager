@@ -45,7 +45,7 @@ namespace WatchManager.Commands
             // TODO: разбить на приватные методы (проверку на ноль можно убрать и сделать его онгоингом)
             bool isValidFilm = _newDocument.TitleType == "Film" && _newDocument.TitleName != null && _newDocument.TitleName != "";
             bool isValidSerial = _newDocument.TitleType != "Film" && _newDocument.TitleName != null && _newDocument.TitleName != "" && _newDocument.Seasons != null && _newDocument.CurrentEpisode.SeasonNumber != "0" && _newDocument.CurrentEpisode.SeasonEpisodesCount != "0" && _newDocument.CurrentEpisode.SeasonNumber != "" && _newDocument.CurrentEpisode.SeasonEpisodesCount != "" && !_newDocument.Seasons.Any(season => season.SeasonEpisodesCount == "" || season.SeasonEpisodesCount == "0");
-            bool isValidSeasonsTable = _newDocument.Seasons.All(x => int.TryParse(x.SeasonEpisodesCount, out int res));
+            bool isValidSeasonsTable = _newDocument.Seasons != null && _newDocument.Seasons.All(x => int.TryParse(x.SeasonEpisodesCount, out int res));
 
 
             if (isValidFilm || (isValidSerial && isValidSeasonsTable))

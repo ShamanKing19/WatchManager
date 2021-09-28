@@ -11,7 +11,7 @@
              d:DesignHeight="400" d:DesignWidth="700">
 
     <UserControl.Resources>
-        <Style x:Key="RegistrationInputField" TargetType="{x:Type components:InputFieldWithTitle}">
+        <Style x:Key="InputField" TargetType="{x:Type components:InputFieldWithTitle}">
             <Setter Property="TitleBackground" Value="{StaticResource PrimaryColor}"/>
             <Setter Property="InputBackground" Value="{StaticResource AdditionalColor}"/>
             <Setter Property="CornerRadius" Value="15"/>
@@ -20,54 +20,50 @@
     </UserControl.Resources>
     
     
-    <Grid Background="#4c4c53">
+    <Grid Background="{StaticResource PrimaryColor}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="11*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Margin="10">
-            <Border Background="{StaticResource SecondaryColor}" Height="155" CornerRadius="10" Padding="4" Margin="0 0 0 8">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" Margin="10" Padding="10" Background="{StaticResource SecondaryColor}" CornerRadius="{StaticResource PrimaryCornerRadius}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="4*"/>
 
-                    <components:InputFieldWithTitle Title="Title" Text="{Binding TitleName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource RegistrationInputField}"/>
-                    <components:TypeInputCombobox Grid.Row="1" Grid.Column="0"/>
-                    <components:InputFieldWithTitle Title="Seasons" Text="{Binding SeasonsCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Visibility="{Binding FilmTypeVisibility}" Style="{StaticResource RegistrationInputField}"/>
-                    <components:InputFieldWithTitle Title="Current Season" Text="{Binding CurrentSeason, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="0" Visibility="{Binding FilmTypeVisibility}" Style="{StaticResource RegistrationInputField}"/>
-                    <components:InputFieldWithTitle Title="Current Episode" Text="{Binding CurrentEpisode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Visibility="{Binding FilmTypeVisibility}" Style="{StaticResource RegistrationInputField}"/>
-                    <components:WatchedCheckBox Margin="0 0 5 0" Grid.Row="3" Grid.Column="0"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-                </Grid>
-            </Border>
-
-            <components:SeasonsTable HorizontalAlignment="Center" Visibility="{Binding FilmTypeVisibility}"/>
-            
-        </StackPanel>
+                <components:InputFieldWithTitle Title="Title" Text="{Binding TitleName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource InputField}"/>
+                <components:WatchedCheckBox Width="200" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0"/>
+                <components:TypeInputCombobox Width="200" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0"/>
+                <components:InputFieldWithTitle Title="Seasons" Width="200" HorizontalAlignment="Left" Text="{Binding SeasonsCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Visibility="{Binding FilmTypeVisibility}" Style="{StaticResource InputField}"/>
+                <components:InputFieldWithTitle Title="Current Season" Width="200" HorizontalAlignment="Left" Text="{Binding CurrentSeason, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="0" Visibility="{Binding FilmTypeVisibility}" Style="{StaticResource InputField}"/>
+                <components:InputFieldWithTitle Title="Current Episode" Width="200" HorizontalAlignment="Left" Text="{Binding CurrentEpisode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" Visibility="{Binding FilmTypeVisibility}" Style="{StaticResource InputField}"/>
+            </Grid>
+        </Border>
         
-
         <Grid Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
                 <RowDefinition Height="4*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <components:SaveButton Grid.Column="0"/>
-            <components:BackButton Grid.Column="1"/>
-            <components:DeleteButton Height="40" Margin="10" Grid.Row="1" Grid.ColumnSpan="2"/>
+            <components:SeasonsTable Margin="10" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Visibility="{Binding FilmTypeVisibility}"/>
+            <components:SaveButton Margin="10" Grid.Column="0" Grid.Row="1"/>
+            <components:BackButton Margin="10" Grid.Column="1" Grid.Row="1"/>
+            <components:DeleteButton Margin="10" Grid.Row="2" Grid.ColumnSpan="2"/>
 
         </Grid>
     </Grid>

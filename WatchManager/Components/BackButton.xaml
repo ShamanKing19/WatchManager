@@ -36,7 +36,7 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Padding" Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -68,6 +68,6 @@
     </UserControl.Resources>
 
 
-    <Button Command="{Binding BackToWatchPageCommand}" Style="{DynamicResource BackButton}" Content="Back" Width="80" Height="40"></Button>
+    <Button Content="Back"  Command="{Binding BackToWatchPageCommand}" Style="{DynamicResource BackButton}"></Button>
     
 </UserControl>
