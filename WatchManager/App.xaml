@@ -46,6 +46,7 @@
         <SolidColorBrush x:Key="SecondaryFontColor" Color="#4c4c53"/>
         <SolidColorBrush x:Key="AdditionalFontColor" Color="#eebcec"/>
         <SolidColorBrush x:Key="ExtraColor" Color="IndianRed"/>
+        <SolidColorBrush x:Key="LeaveAccountButtonColor" Color="IndianRed"/>
         <SolidColorBrush x:Key="RowColor" Color="#4c4c53"/>
         <SolidColorBrush x:Key="SelectedItemColor" Color="#eebcec"/>
         <SolidColorBrush x:Key="SelectedItemFontColor" Color="#4c4c53"/>
