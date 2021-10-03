@@ -4,8 +4,14 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon />
+    <ApplicationIcon>icon.ico</ApplicationIcon>
     <StartupObject />
+    <Authors>ShamanKing19</Authors>
+    <Copyright>Типо моё, ок да?</Copyright>
+    <PackageIcon>incon.png</PackageIcon>
+    <PackageIconUrl />
+    <RepositoryUrl>https://github.com/ShamanKing19/WatchManager</RepositoryUrl>
+    <Win32Resource />
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

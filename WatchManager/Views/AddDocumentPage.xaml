@@ -61,8 +61,8 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <components:SeasonsTable Margin="10" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Visibility="{Binding FilmTypeVisibility}"/>
-            <components:SaveButton Margin="10" Grid.Column="0" Grid.Row="1"/>
-            <components:BackButton Margin="10" Grid.Column="1" Grid.Row="1"/>
+            <components:SaveButton Margin="10" Grid.Column="1" Grid.Row="1"/>
+            <components:BackButton Margin="10" Grid.Column="00" Grid.Row="1"/>
             <components:DeleteButton Margin="10" Grid.Row="2" Grid.ColumnSpan="2"/>
 
         </Grid>
